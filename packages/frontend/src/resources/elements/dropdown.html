@@ -1,0 +1,12 @@
+<template>
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="${elementId}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    ${label}: ${selectedItem}
+  </button>
+
+  <div class="dropdown-menu scrollable-menu" aria-labelledby="${elementId}">
+    <a repeat.for="item of itemsSource" class="dropdown-item" href="#" click.delegate="menuItemClicked(item)">
+      ${item}
+    </a>
+  </div>
+
+</template>

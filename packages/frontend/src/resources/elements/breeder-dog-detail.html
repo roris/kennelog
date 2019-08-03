@@ -1,0 +1,36 @@
+<template bindable="model">
+  <div class="d-table col-12 w-100 py-4 border-bottom">
+
+    <div class="d-table-cell col-2 col-lg-1 align-middle">
+        <img class="avatar" alt="" src="${model.avatar}" width="100" height="100">  
+    </div>
+
+    <div class="d-table-cell col-8">
+      <h4>
+          ${model.name}
+      </h4>
+
+      <div>
+        <p>
+          ${model.breed}
+        </p>
+      </div>
+
+      <div>
+        <span>
+          ${model.gender === "M" ? "♂" : "♀"}
+        </span>
+      </div>
+    </div>
+
+    <div class="d-table-cell col-2 text-right">
+      <a route-href="route: dog-detail; params.bind: {id:model.id}">
+        <span>
+          ${model.microchipNo}
+        </span>
+      </a>
+    </div>
+
+  </div>
+
+</template>

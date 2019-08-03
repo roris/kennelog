@@ -1,0 +1,32 @@
+body {  
+  min-height: 150rem;
+  padding-top: 8rem;
+}
+
+.menu-item {
+  padding: 1rem 0.5rem;
+  border-bottom-color: transparent;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+}
+
+.menu-item:hover{
+  border-bottom-color: gainsboro;
+}
+
+.menu-item.selected, .menu-item.selected:hover{
+  border-bottom-color: orange;
+}
+
+user-menu {
+  width: 100%;
+  top: 0;
+}
+
+.avatar {
+  border-radius: 3px;
+  display: inline-block;
+  line-height: 1;
+  overflow: hidden;
+  vertical-align: middle;
+}

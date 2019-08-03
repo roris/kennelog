@@ -1,0 +1,13 @@
+<template>
+  <require from="../../resources/elements/user-info.html"></require>
+  <require from="../../resources/elements/user-menu.html"></require>
+  <require from="../../resources/elements/breeder-dog-list.html"></require>
+
+  <user-info user.bind="user"></user-info>
+
+  <div class="col-lg-9 col-md-8 col-12 float-md-left pl-md-2">
+    <user-menu selected="0"></user-menu>
+    <breeder-dog-list dogs.bind="dogs" breeds.bind="breeds"></breeder-dog-list>
+  </div>
+
+</template>
