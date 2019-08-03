@@ -19,5 +19,11 @@ export const routeMap: RouteConfig[] = [
     name: 'new-pair',
     title: 'Create new pair',
     moduleId: PLATFORM.moduleName('./components/pairs/new-pair')
+  },
+  {
+    route: ['litters/new'],
+    name: 'new-litter',
+    title: 'Add a new litter',
+    moduleId: PLATFORM.moduleName('./components/litters/new-litter')
   }
 ];
