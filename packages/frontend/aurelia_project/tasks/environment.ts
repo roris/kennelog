@@ -1,8 +1,8 @@
-import project from '../aurelia.json';
-import rename from 'gulp-rename';
-import gulp from 'gulp';
-import fs from 'fs';
-import through from 'through2';
+import * as project from '../aurelia.json';
+import * as rename from 'gulp-rename';
+import * as gulp from 'gulp';
+import * as fs from 'fs';
+import * as through from 'through2';
 import {CLIOptions} from 'aurelia-cli';
 
 function configureEnvironment() {

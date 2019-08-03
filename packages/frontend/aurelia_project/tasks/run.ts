@@ -1,7 +1,7 @@
-import webpack from 'webpack';
-import Server from 'webpack-dev-server';
-import project from '../aurelia.json';
-import gulp from 'gulp';
+import * as webpack from 'webpack';
+import * as Server from 'webpack-dev-server';
+import * as project from '../aurelia.json';
+import * as gulp from 'gulp';
 
 import {config} from './build';
 import configureEnvironment from './environment';
@@ -22,7 +22,7 @@ function runWebpack(done) {
       colors: require('supports-color')
     },
     ...config.devServer
-  };
+  } as any;
 
   // Add the webpack-dev-server client to the webpack entry point
   // The path for the client to use such as `webpack-dev-server/client?http://${opts.host}:${opts.port}/` is not required

@@ -1,10 +1,8 @@
-// regenerator-runtime is to support async/await syntax in ESNext.
-// If you don't use async/await, you can remove regenerator-runtime.
-import 'regenerator-runtime/runtime';
+import {Aurelia} from 'aurelia-framework'
 import environment from './environment';
 import {PLATFORM} from 'aurelia-pal';
 
-export function configure(aurelia) {
+export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
     .feature(PLATFORM.moduleName('resources/index'));

@@ -1,8 +1,8 @@
-import webpackConfig from '../../webpack.config';
-import webpack from 'webpack';
-import project from '../aurelia.json';
-import gulp from 'gulp';
-import del from 'del';
+import * as webpackConfig from '../../webpack.config';
+import * as webpack from 'webpack';
+import * as project from '../aurelia.json';
+import * as gulp from 'gulp';
+import * as del from 'del';
 import {CLIOptions, Configuration} from 'aurelia-cli';
 import configureEnvironment from './environment';
 
@@ -16,7 +16,7 @@ const coverage = buildOptions.isApplicable('coverage');
 const config = webpackConfig({
   production, server, extractCss, coverage, analyze
 });
-const compiler = webpack(config);
+const compiler = webpack(<any>config);
 
 function buildWebpack(done) {
   if (CLIOptions.hasFlag('watch')) {

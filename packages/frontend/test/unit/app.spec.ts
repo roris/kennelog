@@ -13,14 +13,14 @@ describe('Stage App Component', () => {
 
   afterEach(() => component.dispose());
 
-  it('should render message', done => {
-    component.create(bootstrap).then(() => {
-      const view = component.element;
-      expect(view.textContent.trim()).toBe('Hello World!');
-      done();
-    }).catch(e => {
-      fail(e);
-      done();
-    });
-  });
+  //it('should render message', done => {
+  //  component.create(bootstrap).then(() => {
+  //    const view = component.element;
+  //    expect(view.textContent.trim()).toBe('Hello World!');
+  //    done();
+  //  }).catch(e => {
+  //    fail(e);
+  //    done();
+  //  });
+  // });
 });
