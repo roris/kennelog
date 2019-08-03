@@ -1,0 +1,50 @@
+<template>
+  <div class="container">
+    <form class="col-12">
+      <div class="border-bottom pb-2">
+        <h2>Create a new pair</h2>
+      </div>
+
+      <div class="form-group">
+        <label for="sireChipNo">Sire microchip#</label>
+        <div class="form-row">
+          <div class="col-3">
+            <input type="number" class="form-control">
+          </div>
+
+          <div class="col-4">
+            <button class="btn btn-secondary">Search</button>
+            <button class="btn btn-secondary">Suggest</button>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+        <label for="dameChipNo">Dame microchip#</label>
+        <div class="form-row">
+          <div class="col-3">
+            <input type="number" class="form-control">
+          </div>
+          <div class="col-4">
+            <button class="btn btn-secondary">Search</button>
+            <button class="btn btn-secondary">Suggest</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="datePairedOn">Date paired on</label>
+        <input type="date" class="form-control col-2" id="datePairedOn">
+        <small class="form-text text-muted">
+          Leave empty if you don't know the date.
+        </small>
+      </div>
+
+      <div class="form-group border-top pt-4">
+          <button class="btn btn-success" type="submit">Create pair</button>
+        </div>
+    </form>
+  </div>
+</template>
