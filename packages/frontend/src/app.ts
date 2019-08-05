@@ -3,7 +3,7 @@ import { routeMap } from './route-map';
 
 export class App {
   configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = "Kennelog";
+    config.title = 'Kennelog';
     config.map(routeMap);
   }
 }
