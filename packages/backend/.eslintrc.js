@@ -28,12 +28,16 @@ module.exports = {
       'warn',
       {
         accessibility: 'no-public'
-      }
-    ],
-    // allow function return type deduction
+      },
+          // allow function return type deduction
     '@typescript-eslint/explicit-function-return-type': [
       'error',
-      { allowExpressions: true, allowTypedFunctionExpressions: true }
+      {
+        allowExpressions: true,
+        allowTypedFunctionExpressions: true,
+        allowHigherOrderFunctions: true
+      }
+    ]
     ]
   }
 };
