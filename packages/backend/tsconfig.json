@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
-    "outDir": "./lib",
+    "target": "es2019",
+    "moduleResolution": "node",
+    "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
     "test"
   ]

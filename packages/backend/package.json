@@ -23,11 +23,11 @@
     "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "test": "yarn run compile && yarn run jest",
-    "dev": "ts-node-dev --no-notify src/",
-    "start": "yarn run compile && node lib/",
+    "test": "yarn run build && yarn run jest",
+    "start": "yarn run build && node dist/",
     "jest": "jest  --forceExit",
-    "compile": "shx rm -rf lib/ && tsc"
+    "check-types": "tsc --noEmit",
+    "build": "babel src --out-dir dist --extensions \".ts\" --source-maps inline"
   },
   "dependencies": {
     "@feathersjs/configuration": "^4.3.0-pre.1",
@@ -42,6 +42,13 @@
     "winston": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
     "@types/compression": "^0.0.36",
     "@types/cors": "^2.8.5",
     "@types/helmet": "^0.0.43",

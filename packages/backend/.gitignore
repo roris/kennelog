@@ -111,6 +111,7 @@ $RECYCLE.BIN/
 lib/
 data/
 
+
 #
 # https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore
 #
@@ -203,3 +204,7 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+
+# Custom stuff
+dist/
