@@ -22,6 +22,18 @@ module.exports = {
   rules: {
     semi: ['error', 'always'],
     indent: ['error', 2],
-    quotes: ['error', 'single']
+    quotes: ['error', 'single'],
+    // explicitly specifying public becomes annoying after a while
+    '@typescript-eslint/explicit-member-accessibility': [
+      'warn',
+      {
+        accessibility: 'no-public'
+      }
+    ],
+    // allow function return type deduction
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
+      { allowExpressions: true, allowTypedFunctionExpressions: true }
+    ]
   }
 };
