@@ -28,8 +28,8 @@ module.exports = {
       'warn',
       {
         accessibility: 'no-public'
-      },
-          // allow function return type deduction
+      }
+    ],
     '@typescript-eslint/explicit-function-return-type': [
       'error',
       {
@@ -37,7 +37,6 @@ module.exports = {
         allowTypedFunctionExpressions: true,
         allowHigherOrderFunctions: true
       }
-    ]
     ]
   }
 };

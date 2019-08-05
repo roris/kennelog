@@ -208,3 +208,5 @@ typings/
 
 # Custom stuff
 dist/
+config/local*
+*.sqlite3

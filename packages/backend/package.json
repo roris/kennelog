@@ -31,6 +31,9 @@
     "lint": "eslint */**/*.{js,ts}"
   },
   "dependencies": {
+    "@feathersjs/authentication": "^4.3.0-pre.1",
+    "@feathersjs/authentication-local": "^4.3.0-pre.1",
+    "@feathersjs/authentication-oauth": "^4.3.0-pre.1",
     "@feathersjs/configuration": "^4.3.0-pre.1",
     "@feathersjs/errors": "^4.3.0-pre.1",
     "@feathersjs/express": "^4.3.0-pre.1",
@@ -38,7 +41,11 @@
     "@feathersjs/socketio": "^4.3.0-pre.1",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "feathers-objection": "^4.1.1",
     "helmet": "^3.20.0",
+    "knex": "^0.19.1",
+    "objection": "^1.6.9",
+    "pg": "^7.12.0",
     "serve-favicon": "^2.5.0",
     "winston": "^3.0.0"
   },
@@ -54,6 +61,7 @@
     "@types/cors": "^2.8.5",
     "@types/helmet": "^0.0.43",
     "@types/jest": "^24.0.16",
+    "@types/jsonwebtoken": "^8.3.2",
     "@types/serve-favicon": "^2.2.30",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
@@ -71,6 +79,7 @@
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "shx": "^0.3.2",
+    "sqlite3": "^4.0.9",
     "ts-jest": "^24.0.2",
     "ts-node-dev": "^1.0.0-pre.40",
     "tslint": "^5.18.0",

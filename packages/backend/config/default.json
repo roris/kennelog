@@ -6,5 +6,39 @@
     "default": 10,
     "max": 50
   },
-  "ts": true
+  "ts": true,
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "VTiGFOOgVjROpfeVdmaB4aW491U=",
+    "authStrategies": ["jwt", "local"],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "postgres": {
+    "client": "pg",
+    "connection": {
+      "host": "localhost",
+      "user": "postgres",
+      "password": "",
+      "database": "kennelog"
+    }
+  },
+  "sqlite": {
+    "client": "sqlite3",
+    "connection": {
+      "filename": "./kennelog.sqlite3"
+    }
+  }
 }
