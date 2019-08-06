@@ -1,8 +1,16 @@
 import {inject} from 'aurelia-dependency-injection';
-import {Router} from 'aurelia-router';
+import {Redirect, Router} from 'aurelia-router';
 import validator from 'validator';
 import {WebApi} from '../../shared/web-api';
 import {SharedState} from '../../shared/shared-state';
+
+interface Credentials {
+  email: string,
+  password: string,
+  name: string,
+  dateOfBirth: string,
+  licenseNo: string
+}
 
 @inject(WebApi,Router,SharedState)
 export class SignUp {
@@ -38,7 +46,7 @@ export class SignUp {
     return validEmail && validPassword && validName && validDateOfBirth && validLicenseNo;
   }
 
-  get credentials() {
+  get credentials(): Credentials {
     return {
       email: this.email,
       password: this.password,
@@ -59,5 +67,12 @@ export class SignUp {
     } catch (err) {
       // -- login error
     }
+  }
+
+  canActivate(): boolean | Redirect {
+    if (this.sharedState.isLoggedIn) {
+      return new Redirect('dogs');
+    }
+    return true;
   }
 }

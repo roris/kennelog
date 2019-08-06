@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-dependency-injection';
-import {Router} from 'aurelia-router';
+import {Redirect, Router} from 'aurelia-router';
 import {WebApi} from '../../shared/web-api';
 import {SharedState} from '../../shared/shared-state';
 
@@ -10,7 +10,9 @@ export class SignIn {
   password: string = '';
 
   api: WebApi;
+
   sharedState: SharedState;
+
   router: Router;
 
   constructor(api: WebApi, sharedState: SharedState, router: Router) {
@@ -23,13 +25,18 @@ export class SignIn {
     return this.email !== '' && this.password !== '';
   }
 
-  async login() {
+  async login(): void {
     const credentials = { email: this.email, password: this.password };
     const res = await this.api.login(credentials);
     if (res.success) {
       this.router.navigateToRoute('dogs');
-      return true;
     } 
-    return false;
+  }
+
+  canActivate() : boolean | Redirect {
+    if (this.sharedState.isLoggedIn) {
+      return new Redirect('dogs');
+    }
+    return true;
   }
 }

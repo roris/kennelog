@@ -29,14 +29,14 @@ export class WebApi {
 
   async login(credentials) {
     try {
-      let user = {};
+      let res = {};
       if (!credentials) {
-        user = await this.client.authenticate();
+        res = await this.client.authenticate();
       } else {
         const payload = Object.assign({strategy: 'local'}, credentials);
-        user = await this.client.authenticate(payload);
+        res = await this.client.authenticate(payload);
       }
-      this.sharedState.user = user;
+      this.sharedState.user = res.user;
       this.sharedState.isLoggedIn = true;
       return { success: true };
     } catch (error) {
