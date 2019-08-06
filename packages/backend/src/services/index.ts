@@ -3,6 +3,7 @@ import users from './users/users.service';
 import dogs from './dogs/dogs.service';
 import breeds from './breeds/breeds.service';
 import uploads from './uploads/uploads.service';
+import blobs from './blobs/blobs.service';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 export default function (app: Application): void {
@@ -10,4 +11,5 @@ export default function (app: Application): void {
   app.configure(dogs);
   app.configure(breeds);
   app.configure(uploads);
+  app.configure(blobs);
 }
