@@ -29,8 +29,10 @@
     "check-types": "tsc --noEmit",
     "build": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
     "lint": "eslint */**/*.{js,ts}",
-    "migrate:latest": "yarn run knex migrate:latest",
-    "migrate:make": "yarn run knex migrate:make"
+    "migrate-latest": "yarn run knex migrate:latest",
+    "migrate-up": "yarn run knex migrate:up",
+    "migrate-down": "yarn run knex migrate:down",
+    "make-migrate": "yarn run knex migrate:make -x ts"
   },
   "dependencies": {
     "@feathersjs/authentication": "^4.3.0-pre.1",
