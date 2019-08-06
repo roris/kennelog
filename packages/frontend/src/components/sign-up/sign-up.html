@@ -1,45 +1,42 @@
 <template>
-  <div class="container">
-    <form accept-charset="UTF-8">
-      <div class="border-bottom pb-2">
-        <h2>Sign Up</h2>
-      </div>
+  <form accept-charset="UTF-8">
+    <div class="border-bottom pb-2">
+      <h2>Sign Up</h2>
+    </div>
 
-      <div class="form-group">
-        <label for="fullnameInput">Name</label>
-        <input type="text" class="form-control col-3" maxlength="255" id="fullnameInput" aria-describedby="fullnameHelp"
-          value.bind="name">
-        <small class="fullnameHelp">You can leave this field empty if you do not wish to reveal your name.</small>
-      </div>
+    <div class="form-group">
+      <label for="fullnameInput">Name</label>
+      <input type="text" class="form-control col-3" maxlength="255" id="fullnameInput" aria-describedby="fullnameHelp"
+        value.bind="name">
+      <small class="fullnameHelp">You can leave this field empty if you do not wish to reveal your name.</small>
+    </div>
 
-      <div class="form-group">
-        <label for="emailAddressInput">Email address</label>
-        <input type="email" class="form-control col-3" maxlength="254" id="emailAddressInput" value.bind="email"
-          required>
-      </div>
+    <div class="form-group">
+      <label for="emailAddressInput">Email address</label>
+      <input type="email" class="form-control col-3" maxlength="254" id="emailAddressInput" value.bind="email" required>
+    </div>
 
-      <div class="form-group">
-        <label for="passwordInput">Password</label>
-        <input type="password" class="form-control col-3" minlength="8" maxlength="72" value.bind="password" required
-          id="passwordInput">
-      </div>
+    <div class="form-group">
+      <label for="passwordInput">Password</label>
+      <input type="password" class="form-control col-3" minlength="8" maxlength="72" value.bind="password" required
+        id="passwordInput">
+    </div>
 
-      <div class="form-group">
-        <label for="dateOfBirthInput">Date of birth</label>
-        <input type="date" class="form-control col-2" value.bind="dateOfBirth" required id="dateOfBirthInput">
-      </div>
+    <div class="form-group">
+      <label for="dateOfBirthInput">Date of birth</label>
+      <input type="date" class="form-control col-2" value.bind="dateOfBirth" required id="dateOfBirthInput">
+    </div>
 
-      <div class="form-group">
-        <label for="licenseNo">Dog breeding license #</label>
-        <input type="text" class="form-control col-3" maxlength="50" value.bind="licenseNo" required
-          id="licenseNoInput">
-      </div>
-    </form>
+    <div class="form-group">
+      <label for="licenseNo">Dog breeding license #</label>
+      <input type="text" class="form-control col-3" maxlength="50" value.bind="licenseNo" required id="licenseNoInput">
+    </div>
 
     <div class="form-group pt-3 border-top">
       <button type="submit" class="btn btn-success" click.delegate="signUp()" disabled.bind="!canSubmit">
         Sign Up
       </button>
     </div>
-  </div>
+
+  </form>
 </template>

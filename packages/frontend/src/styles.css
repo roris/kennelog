@@ -1,5 +1,4 @@
-body {  
-  min-height: 150rem;
+body {
   padding-top: 8rem;
 }
 
@@ -10,11 +9,12 @@ body {
   border-bottom-width: 2px;
 }
 
-.menu-item:hover{
+.menu-item:hover {
   border-bottom-color: gainsboro;
 }
 
-.menu-item.selected, .menu-item.selected:hover{
+.menu-item.selected,
+.menu-item.selected:hover {
   border-bottom-color: orange;
 }
 
