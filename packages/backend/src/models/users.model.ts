@@ -18,6 +18,8 @@ class Users extends Model {
 
   dateOfBirth!: string;
 
+  avatar!: string;
+
   static get tableName(): string {
     return 'users';
   }
@@ -32,7 +34,8 @@ class Users extends Model {
         email: {type: ['string', 'null']},
         password: {type: 'string'},
         name: {type: ['string', 'null']},
-        dateOfBirth: {type: ['string', 'null']}
+        dateOfBirth: {type: ['string', 'null']},
+        avatar: {type: ['string', 'null']}
       }
     };
   }
