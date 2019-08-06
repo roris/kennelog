@@ -3,7 +3,7 @@ import { PLATFORM } from 'aurelia-pal';
 
 export const routeMap: RouteConfig[] = [
   {
-    route: ['', 'dogs'],
+    route: ['', 'dogs', 'home'],
     name: 'dogs',
     title: 'Your dogs',
     moduleId: PLATFORM.moduleName('./components/dogs/breeder-dogs'),
@@ -33,9 +33,15 @@ export const routeMap: RouteConfig[] = [
     moduleId: PLATFORM.moduleName('./components/litters/new-litter-from-pair')
   },
   {
-    route: ['sign-up'],
+    route: ['sign-up', 'register'],
     name: 'sign-up',
     title: 'Sign Up',
     moduleId: PLATFORM.moduleName('./components/sign-up/sign-up')
+  },
+  {
+    route: ['sign-in', 'login'],
+    name: 'sign-in',
+    title: 'Sign in to Kennelog',
+    moduleId: PLATFORM.moduleName('./components/sign-in/sign-in')
   }
 ];
