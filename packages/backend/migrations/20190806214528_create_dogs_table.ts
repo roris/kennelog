@@ -39,6 +39,7 @@ export async function up(knex: Knex): Promise<any> {
     table.integer('picture')
       .unsigned()
       .nullable()
+      .unique()
       .references('id')
       .inTable('uploads')
       .onDelete('SET NULL');
