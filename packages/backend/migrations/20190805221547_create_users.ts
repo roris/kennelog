@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<any> {
     if (!exists) {
       return knex.schema.createTable('users', table => {
         table.increments('id')
+          .unsigned()
           .primary()
           .notNullable();
         table.string('licenseNo', 50)
