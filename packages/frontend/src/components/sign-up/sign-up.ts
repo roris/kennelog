@@ -2,8 +2,9 @@ import {inject} from 'aurelia-dependency-injection';
 import {Router} from 'aurelia-router';
 import validator from 'validator';
 import {WebApi} from '../../shared/web-api';
+import {SharedState} from '../../shared/shared-state';
 
-@inject(WebApi,Router)
+@inject(WebApi,Router,SharedState)
 export class SignUp {
   email: string = ''
 
@@ -19,9 +20,12 @@ export class SignUp {
 
   router: Router;
 
-  constructor(api: WebApi, router: Router) {
+  sharedState: sharedState;
+
+  constructor(api: WebApi, router: Router, sharedState: SharedState) {
     this.api = api;
     this.router = router;
+    this.sharedState = sharedState;
   }
 
   get canSubmit(): boolean {
