@@ -13,6 +13,7 @@ import weights from './weights/weights.service';
 import heights from './heights/heights.service';
 import lengths from './lengths/lengths.service';
 import hipScores from './hip-scores/hip-scores.service';
+import elbowScores from './elbow-scores/elbow-scores.service';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 export default function (app: Application): void {
@@ -30,4 +31,5 @@ export default function (app: Application): void {
   app.configure(heights);
   app.configure(lengths);
   app.configure(hipScores);
+  app.configure(elbowScores);
 }
