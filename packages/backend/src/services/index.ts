@@ -10,6 +10,7 @@ import dogsLitters from './dogs-litters/dogs-litters.service';
 import events from './events/events.service';
 import measures from './measures/measures.service';
 import weights from './weights/weights.service';
+import heights from './heights/heights.service';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 export default function (app: Application): void {
@@ -24,4 +25,5 @@ export default function (app: Application): void {
   app.configure(events);
   app.configure(measures);
   app.configure(weights);
+  app.configure(heights);
 }
