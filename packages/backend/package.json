@@ -28,7 +28,9 @@
     "jest": "jest  --forceExit",
     "check-types": "tsc --noEmit",
     "build": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
-    "lint": "eslint */**/*.{js,ts}"
+    "lint": "eslint */**/*.{js,ts}",
+    "migrate:latest": "yarn run knex migrate:latest",
+    "migrate:make": "yarn run knex migrate:make"
   },
   "dependencies": {
     "@feathersjs/authentication": "^4.3.0-pre.1",
