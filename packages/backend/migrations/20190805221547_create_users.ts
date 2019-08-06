@@ -19,6 +19,8 @@ export async function up(knex: Knex): Promise<any> {
           .nullable();
         table.date('dateOfBirth')
           .nullable();
+        table.string('avatar')
+          .nullable();
         table.timestamp('createdAt');
         table.timestamp('updatedAt');
       })
