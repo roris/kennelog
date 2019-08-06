@@ -11,17 +11,20 @@ export async function up(knex: Knex): Promise<any> {
       .unsigned()
       .nullable()
       .references('id')
-      .inTable('dogs');
+      .inTable('dogs')
+      .onDelete('SET NULL');
     table.integer('dame')
       .unsigned()
       .nullable()
       .references('id')
-      .inTable('dogs');
+      .inTable('dogs')
+      .onDelete('SET NULL');
     table.integer('pairedBy')
       .unsigned()
       .nullable()
       .references('id')
-      .inTable('users');
+      .inTable('users')
+      .onDelete('SET NULL');
     table.date('pairedOn')
       .nullable();
     table.timestamp('createdAt');
