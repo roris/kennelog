@@ -8,12 +8,17 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@feathersjs/authentication-client": "^4.0.0-pre",
+    "@feathersjs/feathers": "^4.0.0-pre",
+    "@feathersjs/socketio-client": "^4.0.0-pre",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.2",
     "bootstrap": "^4.3.1",
+    "config": "^3.2.2",
+    "config-webpack": "^1.0.4",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
-    "lint": "eslint */**/*.{js,ts}"
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -21,6 +26,7 @@
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.4.0",
+    "@types/config": "^0.0.34",
     "@types/jest": "^24.0.9",
     "@types/lodash": "^4.14.117",
     "@types/node": "^10.11.6",

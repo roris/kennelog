@@ -7,6 +7,7 @@ const project = require('./aurelia_project/aurelia.json');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const { ProvidePlugin } = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ConfigWebpackPlugin = require('config-webpack');
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
@@ -27,6 +28,9 @@ const cssRules = [
 
 
 module.exports = ({ production, server, extractCss, coverage, analyze, karma } = {}) => ({
+  node: {
+    fs: 'empty'
+  },
   resolve: {
     extensions: ['.ts', '.js'],
     modules: [srcDir, 'node_modules'],
@@ -167,6 +171,7 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
     })),
     ...when(production || server, new CopyWebpackPlugin([
       { from: 'static', to: outDir, ignore: ['.*'] }])), // ignore dot (hidden) files
-    ...when(analyze, new BundleAnalyzerPlugin())
+    ...when(analyze, new BundleAnalyzerPlugin()),
+    new ConfigWebpackPlugin()
   ]
 });
