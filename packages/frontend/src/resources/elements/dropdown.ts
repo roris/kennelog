@@ -9,6 +9,7 @@ export class Dropdown {
     @bindable selectedItem: string;
 
     @bindable elementId: string;
+
     menuItemClicked(item: string) {
       this.selectedItem = item;
     }
