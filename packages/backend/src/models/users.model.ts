@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Users extends Model {
@@ -36,6 +36,30 @@ class Users extends Model {
         name: {type: ['string', 'null']},
         dateOfBirth: {type: ['string', 'null']},
         avatar: {type: ['string', 'null']}
+      }
+    };
+  }
+
+  static get relationMappings() : RelationMappings {
+    const Dogs = require('./dogs.model');
+
+    return {
+      owns: {
+        relation: Model.HasManyRelation,
+        modelClass: Dogs,
+        join: {
+          from: 'users.id',
+          to: 'dogs.owner'
+        }
+      },
+
+      bred: {
+        relation: Model.HasManyRelation,
+        modelClass: Dogs,
+        join: {
+          from: 'users.id',
+          to: 'dogs.breeder'
+        }
       }
     };
   }

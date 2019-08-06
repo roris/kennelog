@@ -18,6 +18,18 @@ export async function up(knex: Knex): Promise<any> {
           .notNullable();
         table.date('dateOfBirth')
           .nullable();
+        table.integer('owner')
+          .unsigned()
+          .nullable();
+        table.integer('breeder')
+          .unsigned()
+          .nullable();
+        table.foreign('owner')
+          .references('id')
+          .inTable('users');
+        table.foreign('breeder')
+          .references('id')
+          .inTable('users');
         table.timestamp('createdAt');
         table.timestamp('updatedAt');
       })
