@@ -6,7 +6,7 @@ export const routeMap: RouteConfig[] = [
     route: ['', 'dogs', 'home'],
     name: 'dogs',
     title: 'Your dogs',
-    moduleId: PLATFORM.moduleName('./components/dogs/breeder-dogs'),
+    moduleId: PLATFORM.moduleName('./components/dogs/breeder-dogs')
   },
   {
     route: ['dogs/new'],

@@ -1,9 +1,9 @@
-import {inject} from 'aurelia-dependency-injection';
-import {Redirect, Router} from 'aurelia-router';
-import {WebApi} from '../../shared/web-api';
-import {SharedState} from '../../shared/shared-state';
+import { inject } from 'aurelia-dependency-injection';
+import { Redirect, Router } from 'aurelia-router';
+import { WebApi } from '../../shared/web-api';
+import { SharedState } from '../../shared/shared-state';
 
-@inject(WebApi,SharedState,Router)
+@inject(WebApi, SharedState, Router)
 export class SignIn {
   email: string = '';
 
@@ -30,10 +30,10 @@ export class SignIn {
     const res = await this.api.login(credentials);
     if (res.success) {
       this.router.navigateToRoute('dogs');
-    } 
+    }
   }
 
-  canActivate() : boolean | Redirect {
+  canActivate(): boolean | Redirect {
     if (this.sharedState.isLoggedIn) {
       return new Redirect('dogs');
     }

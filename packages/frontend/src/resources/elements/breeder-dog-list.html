@@ -5,7 +5,7 @@
     <div class="border-bottom py-3">
       <form class="d-block d-sm-flex" accept-charset="UTF-8">
         <div class="mb-3 mb-sm-0 mr-sm-3 flex-fill">
-          <input class="form-control w-100">
+          <input class="form-control w-100" />
         </div>
         <div class="d-flex">
           <dropdown class="mr-2" label="Breed" items-source.bind="breeds" element-id="breed-filter"></dropdown>
@@ -13,18 +13,14 @@
           <a class="btn btn-success float-right" route-href="route: new-dog;" role="button">
             Add new dog
           </a>
-
         </div>
       </form>
     </div>
   </div>
-
 
   <div class="col-12 d-flex w-100 py-4" if.bind="dogs === undefined || dogs.length === 0 ">
     <span>You do not have any dogs. <a route-href="route: new-dog;">Add a new dog.</a></span>
   </div>
 
   <breeder-dog-detail repeat.for="dog of dogs" model.bind="dog"></breeder-dog-detail>
-
-  </div>
 </template>

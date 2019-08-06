@@ -1,13 +1,12 @@
-import {inject} from 'aurelia-dependency-injection';
+import { inject } from 'aurelia-dependency-injection';
 import feathers, { Service, Application } from '@feathersjs/feathers';
 import authentication from '@feathersjs/authentication-client';
 import socketio from '@feathersjs/socketio-client';
 import * as io from 'socket.io-client';
-import {SharedState} from './shared-state';
+import { SharedState } from './shared-state';
 
 @inject(SharedState)
 export class WebApi {
-
   users: Service<any>;
 
   private client: Application<any>;
@@ -20,12 +19,12 @@ export class WebApi {
     this.socket = io(CONFIG.server);
     const client = feathers();
     client.configure(socketio(this.socket));
-    client.configure(authentication({storage: window.localStorage}));
+    client.configure(authentication({ storage: window.localStorage }));
 
     this.client = client;
     this.users = client.service('users');
     this.sharedState = sharedState;
-  }  
+  }
 
   async login(credentials) {
     try {
@@ -33,14 +32,14 @@ export class WebApi {
       if (!credentials) {
         res = await this.client.authenticate();
       } else {
-        const payload = Object.assign({strategy: 'local'}, credentials);
+        const payload = Object.assign({ strategy: 'local' }, credentials);
         res = await this.client.authenticate(payload);
       }
       this.sharedState.user = res.user;
       this.sharedState.isLoggedIn = true;
       return { success: true };
     } catch (error) {
-      return { success: false, error: error};
+      return { success: false, error: error };
     }
   }
 

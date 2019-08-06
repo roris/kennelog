@@ -1,28 +1,28 @@
-import {inject} from 'aurelia-dependency-injection';
-import {Redirect, Router} from 'aurelia-router';
+import { inject } from 'aurelia-dependency-injection';
+import { Redirect, Router } from 'aurelia-router';
 import validator from 'validator';
-import {WebApi} from '../../shared/web-api';
-import {SharedState} from '../../shared/shared-state';
+import { WebApi } from '../../shared/web-api';
+import { SharedState } from '../../shared/shared-state';
 
 interface Credentials {
-  email: string,
-  password: string,
-  name: string,
-  dateOfBirth: string,
-  licenseNo: string
+  email: string;
+  password: string;
+  name: string;
+  dateOfBirth: string;
+  licenseNo: string;
 }
 
-@inject(WebApi,Router,SharedState)
+@inject(WebApi, Router, SharedState)
 export class SignUp {
-  email: string = ''
+  email: string = '';
 
-  password: string = ''
+  password: string = '';
 
-  name: string = ''
+  name: string = '';
 
   dateOfBirth: string = '';
 
-  licenseNo: string = ''
+  licenseNo: string = '';
 
   api: WebApi;
 
@@ -37,13 +37,20 @@ export class SignUp {
   }
 
   get canSubmit(): boolean {
-    const validPassword = this.password.length >= 8 && this.password.length <= 72;
+    const validPassword =
+      this.password.length >= 8 && this.password.length <= 72;
     const validName = this.name.length <= 255;
     const validEmail = validator.isEmail(this.email);
     const validDateOfBirth = this.dateOfBirth.length > 0;
     const validLicenseNo = this.licenseNo.length >= 8;
 
-    return validEmail && validPassword && validName && validDateOfBirth && validLicenseNo;
+    return (
+      validEmail &&
+      validPassword &&
+      validName &&
+      validDateOfBirth &&
+      validLicenseNo
+    );
   }
 
   get credentials(): Credentials {
@@ -57,7 +64,7 @@ export class SignUp {
   }
 
   async signUp(): void {
-    const user = this.credentials;  
+    const user = this.credentials;
     try {
       await this.api.users.create(user);
       const res = await this.api.login(user);

@@ -1,27 +1,27 @@
 import { inject } from 'aurelia-dependency-injection';
 import { Redirect } from 'aurelia-router';
-import {SharedState} from '../../shared/shared-state';
-import {WebApi} from '../../shared/web-api';
+import { SharedState } from '../../shared/shared-state';
+import { WebApi } from '../../shared/web-api';
 
-@inject(WebApi,SharedState)
+@inject(WebApi, SharedState)
 export class BreederDogs {
-    dogs;
+  dogs;
 
-    breeds;
+  breeds;
 
-    api: WebApi;
+  api: WebApi;
 
-    sharedState: SharedState;
+  sharedState: SharedState;
 
-    constructor(api: WebApi, sharedState: SharedState) {
-      this.api = api;
-      this.sharedState = sharedState;
+  constructor(api: WebApi, sharedState: SharedState) {
+    this.api = api;
+    this.sharedState = sharedState;
+  }
+
+  canActivate(): boolean | Redirect {
+    if (!this.sharedState.isLoggedIn) {
+      return new Redirect('sign-in');
     }
-
-    canActivate() : boolean | Redirect {
-      if (!this.sharedState.isLoggedIn) {
-        return new Redirect('sign-in');
-      }
-      return true;
-    }
+    return true;
+  }
 }

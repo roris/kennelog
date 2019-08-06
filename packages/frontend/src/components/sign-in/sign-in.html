@@ -6,21 +6,19 @@
 
     <div class="form-group mx-auto col-4">
       <label for="emailInput">Email address</label>
-      <input type="email" class="form-control" id="emailInput" value.bind="email" required>
+      <input type="email" class="form-control" id="emailInput" value.bind="email" required />
     </div>
 
     <div class="form-group mx-auto col-4">
       <label for="passwordInput">Password</label>
-      <input type="password" class="form-control" id="passwordInput" value.bind="password" required>
+      <input type="password" class="form-control" id="passwordInput" value.bind="password" required />
     </div>
 
-
     <div class="form-group mx-auto col-4 border-bottom pb-2">
-      <button type="submit" class="btn btn-success form-control" click.delegate="login()" disabled.bind='!canSubmit'>
+      <button type="submit" class="btn btn-success form-control" click.delegate="login()" disabled.bind="!canSubmit">
         Sign in
       </button>
     </div>
-
   </form>
 
   <div class="col-4 mx-auto">

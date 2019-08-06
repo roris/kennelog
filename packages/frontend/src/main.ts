@@ -1,6 +1,6 @@
-import {Aurelia} from 'aurelia-framework';
+import { Aurelia } from 'aurelia-framework';
 import environment from './environment';
-import {PLATFORM} from 'aurelia-pal';
+import { PLATFORM } from 'aurelia-pal';
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';

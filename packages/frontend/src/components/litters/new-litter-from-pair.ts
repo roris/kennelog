@@ -1,9 +1,9 @@
 import { inject } from 'aurelia-dependency-injection';
 import { Redirect } from 'aurelia-router';
-import {SharedState} from '../../shared/shared-state';
-import {WebApi} from '../../shared/web-api';
+import { SharedState } from '../../shared/shared-state';
+import { WebApi } from '../../shared/web-api';
 
-@inject(WebApi,SharedState)
+@inject(WebApi, SharedState)
 export class NewLitterFromPair {
   api: WebApi;
 
@@ -14,7 +14,7 @@ export class NewLitterFromPair {
     this.sharedState = sharedState;
   }
 
-  canActivate() : boolean | Redirect {
+  canActivate(): boolean | Redirect {
     if (!this.sharedState.isLoggedIn) {
       return new Redirect('sign-in');
     }
