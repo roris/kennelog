@@ -4,6 +4,7 @@ export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable('breeds', table => {
     table.increments('id')
       .unsigned()
+      .primary()
       .notNullable();
     table.string('name')
       .notNullable()
