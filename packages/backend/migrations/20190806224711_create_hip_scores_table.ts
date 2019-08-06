@@ -17,7 +17,7 @@ export async function up(knex: Knex): Promise<any> {
     // subluxation
     table.integer('s_l')
       .notNullable();
-    table.integer('s_l')
+    table.integer('s_r')
       .notNullable();
     // cranial acetabular edge
     table.integer('crae_l')
