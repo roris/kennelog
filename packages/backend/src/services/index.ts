@@ -8,6 +8,7 @@ import pairs from './pairs/pairs.service';
 import litters from './litters/litters.service';
 import dogsLitters from './dogs-litters/dogs-litters.service';
 import events from './events/events.service';
+import measures from './measures/measures.service';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 export default function (app: Application): void {
@@ -20,4 +21,5 @@ export default function (app: Application): void {
   app.configure(litters);
   app.configure(dogsLitters);
   app.configure(events);
+  app.configure(measures);
 }
