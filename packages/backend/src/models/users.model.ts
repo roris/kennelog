@@ -8,6 +8,16 @@ class Users extends Model {
 
   updatedAt!: string;
 
+  licenseNo!: string;
+
+  email!: string;
+
+  password!: string;
+
+  name!: string;
+
+  dateOfBirth!: string;
+
   static get tableName(): string {
     return 'users';
   }

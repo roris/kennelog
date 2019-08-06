@@ -38,7 +38,7 @@
   "sqlite": {
     "client": "sqlite3",
     "connection": {
-      "filename": "./kennelog.sqlite3"
+      "filename": "kennelog.sqlite3"
     }
   }
 }
