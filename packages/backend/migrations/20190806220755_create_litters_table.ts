@@ -1,4 +1,4 @@
-import * as Knex from "knex";
+import * as Knex from 'knex';
 
 
 export async function up(knex: Knex): Promise<any> {
@@ -11,10 +11,11 @@ export async function up(knex: Knex): Promise<any> {
       .unsigned()
       .nullable()
       .references('id')
-      .inTable('pairs');
+      .inTable('pairs')
+      .onDelete('SET NULL');
     table.timestamp('createdAt');
     table.timestamp('updatedAt');
-  })
+  });
 }
 
 
