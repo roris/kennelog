@@ -1,51 +1,43 @@
-import { inject } from 'aurelia-dependency-injection';
 import feathers, { Service, Application } from '@feathersjs/feathers';
 import authentication from '@feathersjs/authentication-client';
 import socketio from '@feathersjs/socketio-client';
 import * as io from 'socket.io-client';
-import { SharedState } from './shared-state';
 
-@inject(SharedState)
+export interface LoginResponse {
+  authenticated: boolean;
+  user?: any;
+  code?: number;
+  reason?: string;
+}
+
 export class WebApi {
   users: Service<any>;
 
   private client: Application<any>;
 
-  private socket: any;
-
-  private sharedState: SharedState;
-
-  constructor(sharedState: SharedState) {
-    this.socket = io(CONFIG.server); // eslint-disable-line no-undef
-    const client = feathers();
-    client.configure(socketio(this.socket));
-    client.configure(authentication({ storage: window.localStorage }));
-
-    this.client = client;
-    this.users = client.service('users');
-    this.sharedState = sharedState;
+  constructor() {
+    const socket = io(CONFIG.server); // eslint-disable-line no-undef
+    this.client = feathers();
+    this.client.configure(socketio(socket));
+    this.client.configure(authentication());
+    this.users = this.client.service('users');
   }
 
-  async login(credentials): Promise<{success: boolean, error?: any}> {
+  async login(credentials: any = false): Promise<LoginResponse> {
     try {
-      let res;
+      let response;
       if (!credentials) {
-        res = await this.client.authenticate();
+        // attempt to login using the token in localStorage
+        response = await this.client.authenticate();
       } else {
-        const payload = Object.assign({ strategy: 'local' }, credentials);
-        res = await this.client.authenticate(payload);
+        // new login attempt
+        const options = { strategy: 'local' };
+        const payload = Object.assign(options, credentials);
+        response = await this.client.authenticate(payload);
       }
-      this.sharedState.user = res.user;
-      this.sharedState.isLoggedIn = true;
-      return { success: true };
+      return { authenticated: true, user: response.user };
     } catch (error) {
-      return { success: false, error: error };
+      return { authenticated: false, code: error.code, reason: error.message };
     }
-  }
-
-  async logout(): Promise<void> {
-    this.sharedState.isLoggedIn = false;
-    this.sharedState.user = {};
-    await this.client.logout();
   }
 }

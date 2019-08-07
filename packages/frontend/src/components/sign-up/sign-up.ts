@@ -1,8 +1,10 @@
 import { inject } from 'aurelia-dependency-injection';
 import { Redirect, Router } from 'aurelia-router';
+import { Store } from 'aurelia-store';
 import validator from 'validator';
 import { WebApi } from '../../shared/web-api';
-import { SharedState } from '../../shared/shared-state';
+import { ViewModelState as State } from '../../shared/view-model-state';
+import { AppState } from 'shared/app-state';
 
 interface Credentials {
   email: string;
@@ -12,7 +14,7 @@ interface Credentials {
   licenseNo: string;
 }
 
-@inject(WebApi, Router, SharedState)
+@inject(Router, State, Store, WebApi)
 export class SignUp {
   email: string = '';
 
@@ -28,12 +30,20 @@ export class SignUp {
 
   router: Router;
 
-  sharedState: sharedState;
+  state: State;
 
-  constructor(api: WebApi, router: Router, sharedState: SharedState) {
+  store: Store<AppState>;
+
+  constructor(
+    router: Router,
+    state: State,
+    store: Store<AppState>,
+    api: WebApi
+  ) {
     this.api = api;
     this.router = router;
-    this.sharedState = sharedState;
+    this.state = state;
+    this.store = store;
   }
 
   get canSubmit(): boolean {
@@ -63,21 +73,26 @@ export class SignUp {
     };
   }
 
-  async signUp(): void {
+  async signUp(): Promise<void> {
     const user = this.credentials;
+
     try {
       await this.api.users.create(user);
-      const res = await this.api.login(user);
-      if (res.success) {
+
+      const credentials = { email: user.email, password: user.password };
+      const response = await this.api.login(credentials);
+
+      if (response.authenticated) {
+        this.state.onLogin(this.store, true, response.user);
         this.router.navigateToRoute('dogs');
       }
     } catch (err) {
-      // -- login error
+      // sign up failed
     }
   }
 
   canActivate(): boolean | Redirect {
-    if (this.sharedState.isLoggedIn) {
+    if (this.state.authenticated) {
       return new Redirect('dogs');
     }
     return true;

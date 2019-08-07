@@ -1,21 +1,82 @@
+import { inject } from 'aurelia-dependency-injection';
 import { Router, RouterConfiguration } from 'aurelia-router';
+import {
+  Store,
+  localStorageMiddleware,
+  MiddlewarePlacement,
+  rehydrateFromLocalStorage
+} from 'aurelia-store';
+import { Subscription } from 'rxjs';
 import { routeMap } from './route-map';
-import { inject } from 'aurelia-framework';
-import { WebApi } from 'shared/web-api';
+import { WebApi } from './shared/web-api';
+import { AppState as State } from './shared/app-state';
+import { ViewModelState } from 'shared/view-model-state';
 
-@inject(WebApi)
+@inject(Store, ViewModelState, WebApi)
 export class App {
   api: WebApi;
 
   router: Router;
 
-  constructor(api: WebApi) {
+  state: State;
+
+  store: Store<State>;
+
+  subscription: Subscription;
+
+  viewModelState: ViewModelState;
+
+  constructor(
+    store: Store<State>,
+    viewModelState: ViewModelState,
+    api: WebApi
+  ) {
     this.api = api;
+    this.store = store;
+    this.viewModelState = viewModelState;
   }
 
   configureRouter(config: RouterConfiguration, router: Router): void {
     config.title = 'Kennelog';
     config.map(routeMap);
     this.router = router;
+  }
+
+  bind(): void {
+    this.subscription = this.store.state.subscribe(newState => {
+      this.state = newState;
+    });
+
+    // load the state from local storage
+    this.store.registerMiddleware(
+      localStorageMiddleware,
+
+      MiddlewarePlacement.After,
+
+      { key: 'kennelog-store' }
+    );
+    this.store.registerAction('Rehydrate', rehydrateFromLocalStorage);
+    this.store.dispatch(rehydrateFromLocalStorage, 'kennelog-store');
+  }
+
+  unbind(): void {
+    this.subscription.unsubscribe();
+  }
+
+  async activate(): Promise<void> {
+    const state = JSON.parse(localStorage.getItem('kennelog-store'));
+    if (state.authenticated) {
+      const response = await this.api.login();
+      const authenticated = response.authenticated;
+      const user = authenticated ? response.user : {};
+
+      // update viewModelState only if authentication was successful
+      if (authenticated) {
+        this.viewModelState.onLogin(this.store, authenticated, user);
+      } else if (response.code === 401) {
+        state.authenticated = false;
+        localStorage.setItem('kennelog-store', state);
+      }
+    }
   }
 }

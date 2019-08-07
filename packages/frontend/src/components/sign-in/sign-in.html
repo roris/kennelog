@@ -15,7 +15,8 @@
     </div>
 
     <div class="form-group mx-auto col-4 border-bottom pb-2">
-      <button type="submit" class="btn btn-success form-control" click.delegate="login()" disabled.bind="!canSubmit">
+      <button type="submit" class="btn btn-success form-control" click.delegate="onSignInClicked()"
+        disabled.bind="!canSubmit">
         Sign in
       </button>
     </div>

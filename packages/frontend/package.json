@@ -13,6 +13,7 @@
     "@feathersjs/socketio-client": "^4.0.0-pre",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.2",
+    "aurelia-store": "^1.4.0",
     "bootstrap": "^4.3.1",
     "config": "^3.2.2",
     "config-webpack": "^1.0.4",
