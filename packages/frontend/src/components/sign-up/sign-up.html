@@ -1,66 +1,108 @@
 <template>
-  <form accept-charset="UTF-8">
+  <form
+    class="needs-validation"
+    class.bind="validated ? 'was-validated' : ''"
+    accept-charset="ISO-8859-1"
+    novalidate="true"
+  >
     <div class="border-bottom pb-2">
       <h2>Sign Up</h2>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" validation-errors.bind="nameErrors">
       <label for="fullnameInput">Name</label>
       <input
         type="text"
         class="form-control col-3"
+        class.bind="nameErrors.length ? 'is-invalid' : ''"
         maxlength="255"
         id="fullnameInput"
         aria-describedby="fullnameHelp"
-        value.bind="name"
+        value.bind="name & validate"
       />
       <small class="fullnameHelp">You can leave this field empty if you do not wish to reveal your name.</small>
+      <ul class="invalid-feedback" if.bind="nameErrors.length > 0">
+        <li repeat.for="errorInfo of nameErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" validation-errors.bind="emailErrors">
       <label for="emailAddressInput">Email address</label>
       <input
         type="email"
         class="form-control col-3"
+        class.bind="emailErrors.length ? 'is-invalid' : ''"
         maxlength="254"
         id="emailAddressInput"
-        value.bind="email"
+        value.bind="email & validate"
         required
       />
+      <ul class="invalid-feedback" if.bind="emailErrors.length > 0">
+        <li repeat.for="errorInfo of emailErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" validation-errors.bind="passwordErrors">
       <label for="passwordInput">Password</label>
       <input
         type="password"
         class="form-control col-3"
+        class.bind="passwordErrors.length ? 'is-invalid' : ''"
         minlength="8"
         maxlength="72"
-        value.bind="password"
         required
         id="passwordInput"
+        value.bind="password & validate"
       />
+      <ul class="invalid-feedback" if.bind="passwordErrors.length > 0">
+        <li repeat.for="errorInfo of passwordErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" validation-errors.bind="dateOfBirthErrors">
       <label for="dateOfBirthInput">Date of birth</label>
-      <input type="date" class="form-control col-2" value.bind="dateOfBirth" required id="dateOfBirthInput" />
+      <input
+        type="date"
+        class="form-control col-2 "
+        class.bind="dateOfBirthErrors.length ? 'is-invalid' : ''"
+        required
+        id="dateOfBirthInput"
+        value.bind="dateOfBirth & validate"
+        max.bind="maxDateOfBirth"
+      />
+      <ul class="invalid-feedback" if.bind="dateOfBirthErrors.length > 0">
+        <li repeat.for="errorInfo of dateOfBirthErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" validation-errors.bind="licenseNoErrors">
       <label for="licenseNo">Dog breeding license #</label>
       <input
         type="text"
         class="form-control col-3"
+        class.bind="licenseNoErrors.length ? 'is-invalid' : ''"
         maxlength="50"
-        value.bind="licenseNo"
+        value.bind="licenseNo & validate"
         required
         id="licenseNoInput"
       />
+      <ul class="invalid-feedback" if.bind="licenseNoErrors.length > 0">
+        <li repeat.for="errorInfo of licenseNoErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
     <div class="form-group pt-3 border-top">
-      <button type="submit" class="btn btn-success" click.delegate="signUp()" disabled.bind="!canSubmit">
+      <button type="submit" class="btn btn-success" click.delegate="submit()" disabled.bind="!canSubmit">
         Sign Up
       </button>
     </div>
