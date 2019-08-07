@@ -63,6 +63,7 @@
     "gulp-rename": "^1.4.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.2",
     "istanbul-instrumenter-loader": "^3.0.1",
     "jest": "^24.1.0",
     "jest-cli": "^24.1.0",
@@ -70,6 +71,7 @@
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^0.4.3",
     "minimatch": "^3.0.4",
+    "precise-commits": "^1.0.2",
     "prettier": "^1.18.2",
     "promise-polyfill": "^8.1.0",
     "regenerator-runtime": "0.13.2",
@@ -130,5 +132,10 @@
       "text",
       "html"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "precise-commits"
+    }
   }
 }
