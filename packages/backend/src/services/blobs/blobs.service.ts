@@ -14,12 +14,11 @@ declare module '../../declarations' {
 }
 
 const blobStorage = fs('./content');
-const blobService = BlobService({ Model: blobStorage});
 
 export default function (app: Application) {
 
   // Initialize our service with any options it requires
-  app.use('/blobs', blobService);
+  app.use('/blobs', new BlobService({ Model: blobStorage}));
 
   // Get our initialized service so that we can register hooks
   const service = app.service('blobs');
