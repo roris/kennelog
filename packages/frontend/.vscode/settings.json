@@ -2,6 +2,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "html.suggest.angular1": false,
   "html.suggest.ionic": false,
-  "prettier.eslintIntegration": true,
-  "prettier.singleQuote": true
+  "editor.formatOnSave": true,
+  "prettier.eslintIntegration": true
 }
