@@ -31,7 +31,7 @@ class Weights extends Model {
           to: 'weights.id'
         }
       }
-    }
+    };
   }
 }
 

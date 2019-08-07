@@ -44,7 +44,7 @@ class Users extends Model {
     const Dogs = require('./dogs.model');
 
     return {
-      owns: {
+      stock: {
         relation: Model.HasManyRelation,
         modelClass: Dogs,
         join: {

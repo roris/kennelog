@@ -5,6 +5,7 @@ import { Application } from '../declarations';
 
 class Events extends Model {
   createdAt!: string;
+
   updatedAt!: string;
 
   static get tableName() {
@@ -36,7 +37,7 @@ class Events extends Model {
           to: 'events.dog'
         }
       }
-    }
+    };
   }
 
   $beforeInsert() {

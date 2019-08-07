@@ -32,7 +32,7 @@ class Heights extends Model {
           to: 'heights.id'
         }
       }
-    }
+    };
   }
 }
 

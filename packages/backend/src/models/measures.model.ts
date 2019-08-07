@@ -5,6 +5,7 @@ import { Application } from '../declarations';
 
 class Measures extends Model {
   createdAt!: string;
+
   updatedAt!: string;
 
   static get tableName() {
@@ -18,7 +19,7 @@ class Measures extends Model {
 
       properties: {
         measuredOn: { type: 'string' },
-        dog: {type: 'integer' }
+        dog: { type: 'integer' }
       }
     };
   }

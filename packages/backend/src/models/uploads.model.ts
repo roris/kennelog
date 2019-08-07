@@ -5,7 +5,9 @@ import { Application } from '../declarations';
 
 class Uploads extends Model {
   createdAt!: string;
+
   updatedAt!: string;
+
   uri!: string;
 
   static get tableName() {
@@ -35,7 +37,7 @@ class Uploads extends Model {
           to: 'dogs.picture'
         }
       }
-    }
+    };
   }
 
   $beforeInsert() {

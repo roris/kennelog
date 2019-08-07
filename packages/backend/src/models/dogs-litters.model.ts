@@ -5,6 +5,7 @@ import { Application } from '../declarations';
 
 class DogsLitters extends Model {
   createdAt!: string;
+
   updatedAt!: string;
 
   static get tableName() {
@@ -18,7 +19,7 @@ class DogsLitters extends Model {
 
       properties: {
         dog: { type: 'integer' },
-        litter: { type: 'integer' },
+        litter: { type: 'integer' }
       }
     };
   }
@@ -45,7 +46,7 @@ class DogsLitters extends Model {
           to: 'dogs_litters.dog'
         }
       }
-    }
+    };
   }
 
   $beforeInsert() {

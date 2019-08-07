@@ -31,7 +31,7 @@ class Lengths extends Model {
           to: 'lengths.id'
         }
       }
-    }
+    };
   }
 }
 

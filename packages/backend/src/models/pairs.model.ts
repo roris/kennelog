@@ -5,6 +5,7 @@ import { Application } from '../declarations';
 
 class Pairs extends Model {
   createdAt!: string;
+
   updatedAt!: string;
 
   static get tableName() {
@@ -18,7 +19,7 @@ class Pairs extends Model {
         sire: { type: ['number', 'null'] },
         dame: { type: ['number', 'null'] },
         pairedBy: { type: ['number', 'null'] },
-        pairedOn: { type: ['string', 'null'] },
+        pairedOn: { type: ['string', 'null'] }
       }
     };
   }
@@ -54,9 +55,8 @@ class Pairs extends Model {
           to: 'pairs.pairedBy'
         }
       }
-    }
+    };
   }
-
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();

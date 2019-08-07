@@ -5,6 +5,7 @@ import { Application } from '../declarations';
 
 class Litters extends Model {
   createdAt!: string;
+
   updatedAt!: string;
 
   static get tableName() {
@@ -16,12 +17,12 @@ class Litters extends Model {
       type: 'object',
 
       properties: {
-        parents: { type: ['integer', 'null'] },
+        parents: { type: ['integer', 'null'] }
       }
     };
   }
 
-  static get relationMappings() : RelationMappings {
+  static get relationMappings(): RelationMappings {
     const Pairs = require('./pairs.model');
 
     return {
@@ -33,7 +34,7 @@ class Litters extends Model {
           to: 'litters.parents'
         }
       }
-    }
+    };
   }
 
   $beforeInsert() {

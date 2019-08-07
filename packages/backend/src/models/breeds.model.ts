@@ -38,7 +38,7 @@ class Breeds extends Model {
           to: 'dogs.breed'
         }
       }
-    }
+    };
   }
 
   $beforeInsert() {
