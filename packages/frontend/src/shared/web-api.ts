@@ -16,7 +16,7 @@ export class WebApi {
   private sharedState: SharedState;
 
   constructor(sharedState: SharedState) {
-    this.socket = io(CONFIG.server);
+    this.socket = io(CONFIG.server); // eslint-disable-line no-undef
     const client = feathers();
     client.configure(socketio(this.socket));
     client.configure(authentication({ storage: window.localStorage }));
@@ -26,9 +26,9 @@ export class WebApi {
     this.sharedState = sharedState;
   }
 
-  async login(credentials) {
+  async login(credentials): Promise<{success: boolean, error?: any}> {
     try {
-      let res = {};
+      let res;
       if (!credentials) {
         res = await this.client.authenticate();
       } else {
@@ -43,9 +43,9 @@ export class WebApi {
     }
   }
 
-  async logout() {
+  async logout(): Promise<void> {
     this.sharedState.isLoggedIn = false;
     this.sharedState.user = {};
-    return this.client.logout();
+    await this.client.logout();
   }
 }

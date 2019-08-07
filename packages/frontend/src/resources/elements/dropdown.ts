@@ -10,7 +10,7 @@ export class Dropdown {
 
   @bindable elementId: string;
 
-  menuItemClicked(item: string) {
+  menuItemClicked(item: string): void {
     this.selectedItem = item;
   }
 }

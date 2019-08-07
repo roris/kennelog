@@ -13,7 +13,7 @@ export class App {
     this.api = api;
   }
 
-  configureRouter(config: RouterConfiguration, router: Router) {
+  configureRouter(config: RouterConfiguration, router: Router): void {
     config.title = 'Kennelog';
     config.map(routeMap);
     this.router = router;
