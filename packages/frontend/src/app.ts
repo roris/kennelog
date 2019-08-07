@@ -64,8 +64,12 @@ export class App {
   }
 
   async activate(): Promise<void> {
-    const state = JSON.parse(localStorage.getItem('kennelog-store'));
-    if (state.authenticated) {
+    const storedState = JSON.parse(localStorage.getItem('kennelog-store'));
+    if (!storedState) {
+      return;
+    }
+
+    if (storedState.authenticated) {
       const response = await this.api.login();
       const authenticated = response.authenticated;
       const user = authenticated ? response.user : {};
@@ -74,8 +78,8 @@ export class App {
       if (authenticated) {
         this.viewModelState.onLogin(this.store, authenticated, user);
       } else if (response.code === 401) {
-        state.authenticated = false;
-        localStorage.setItem('kennelog-store', state);
+        storedState.authenticated = false;
+        localStorage.setItem('kennelog-store', storedState);
       }
     }
   }
