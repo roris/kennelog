@@ -1,14 +1,15 @@
 import * as authentication from '@feathersjs/authentication';
+import sanitizeDog from '../../hooks/sanitize-dog';
 // Don't remove this comment. It's needed to format import lines nicely.
 
 const { authenticate } = authentication.hooks;
 
 export default {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [authenticate('jwt')],
     find: [],
     get: [],
-    create: [],
+    create: [sanitizeDog()],
     update: [],
     patch: [],
     remove: []
