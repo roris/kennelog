@@ -11,6 +11,8 @@ export interface LoginResponse {
 }
 
 export class WebApi {
+  blobs: Service<any>;
+
   users: Service<any>;
 
   uploads: Service<any>;
@@ -25,6 +27,7 @@ export class WebApi {
     this.client.configure(socketio(socket));
     this.client.configure(authentication());
 
+    this.blobs = this.client.service('blobs');
     this.uploads = this.client.service('uploads');
     this.users = this.client.service('users');
     this.dogs = this.client.service('dogs');

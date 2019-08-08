@@ -1,5 +1,5 @@
 import { inject } from 'aurelia-dependency-injection';
-import { Redirect } from 'aurelia-router';
+import { Redirect, Router } from 'aurelia-router';
 import {
   Validator,
   ValidationControllerFactory as ControllerFactory,
@@ -14,40 +14,54 @@ import { WebApi } from '../../shared/web-api';
 
 class Dog {
   name: string = '';
-  microchipNo: number;
+
+  microchipNo: string;
+
   dob: string = '';
+
   gender: string;
 
   sireMicrochipNo: string;
+
   dameMicrochipNo: string;
 
   imageFiles: File[] = [];
+
   breed: string = '';
+
+  get hasImage(): boolean {
+    return this.imageFiles.length > 0;
+  }
 }
 
-@inject(State, ControllerFactory, Validator, WebApi)
+@inject(ControllerFactory, Router, State, Validator, WebApi)
 export class NewDog {
   api: WebApi;
 
-  canSubmit: boolean = false;
-
   controller: ValidationController;
+
+  isBreeder: boolean = true;
+
+  isOwner: boolean = true;
+
+  submitting: boolean = false;
+
+  valid: boolean = false;
+
+  validated: boolean = false;
+
+  router: Router;
 
   state: State;
 
   validator: Validator;
 
-  validated: boolean = false;
-
-  isOwner: boolean = true;
-
-  isBreeder: boolean = true;
-
   dog: Dog = new Dog();
 
   constructor(
-    state: State,
     controllerFactory: ControllerFactory,
+    router: Router,
+    state: State,
     validator: Validator,
     api: WebApi
   ) {
@@ -57,9 +71,13 @@ export class NewDog {
     this.controller.validateTrigger = validateTrigger.changeOrBlur;
     this.controller.subscribe(() => this.validateWhole());
 
-    this.validator = validator;
-
+    this.router = router;
     this.state = state;
+    this.validator = validator;
+  }
+
+  get canSubmit(): boolean {
+    return !this.submitting && this.valid;
   }
 
   get maxDateOfBirth(): string {
@@ -73,12 +91,81 @@ export class NewDog {
 
     this.validator
       .validateObject(this.dog)
-      .then(
-        results => (this.canSubmit = results.every(result => result.valid))
-      );
+      .then(results => (this.valid = results.every(result => result.valid)));
   }
 
-  async submit(): Promise<void> {}
+  async submit(): Promise<void> {
+    this.submitting = true;
+
+    try {
+      // create the blob first
+      if (this.dog.hasImage) {
+        const reader = new FileReader();
+
+        reader.addEventListener(
+          'load',
+          () => {
+            // const uri = reader.result;
+            const uri = reader.result;
+            this.sendToServer(reader.result)
+              .then(() => {})
+              .catch(() => {});
+          },
+          false
+        );
+
+        reader.readAsDataURL(this.dog.imageFiles[0]);
+      } else {
+        await this.sendToServer();
+      }
+    } catch (error) {
+      console.error('Error while creating dog:', error.code, error.message);
+    }
+    return;
+  }
+
+  async sendToServer(uri?): Promise<void> {
+    try {
+      let upload = undefined;
+      if (uri) {
+        const blob = await this.api.blobs.create({ uri: uri });
+        upload = await this.api.uploads.create({ path: blob.id });
+      }
+      let payload: any = {};
+      payload.gender = this.dog.gender;
+
+      if (this.dog.name !== '') {
+        payload.name = this.dog.name;
+      }
+
+      if (this.dog.dob !== '') {
+        payload.dateOfBirth = this.dog.dob;
+      }
+
+      if (this.dog.microchipNo !== '') {
+        payload.microchipNo = this.dog.microchipNo;
+      }
+
+      if (this.isBreeder) {
+        payload.breeder = this.state.user.id;
+      }
+
+      if (this.isOwner) {
+        payload.owner = this.state.user.id;
+      }
+
+      if (upload) {
+        payload.picture = upload.id;
+      }
+
+      this.api.dogs.create(payload);
+    } catch (error) {
+      console.log(error.code, error.message);
+    }
+
+    this.submitting = false;
+    return;
+  }
 
   canActivate(): boolean | Redirect {
     if (!this.state.authenticated) {
@@ -118,7 +205,7 @@ export class NewDog {
       //
       .ensure<string>('gender')
       .required()
-      .withMessage('${displayName} must be selected')
+      .withMessage('${$displayName} must be selected')
       //
       .ensure<string>('dob')
       .displayName('Date of birth')
@@ -128,10 +215,10 @@ export class NewDog {
       //
       .ensure<File[]>('imageFiles')
       .displayName('Image')
-      .satisfies(imageFiles => imageFiles[0].size <= 300 * 1024)
+      .satisfies(imageFiles => imageFiles[0].size <= 10_000_000)
       .when(dog => dog.imageFiles.length > 0)
       .withMessage(
-        '${$displayName} file size must be smaller or equal to 300 KiB'
+        '${$displayName} file size must be smaller or equal to 10 MB'
       )
       .satisfies(imageFiles => imageFiles[0].type.split('/')[0] === 'image')
       .when(dog => dog.imageFiles.length > 0)
@@ -140,6 +227,6 @@ export class NewDog {
       .maxLength(255)
       .matches(/^[a-zA-Z ]+$/)
       .withMessage('${$displayName} can contain alphabet characters only')
-      .on(this.dog);
+      .on(this);
   }
 }
