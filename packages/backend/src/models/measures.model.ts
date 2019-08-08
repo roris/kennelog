@@ -24,19 +24,19 @@ class Measures extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Dogs = require('./dogs.model')();
-    return {
-      dog: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Dogs,
-        join: {
-          from: 'dogs.id',
-          to: 'measures.dog'
-        }
-      }
-    };
-  }
+  // static get relationMappings(): RelationMappings {
+  //   const Dogs = require('./dogs.model')();
+  //   return {
+  //     dog: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Dogs,
+  //       join: {
+  //         from: 'dogs.id',
+  //         to: 'measures.dog'
+  //       }
+  //     }
+  //   };
+  // }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();

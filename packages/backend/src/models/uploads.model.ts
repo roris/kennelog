@@ -25,20 +25,20 @@ class Uploads extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Dog = require('./dogs.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Dog = require('./dogs.model')();
 
-    return {
-      dog: {
-        relation: Model.HasOneRelation,
-        modelClass: Dog,
-        join: {
-          from: 'uploads.id',
-          to: 'dogs.picture'
-        }
-      }
-    };
-  }
+  //   return {
+  //     dog: {
+  //       relation: Model.HasOneRelation,
+  //       modelClass: Dog,
+  //       join: {
+  //         from: 'uploads.id',
+  //         to: 'dogs.picture'
+  //       }
+  //     }
+  //   };
+  // }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();

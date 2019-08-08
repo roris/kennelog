@@ -19,20 +19,20 @@ class Weights extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Measures = require('./measures.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Measures = require('./measures.model')();
 
-    return {
-      parent: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Measures,
-        join: {
-          from: 'measures.id',
-          to: 'weights.id'
-        }
-      }
-    };
-  }
+  //   return {
+  //     parent: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Measures,
+  //       join: {
+  //         from: 'measures.id',
+  //         to: 'weights.id'
+  //       }
+  //     }
+  //   };
+  // }
 }
 
 export default function(app: Application) {

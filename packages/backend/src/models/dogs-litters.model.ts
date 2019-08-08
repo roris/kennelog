@@ -24,30 +24,30 @@ class DogsLitters extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Litters = require('./litters.model')();
-    const Dogs = require('./dogs.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Litters = require('./litters.model')();
+  //   const Dogs = require('./dogs.model')();
 
-    return {
-      litter: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Litters,
-        join: {
-          from: 'litters.id',
-          to: 'dogs_litters.litter'
-        }
-      },
+  //   return {
+  //     litter: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Litters,
+  //       join: {
+  //         from: 'litters.id',
+  //         to: 'dogs_litters.litter'
+  //       }
+  //     },
 
-      dog: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Dogs,
-        join: {
-          from: 'dogs.id',
-          to: 'dogs_litters.dog'
-        }
-      }
-    };
-  }
+  //     dog: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Dogs,
+  //       join: {
+  //         from: 'dogs.id',
+  //         to: 'dogs_litters.dog'
+  //       }
+  //     }
+  //   };
+  // }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();

@@ -25,20 +25,20 @@ class Events extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Dogs = require('./dogs.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Dogs = require('./dogs.model')();
 
-    return {
-      dog: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Dogs,
-        join: {
-          from: 'dogs.id',
-          to: 'events.dog'
-        }
-      }
-    };
-  }
+  //   return {
+  //     dog: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Dogs,
+  //       join: {
+  //         from: 'dogs.id',
+  //         to: 'events.dog'
+  //       }
+  //     }
+  //   };
+  // }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();

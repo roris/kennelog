@@ -55,20 +55,20 @@ class HipScores extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Measures = require('./measures.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Measures = require('./measures.model')();
 
-    return {
-      parent: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Measures,
-        join: {
-          from: 'measures.id',
-          to: 'hip_scores.id'
-        }
-      }
-    };
-  }
+  //   return {
+  //     parent: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Measures,
+  //       join: {
+  //         from: 'measures.id',
+  //         to: 'hip_scores.id'
+  //       }
+  //     }
+  //   };
+  // }
 }
 
 export default function(app: Application) {

@@ -22,20 +22,20 @@ class Litters extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Pairs = require('./pairs.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Pairs = require('./pairs.model')();
 
-    return {
-      parents: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Pairs,
-        join: {
-          from: 'pairs.id',
-          to: 'litters.parents'
-        }
-      }
-    };
-  }
+  //   return {
+  //     parents: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Pairs,
+  //       join: {
+  //         from: 'pairs.id',
+  //         to: 'litters.parents'
+  //       }
+  //     }
+  //   };
+  // }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();

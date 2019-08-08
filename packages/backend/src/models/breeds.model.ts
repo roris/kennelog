@@ -26,20 +26,20 @@ class Breeds extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Dogs = require('./dogs.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Dogs = require('./dogs.model')();
 
-    return {
-      dogs: {
-        relation: Model.HasManyRelation,
-        modelClass: Dogs,
-        join: {
-          from: 'breeds.id',
-          to: 'dogs.breed'
-        }
-      }
-    };
-  }
+  //   return {
+  //     dogs: {
+  //       relation: Model.HasManyRelation,
+  //       modelClass: Dogs,
+  //       join: {
+  //         from: 'breeds.id',
+  //         to: 'dogs.breed'
+  //       }
+  //     }
+  //   };
+  // }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();

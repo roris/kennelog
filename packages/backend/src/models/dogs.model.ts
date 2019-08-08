@@ -41,28 +41,28 @@ class Dogs extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Users = require('./users.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Users = require('./users.model')();
 
-    return {
-      owner: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Users(),
-        join: {
-          from: 'users.id',
-          to: 'dogs.id'
-        }
-      },
-      breeder: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Users(),
-        join: {
-          from: 'users.id',
-          to: 'dogs.id'
-        }
-      }
-    };
-  }
+  //   return {
+  //     owner: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Users(),
+  //       join: {
+  //         from: 'users.id',
+  //         to: 'dogs.id'
+  //       }
+  //     },
+  //     breeder: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Users(),
+  //       join: {
+  //         from: 'users.id',
+  //         to: 'dogs.id'
+  //       }
+  //     }
+  //   };
+  // }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();

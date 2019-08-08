@@ -20,20 +20,20 @@ class Heights extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Measures = require('./measures.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Measures = require('./measures.model')();
 
-    return {
-      parent: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Measures,
-        join: {
-          from: 'measures.id',
-          to: 'heights.id'
-        }
-      }
-    };
-  }
+  //   return {
+  //     parent: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Measures,
+  //       join: {
+  //         from: 'measures.id',
+  //         to: 'heights.id'
+  //       }
+  //     }
+  //   };
+  // }
 }
 
 export default function(app: Application) {

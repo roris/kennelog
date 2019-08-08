@@ -24,39 +24,39 @@ class Pairs extends Model {
     };
   }
 
-  static get relationMappings(): RelationMappings {
-    const Dogs = require('./dogs.model')();
-    const Users = require('./users.model')();
+  // static get relationMappings(): RelationMappings {
+  //   const Dogs = require('./dogs.model')();
+  //   const Users = require('./users.model')();
 
-    return {
-      sire: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Dogs,
-        join: {
-          from: 'dogs.id',
-          to: 'pairs.sire'
-        }
-      },
+  //   return {
+  //     sire: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Dogs,
+  //       join: {
+  //         from: 'dogs.id',
+  //         to: 'pairs.sire'
+  //       }
+  //     },
 
-      dame: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Dogs,
-        join: {
-          from: 'dogs.id',
-          to: 'pairs.dame'
-        }
-      },
+  //     dame: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Dogs,
+  //       join: {
+  //         from: 'dogs.id',
+  //         to: 'pairs.dame'
+  //       }
+  //     },
 
-      breeder: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Users,
-        join: {
-          from: 'users.id',
-          to: 'pairs.pairedBy'
-        }
-      }
-    };
-  }
+  //     breeder: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Users,
+  //       join: {
+  //         from: 'users.id',
+  //         to: 'pairs.pairedBy'
+  //       }
+  //     }
+  //   };
+  // }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();
