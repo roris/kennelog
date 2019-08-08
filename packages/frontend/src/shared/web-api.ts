@@ -13,6 +13,8 @@ export interface LoginResponse {
 export class WebApi {
   users: Service<any>;
 
+  dogs: Service<any>;
+
   private client: Application<any>;
 
   constructor() {
@@ -21,6 +23,7 @@ export class WebApi {
     this.client.configure(socketio(socket));
     this.client.configure(authentication());
     this.users = this.client.service('users');
+    this.dogs = this.client.service('dogs');
   }
 
   async login(credentials: any = false): Promise<LoginResponse> {
