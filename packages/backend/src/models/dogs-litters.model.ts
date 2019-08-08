@@ -25,8 +25,8 @@ class DogsLitters extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const Litters = require('./litters.model');
-    const Dogs = require('./dogs.model');
+    const Litters = require('./litters.model')();
+    const Dogs = require('./dogs.model')();
 
     return {
       litter: {
@@ -58,6 +58,6 @@ class DogsLitters extends Model {
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   return DogsLitters;
 }

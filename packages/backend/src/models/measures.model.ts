@@ -25,7 +25,7 @@ class Measures extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const Dogs = require('./dogs.model');
+    const Dogs = require('./dogs.model')();
     return {
       dog: {
         relation: Model.BelongsToOneRelation,
@@ -47,6 +47,6 @@ class Measures extends Model {
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   return Measures;
 }

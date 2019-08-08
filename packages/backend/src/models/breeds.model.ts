@@ -27,7 +27,7 @@ class Breeds extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const Dogs = require('./dogs.model');
+    const Dogs = require('./dogs.model')();
 
     return {
       dogs: {
@@ -50,6 +50,6 @@ class Breeds extends Model {
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   return Breeds;
 }

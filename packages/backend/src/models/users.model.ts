@@ -30,18 +30,18 @@ class Users extends Model {
       required: ['password'],
 
       properties: {
-        licenseNo: {type: ['string']},
-        email: {type: ['string', 'null']},
-        password: {type: 'string'},
-        name: {type: ['string', 'null']},
-        dateOfBirth: {type: ['string', 'null']},
-        avatar: {type: ['string', 'null']}
+        licenseNo: { type: ['string'] },
+        email: { type: ['string', 'null'] },
+        password: { type: 'string' },
+        name: { type: ['string', 'null'] },
+        dateOfBirth: { type: ['string', 'null'] },
+        avatar: { type: ['string', 'null'] }
       }
     };
   }
 
-  static get relationMappings() : RelationMappings {
-    const Dogs = require('./dogs.model');
+  static get relationMappings(): RelationMappings {
+    const Dogs = require('./dogs.model')();
 
     return {
       stock: {
@@ -73,6 +73,6 @@ class Users extends Model {
   }
 }
 
-export default function (app: Application): any {
+export default function(app: Application): any {
   return Users;
 }

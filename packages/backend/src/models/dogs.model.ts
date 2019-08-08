@@ -4,7 +4,7 @@ import { Model, JsonSchema, RelationMappings } from 'objection';
 import Knex from 'knex';
 import { Application } from '../declarations';
 
-class dogs extends Model {
+class Dogs extends Model {
   createdAt!: string;
 
   updatedAt!: string;
@@ -25,24 +25,24 @@ class dogs extends Model {
     return 'dogs';
   }
 
-  static get jsonSchema() : JsonSchema {
+  static get jsonSchema(): JsonSchema {
     return {
       type: 'object',
       required: ['gender'],
 
       properties: {
-        name: {type: ['string', 'null']},
+        name: { type: ['string', 'null'] },
         gender: { type: 'string' },
-        microchipNo: {type: ['integer', 'null'] },
-        dateOfBirth: {type: ['string', 'null']},
-        owner: { type: ['integer', 'null']},
-        breeder: {type: ['integer', 'null']}
+        microchipNo: { type: ['integer', 'null'] },
+        dateOfBirth: { type: ['string', 'null'] },
+        owner: { type: ['integer', 'null'] },
+        breeder: { type: ['integer', 'null'] }
       }
     };
   }
 
-  static get relationMappings() : RelationMappings {
-    const Users = require('./users.model');
+  static get relationMappings(): RelationMappings {
+    const Users = require('./users.model')();
 
     return {
       owner: {
@@ -73,6 +73,6 @@ class dogs extends Model {
   }
 }
 
-export default function (app: Application) {
-  return dogs;
+export default function(app: Application) {
+  return Dogs;
 }

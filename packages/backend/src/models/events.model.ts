@@ -26,7 +26,7 @@ class Events extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const Dogs = require('./dogs.model');
+    const Dogs = require('./dogs.model')();
 
     return {
       dog: {
@@ -49,6 +49,6 @@ class Events extends Model {
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   return Events;
 }

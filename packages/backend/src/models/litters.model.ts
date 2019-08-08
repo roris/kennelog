@@ -23,7 +23,7 @@ class Litters extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const Pairs = require('./pairs.model');
+    const Pairs = require('./pairs.model')();
 
     return {
       parents: {
@@ -46,6 +46,6 @@ class Litters extends Model {
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   return Litters;
 }

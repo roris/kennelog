@@ -20,7 +20,7 @@ class Weights extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const Measures = require('./measures.model');
+    const Measures = require('./measures.model')();
 
     return {
       parent: {
@@ -35,6 +35,6 @@ class Weights extends Model {
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   return Weights;
 }

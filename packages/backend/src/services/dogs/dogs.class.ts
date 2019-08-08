@@ -1,4 +1,5 @@
 import { Service, ObjectionServiceOptions } from 'feathers-objection';
+import { Application } from '../../declarations';
 
 interface Options extends ObjectionServiceOptions {
   Model: any;

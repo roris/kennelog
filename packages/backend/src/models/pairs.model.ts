@@ -25,8 +25,8 @@ class Pairs extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const Dogs = require('./dogs.model');
-    const Users = require('./users.model');
+    const Dogs = require('./dogs.model')();
+    const Users = require('./users.model')();
 
     return {
       sire: {
@@ -67,6 +67,6 @@ class Pairs extends Model {
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   return Pairs;
 }

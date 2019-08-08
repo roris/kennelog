@@ -26,7 +26,7 @@ class Uploads extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const Dog = require('./dogs.model');
+    const Dog = require('./dogs.model')();
 
     return {
       dog: {
