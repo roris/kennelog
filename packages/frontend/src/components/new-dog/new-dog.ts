@@ -15,11 +15,11 @@ import { WebApi } from '../../shared/web-api';
 class Dog {
   name: string = '';
 
-  microchipNo: string;
+  microchipNo: string = '';
 
   dob: string = '';
 
-  gender: string;
+  gender: string = '';
 
   imageFiles: File[] = [];
 
@@ -130,15 +130,15 @@ export class NewDog {
       let payload: any = {};
       payload.gender = this.dog.gender;
 
-      if (this.dog.name !== '') {
+      if (this.dog.name != '') {
         payload.name = this.dog.name;
       }
 
-      if (this.dog.dob !== '') {
+      if (this.dog.dob != '') {
         payload.dateOfBirth = this.dog.dob;
       }
 
-      if (this.dog.microchipNo !== '') {
+      if (this.dog.microchipNo != '') {
         payload.microchipNo = this.dog.microchipNo;
       }
 
