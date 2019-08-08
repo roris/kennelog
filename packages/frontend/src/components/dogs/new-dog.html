@@ -1,75 +1,193 @@
 <template>
-  <form accept-charset="UTF-8">
-    <div class="border-bottom pb-2">
-      <h2>Add a new dog</h2>
+  <form class="needs-validation" class.bind="validated ? 'was-validated' : ''" accept-charset="ISO-8859-1" novalidate>
+    <div class="form-group col-6 mx-auto border-bottom pb-2">
+      <h2 class="">Add a new dog</h2>
     </div>
 
-    <div class="form-group col-6">
+    <div class="form-group col-6 mx-auto" validation-errors.bind="nameErrors">
       <label for="dogName">Name</label>
       <input
         type="text"
         class="form-control"
-        id="dogName"
+        class.bind="nameErrors.length > 0 ? 'is-invalid' : ''"
+        id="dogNameInput"
         maxlength="255"
         placeholder="Enter the dog's name..."
-        required
+        value.bind="dog.name & validate"
       />
+      <ul class="invalid-feedback" if.bind="nameErrors.length > 0">
+        <li repeat.for="errorInfo of nameErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group col-6">
-      <label for="microchipNo">Microchip #</label>
-      <input type="text" class="form-control" id="microchipNo" maxlength="15" />
-      <small class="form-text text-muted">
+    <div class="form-group col-6 mx-auto" validation-errors.bind="microchipNoErrors">
+      <label for="microchipNoInput">Microchip #</label>
+      <input
+        type="string"
+        class="form-control"
+        class.bind="microchipNoErrors.length ? 'is-invalid' : ''"
+        id="microchipNoInput"
+        placeholder="eg: 123456789012345"
+        aria-describedby="microchipDesc"
+        value.bind="dog.microchipNo & validate"
+        maxlength="15"
+      />
+      <small class="form-text text-muted" id="microchipDesc">
         Laws in some places require dogs to be microchipped. If yours does not have a microchip yet, you can leave this
         field empty.
       </small>
+
+      <ul class="invalid-feedback" if.bind="microchipNoErrors.length > 0">
+        <li repeat.for="errorInfo of microchipNoErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group col-6">
-      <label for="dateOfBirth">Date of Birth</label>
-      <input type="date" class="form-control" id="dateOfBirth" />
+    <div class="form-group col-6 mx-auto" validation-errors.bind="dobErrors">
+      <label for="dateOfBirthInput">Date of Birth</label>
+      <input
+        type="date"
+        class="form-control col-4"
+        class.bind="dobErrors.length ? 'is-invalid' : ''"
+        id="dateOfBirthInput"
+        aria-describedby="dateOfBirthDesc"
+        max.bind="maxDateOfBirth"
+        value.bind="dog.dob & validate"
+      />
+      <small class="form-text text-muted" id="dateOfBirthDesc">
+        Leave empty if you do not know when the dog's birth date.
+      </small>
+      <ul class="invalid-feedback" if.bind="dobErrors.length > 0">
+        <li repeat.for="errorInfo of dobErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group col-2">
+    <div class="form-group col-6 mx-auto" validation-errors.bind="genderErrors">
       <label for="gender">Gender</label>
-      <select class="form-control" id="gender">
+      <select class="form-control col-4" id="gender" value.bind="dog.gender & validate" required>
         <option value="" selected disabled>Please select</option>
         <option value="M">Male</option>
         <option value="F">Female</option>
       </select>
+
+      <ul class="invalid-feedback" if.bind="genderErrors.length > 0">
+        <li repeat.for="errorInfo of genderErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group col-6">
-      <label for="imageFile">Image</label>
-      <input type="file" class="form-control-file" id="imageFile" />
+    <div class="form-group col-6 mx-auto" validation-errors.bind="imageFilesErrors">
+      <label for="imageFileInput">Image</label>
+      <input
+        type="file"
+        accept="image/*"
+        class="form-control-file"
+        class.bind="imageFilesErrors.length > 0 ? 'is-invalid' : ''"
+        id="imageFileInput"
+        files.bind="dog.imageFiles & validate"
+      />
+      <ul class="invalid-feedback" if.bind="imageFilesErrors.length > 0">
+        <li repeat.for="errorInfo of imageFilesErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group col-6">
-      <label for="sireChipNo">Sire's microchip #</label>
-      <input type="text" class="form-control" id="sireChipNo" maxlength="15" />
-      <small class="form-text text-muted">
+    <div class="form-group col-6 mx-auto" validation-errors.bind="sireMicrochipNoErrors">
+      <label for="sireMicrochipNoInput">Sire's microchip #</label>
+      <input
+        type="string"
+        class="form-control"
+        class.bind="sireMicrochipNoErrors.length ? 'is-invalid' : ''"
+        id="sireMicrochipNoInput"
+        aria-describedby="sireMicrochipDesc"
+        value.bind="dog.sireMicrochipNo & validate"
+        placeholder="eg: 123456789012345"
+        minlength="9"
+        maxlength="15"
+      />
+      <small class="form-text text-muted" id="sireMicrochipDesc">
         Leave empty if you do not know the microchip number of the sire.
       </small>
+
+      <ul class="invalid-feedback" if.bind="sireMicrochipNoErrors.length > 0">
+        <li repeat.for="errorInfo of sireMicrochipNoErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group col-6">
-      <label for="dameChipNo">Dame's Microchip #</label>
-      <input type="text" class="form-control" id="dameChipNo" maxlength="15" />
-      <small class="form-text text-muted">
+    <div class="form-group col-6 mx-auto" validation-errors.bind="dameMicrochipNoErrors">
+      <label for="dameChipNoInput">Dame's Microchip #</label>
+      <input
+        type="string"
+        class="form-control"
+        class.bind="dameMicrochipNoErrors.length ? 'is-invalid' : ''"
+        id="dameMicrochipNoInput"
+        aria-describedby="dameChipDesc"
+        value.bind="dog.dameMicrochipNo & validate"
+        placeholder="eg: 123456789012345"
+        maxlength="15"
+        minlength="9"
+      />
+      <small class="form-text text-muted" id="dameMicrochipDesc">
         Leave empty if you do not know the microchip number of the dame.
       </small>
+
+      <ul class="invalid-feedback" if.bind="dameMicrochipNoErrors.length > 0">
+        <li repeat.for="errorInfo of dameMicrochipNoErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group col-6">
-      <label for="breed">Breed</label>
-      <input type="text" class="form-control" id="breed" maxlength="255" />
+    <div class="form-group col-6 mx-auto" validation-errors.bind="breedErrors">
+      <label for="breedInput">Breed</label>
+      <input
+        type="text"
+        class="form-control"
+        class.bind="breedErrors.length ? 'is-invalid' : ''"
+        id="breedInput"
+        value.bind="dog.breed & validate"
+        maxlength="255"
+        placeholder="eg: Golden Retriever"
+      />
       <div class="pt-2">
-        <button class="btn btn-secondary" role="button">Classify using the image</button>
+        <button class="btn btn-secondary" role="button" disabled.bind="!hasImage">Classify using the image</button>
       </div>
-    </div>
-
-    <div class="form-group border-top pt-4 pl-3">
-      <button class="btn btn-success" type="submit">Add dog</button>
+      <ul class="invalid-feedback" if.bind="breedErrors.length > 0">
+        <li repeat.for="errorInfo of breedErrors">
+          ${errorInfo.error.message}
+        </li>
+      </ul>
     </div>
   </form>
+
+  <div class="form-group col-6 mx-auto border-top pt-2">
+    <div class="form-check">
+      <label class="form-check-label" for="checkbox1">
+        <input class="form-check-input" type="checkbox" id="checkbox1" checked.bind="isOwner" />
+        I am this dog's owner.
+      </label>
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label" for="checkbox2">
+        <input class="form-check-input" type="checkbox" id="checkbox2" checked.bind="isBreeder" />
+        I bred this dog.
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group col-6 mx-auto border-top pt-4 pl-3">
+    <button class="btn btn-success" type="submit" disabled.bind="!canSubmit" click.delegate="submit()">
+      Add dog
+    </button>
+  </div>
 </template>
