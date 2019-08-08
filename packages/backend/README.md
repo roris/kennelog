@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/roris/kennelog-server.svg?branch=master)](https://travis-ci.com/roris/kennelog-server)
+
 # kennelog-server
 
 > Kennelog server
@@ -13,15 +15,15 @@ Getting up and running is as easy as 1, 2, 3.
 1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
 2. Install your dependencies
 
-    ```
-    cd path/to/kennelog-server; npm install
-    ```
+   ```
+   cd path/to/kennelog-server; npm install
+   ```
 
 3. Start your app
 
-    ```
-    npm start
-    ```
+   ```
+   npm start
+   ```
 
 ## Testing
 
@@ -45,7 +47,7 @@ For more information on all the things you can do with Feathers visit [docs.feat
 
 ## Changelog
 
-__0.1.0__
+**0.1.0**
 
 - Initial release
 
