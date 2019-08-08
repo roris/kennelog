@@ -18,11 +18,11 @@ export class ViewModelState {
     store.registerAction('logoutAction', logoutAction);
   }
 
-  onLogin(store: Store<AppState>, authenticated: boolean, user: any): void {
-    this.authenticated = authenticated;
+  onLogin(store: Store<AppState>, user: any): void {
+    this.authenticated = true;
     this.user = user;
 
-    store.dispatch(loginAction, { authenticated: authenticated });
+    store.dispatch(loginAction, { authenticated: true });
   }
 
   onLogout(store: Store<AppState>): void {

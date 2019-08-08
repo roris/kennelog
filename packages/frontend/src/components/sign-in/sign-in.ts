@@ -19,7 +19,12 @@ export class SignIn {
 
   router: Router;
 
-  constructor(router: Router, state: State, store: Store<AppState>, api: WebApi) {
+  constructor(
+    router: Router,
+    state: State,
+    store: Store<AppState>,
+    api: WebApi
+  ) {
     this.api = api;
     this.router = router;
     this.state = state;
@@ -31,18 +36,18 @@ export class SignIn {
   }
 
   async onSignInClicked(): Promise<void> {
-    const credentials = { email: this.email, password: this.password };
+    try {
+      // login
+      const credentials = { email: this.email, password: this.password };
+      const response = await this.api.login(credentials);
 
-    const response = await this.api.login(credentials);
-    const authenticated = response.authenticated;
-    const user = authenticated ? response.user : {};
+      // update the application state
+      this.state.onLogin(this.store, response.user);
 
-    // update the application state
-    this.state.onLogin(this.store, authenticated, user);
-
-    // navigate to the home page if authenticated
-    if (authenticated) {
+      // navigate to the home page if authenticated
       this.router.navigateToRoute('dogs');
+    } catch (error) {
+      //
     }
   }
 

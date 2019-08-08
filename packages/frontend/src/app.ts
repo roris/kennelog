@@ -86,16 +86,18 @@ export class App {
     }
 
     if (storedState.authenticated) {
-      const response = await this.api.login();
-      const authenticated = response.authenticated;
-      const user = authenticated ? response.user : {};
-
-      // update viewModelState only if authentication was successful
-      if (authenticated) {
-        this.viewModelState.onLogin(this.store, authenticated, user);
-      } else if (response.code === 401) {
-        storedState.authenticated = false;
-        localStorage.setItem('kennelog-store', storedState);
+      try {
+        // update viewModelState if authentication was successful
+        const response = await this.api.login();
+        const user = response.user;
+        this.viewModelState.onLogin(this.store, user);
+      } catch (error) {
+        // remove the stored keys when feathers-jwt was also deleted,
+        // or if the token expired(?)
+        if (error.code === 401) {
+          storedState.authenticated = false;
+          localStorage.setItem('kennelog-store', storedState);
+        }
       }
     }
   }
