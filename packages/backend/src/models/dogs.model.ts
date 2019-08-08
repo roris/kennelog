@@ -9,7 +9,7 @@ class Dogs extends Model {
 
   updatedAt!: string;
 
-  microchipNo!: number;
+  microchipNo!: string;
 
   gender!: string;
 
@@ -33,7 +33,7 @@ class Dogs extends Model {
       properties: {
         name: { type: ['string', 'null'] },
         gender: { type: 'string' },
-        microchipNo: { type: ['integer', 'null'] },
+        microchipNo: { type: ['string', 'null'] },
         dateOfBirth: { type: ['string', 'null'] },
         owner: { type: ['integer', 'null'] },
         breeder: { type: ['integer', 'null'] }
@@ -47,7 +47,7 @@ class Dogs extends Model {
     return {
       owner: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Users,
+        modelClass: Users(),
         join: {
           from: 'users.id',
           to: 'dogs.id'
@@ -55,7 +55,7 @@ class Dogs extends Model {
       },
       breeder: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Users,
+        modelClass: Users(),
         join: {
           from: 'users.id',
           to: 'dogs.id'
