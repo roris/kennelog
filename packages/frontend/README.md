@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/roris/kennelog-client.svg?branch=master)](https://travis-ci.com/roris/kennelog-client)
+
 # `kennelog-client`
 
 This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
