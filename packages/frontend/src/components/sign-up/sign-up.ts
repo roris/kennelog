@@ -123,19 +123,19 @@ export class SignUp {
       .required()
       .maxLength(254)
       .matches(/^[\x20-\x7F]+$/)
-      .withMessage('Enter ASCII characters only')
+      .withMessage('${$displayName} can contain ASCII characters only')
       //
       .ensure<string>('password')
       .required()
       .minLength(8)
       .maxLength(72)
       .matches(/^[\x20-\x7F]+$/)
-      .withMessage('Enter ASCII characters only')
+      .withMessage('${$displayName} can contain ASCII characters only')
       //
       .ensure<string>('name')
       .maxLength(255)
       .matches(/^[\x20-\x7F]+$/)
-      .withMessage('Enter ASCII characters only')
+      .withMessage('${$displayName} can contain ASCII characters only')
       //
       .ensure<string>('dateOfBirth')
       .required()
@@ -152,7 +152,7 @@ export class SignUp {
       .ensure<string>('licenseNo')
       .required()
       .matches(/^[\x20-\x7F]+$/)
-      .withMessage('Enter ASCII characters only')
+      .withMessage('${$displayName} can contain ASCII characters only')
       .on(this);
   }
 }
