@@ -1,10 +1,5 @@
 <template>
-  <form
-    class="needs-validation"
-    class.bind="validated ? 'was-validated' : ''"
-    accept-charset="ISO-8859-1"
-    novalidate="true"
-  >
+  <form class="needs-validation" class.bind="validated ? 'was-validated' : ''" accept-charset="ISO-8859-1" novalidate>
     <div class="border-bottom pb-2">
       <h2>Sign Up</h2>
     </div>
@@ -20,7 +15,9 @@
         aria-describedby="fullnameHelp"
         value.bind="name & validate"
       />
-      <small class="fullnameHelp">You can leave this field empty if you do not wish to reveal your name.</small>
+      <small class="fullnameHelp">
+        You can leave this field empty if you do not wish to reveal your name.
+      </small>
       <ul class="invalid-feedback" if.bind="nameErrors.length > 0">
         <li repeat.for="errorInfo of nameErrors">
           ${errorInfo.error.message}
