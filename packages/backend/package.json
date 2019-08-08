@@ -32,6 +32,7 @@
     "migrate-latest": "yarn run knex migrate:latest",
     "migrate-up": "yarn run knex migrate:up",
     "migrate-down": "yarn run knex migrate:down",
+    "migrate-rollback": "yarn run knex migrate:rollback",
     "make-migrate": "yarn run knex migrate:make -x ts"
   },
   "dependencies": {
