@@ -21,10 +21,6 @@ class Dog {
 
   gender: string;
 
-  sireMicrochipNo: string;
-
-  dameMicrochipNo: string;
-
   imageFiles: File[] = [];
 
   breed: string = '';
@@ -185,19 +181,6 @@ export class NewDog {
       .withMessage('Name can have ASCII characters only')
       .ensure<string>('microchipNo')
       .displayName('Microchip #')
-      .maxLength(15)
-      .minLength(9)
-      .matches(/^[0-9a-zA-z]+$/)
-      .withMessage('${$displayName} can have alphanumeric characters only')
-      .ensure<string>('sireMicrochipNo')
-      .displayName("Sire's Microchip #")
-      .maxLength(15)
-      .minLength(9)
-      .matches(/^[0-9a-zA-z]+$/)
-      .withMessage('${$displayName} can have alphanumeric characters only')
-      //
-      .ensure<string>('dameMicrochipNo')
-      .displayName("Dame's Microchip #")
       .maxLength(15)
       .minLength(9)
       .matches(/^[0-9a-zA-z]+$/)
