@@ -154,7 +154,7 @@ export class NewDog {
         payload.picture = upload.id;
       }
 
-      this.api.dogs.create(payload);
+      await this.api.dogs.create(payload);
     } catch (error) {
       console.log(error.code, error.message);
     }
