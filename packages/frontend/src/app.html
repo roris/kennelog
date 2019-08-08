@@ -2,9 +2,16 @@
   <require from="./styles.css"></require>
 
   <main class="container-fluid">
-    <header class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row fixed-top bg-dark">
       <a class="navbar-brand" href="#"><span>Kennelog</span></a>
-    </header>
+      <div id="navbarCollapse" class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <ul class="navbar-nav mr-auto">
+          <div if.bind="authenticated && !signingOut" class="nav-item float-right">
+            <a class="nav-link" href="#">Logout</a>
+          </div>
+        </ul>
+      </div>
+    </nav>
 
     <div class="container">
       <router-view></router-view>

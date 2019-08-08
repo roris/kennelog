@@ -43,5 +43,11 @@ export const routeMap: RouteConfig[] = [
     name: 'sign-in',
     title: 'Sign in to Kennelog',
     moduleId: PLATFORM.moduleName('./components/sign-in/sign-in')
+  },
+  {
+    route: ['sign-out', 'logout'],
+    name: 'sign-out',
+    title: 'Signing out?',
+    moduleId: PLATFORM.moduleName('./components/sign-out/sign-out')
   }
 ];

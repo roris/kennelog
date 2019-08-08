@@ -40,4 +40,8 @@ export class WebApi {
       return { authenticated: false, code: error.code, reason: error.message };
     }
   }
+
+  async logout(): Promise<any> {
+    return this.client.logout();
+  }
 }

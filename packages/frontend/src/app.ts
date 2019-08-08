@@ -36,6 +36,22 @@ export class App {
     this.viewModelState = viewModelState;
   }
 
+  get authenticated(): boolean {
+    return (
+      this.viewModelState.authenticated &&
+      this.state &&
+      this.state.authenticated
+    );
+  }
+
+  get currentRoute(): string {
+    return this.router.currentInstruction.config.name;
+  }
+
+  get signingOut(): boolean {
+    return this.currentRoute === 'sign-out';
+  }
+
   configureRouter(config: RouterConfiguration, router: Router): void {
     config.title = 'Kennelog';
     config.map(routeMap);
