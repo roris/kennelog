@@ -6,31 +6,33 @@ export const routeMap: RouteConfig[] = [
     route: ['', 'dogs', 'home'],
     name: 'dogs',
     title: 'Your dogs',
-    moduleId: PLATFORM.moduleName('./components/dogs/breeder-dogs')
+    moduleId: PLATFORM.moduleName('./components/breeder-dogs/breeder-dogs')
   },
   {
     route: ['dogs/new'],
     name: 'new-dog',
     title: 'Add new dog',
-    moduleId: PLATFORM.moduleName('./components/dogs/new-dog')
+    moduleId: PLATFORM.moduleName('./components/new-dog/new-dog')
   },
   {
     route: ['pairs/new'],
     name: 'new-pair',
     title: 'Create new pair',
-    moduleId: PLATFORM.moduleName('./components/pairs/new-pair')
+    moduleId: PLATFORM.moduleName('./components/new-pair/new-pair')
   },
   {
     route: ['litters/new'],
     name: 'new-litter',
     title: 'Add a new litter',
-    moduleId: PLATFORM.moduleName('./components/litters/new-litter')
+    moduleId: PLATFORM.moduleName('./components/new-litter/new-litter')
   },
   {
     route: ['litters/new/from-pair'],
     name: 'new-litter-from-pair',
     title: 'Add a new litter',
-    moduleId: PLATFORM.moduleName('./components/litters/new-litter-from-pair')
+    moduleId: PLATFORM.moduleName(
+      './components/new-litter-from-pair/new-litter-from-pair'
+    )
   },
   {
     route: ['sign-up', 'register'],
