@@ -210,3 +210,4 @@ typings/
 dist/
 config/local*
 *.sqlite3
+public/uploads/
