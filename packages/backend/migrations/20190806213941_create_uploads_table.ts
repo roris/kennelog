@@ -8,7 +8,7 @@ export async function up(knex: Knex): Promise<any> {
       .primary()
       .notNullable();
     table
-      .string('uri', 500000)
+      .string('path', 160)
       .unique()
       .index()
       .notNullable();

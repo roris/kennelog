@@ -8,7 +8,7 @@ class Uploads extends Model {
 
   updatedAt!: string;
 
-  uri!: string;
+  path!: string;
 
   static get tableName() {
     return 'uploads';
@@ -17,10 +17,10 @@ class Uploads extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['uri'],
+      required: ['path'],
 
       properties: {
-        uri: { type: 'string' }
+        path: { type: 'string' }
       }
     };
   }
@@ -49,6 +49,6 @@ class Uploads extends Model {
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   return Uploads;
 }
