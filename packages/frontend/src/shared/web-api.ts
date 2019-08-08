@@ -13,6 +13,8 @@ export interface LoginResponse {
 export class WebApi {
   users: Service<any>;
 
+  uploads: Service<any>;
+
   dogs: Service<any>;
 
   private client: Application<any>;
@@ -22,6 +24,8 @@ export class WebApi {
     this.client = feathers();
     this.client.configure(socketio(socket));
     this.client.configure(authentication());
+
+    this.uploads = this.client.service('uploads');
     this.users = this.client.service('users');
     this.dogs = this.client.service('dogs');
   }
