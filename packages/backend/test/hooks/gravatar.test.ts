@@ -1,15 +1,15 @@
-import feathers, { Application} from '@feathersjs/feathers';
+import feathers, { Application } from '@feathersjs/feathers';
 import gravatar from '../../src/hooks/gravatar';
 
-describe('\'gravatar\' hook', () => {
+describe("'gravatar' hook", () => {
   let app: Application;
 
   beforeEach(() => {
     app = feathers();
 
     app.use('/dummy', {
-      async get(id: any) {
-        return { id };
+      async create(data) {
+        return data;
       }
     });
 
@@ -18,9 +18,13 @@ describe('\'gravatar\' hook', () => {
     });
   });
 
-  it('runs the hook', async () => {
+  it("creates a gravatar link from the user' email address", async () => {
     expect.assertions(1);
-    const result = await app.service('dummy').get('test');
-    expect(result).toEqual({ id: 'test' });
+    const email = 'test@example.com';
+    const result = await app.service('dummy').create({ email: email });
+    expect(result).toEqual({
+      email: email,
+      avatar: 'https://s.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0'
+    });
   });
 });
