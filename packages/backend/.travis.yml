@@ -1,5 +1,12 @@
 language: node_js
 node_js:
   - '10'
+
+env:
+  - NODE_ENV=development
+
+before_script:
+  - yarn migrate-latest
+
 after_script:
   - yarn coverage
