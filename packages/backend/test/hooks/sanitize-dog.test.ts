@@ -14,13 +14,18 @@ describe("'sanitize-dog' hook", () => {
     });
 
     app.service('dummy').hooks({
-      before: sanitizeDog()
+      before: {
+        create: sanitizeDog()
+      }
     });
   });
 
-  it('runs the hook', async () => {
+  it('Throws on empty data', async () => {
     expect.assertions(1);
-    const result = await app.service('dummy').get('test');
-    expect(result).toEqual({ id: 'test' });
+    try {
+      await app.service('dummy').create({});
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
   });
 });
