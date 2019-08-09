@@ -25,7 +25,7 @@
   "scripts": {
     "build": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
     "check-types": "tsc --noEmit",
-    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "coverage": "cat ./test/coverage/lcov.info | coveralls",
     "lint": "eslint */**/*.{js,ts}",
     "migrate-latest": "knex migrate:latest",
     "migrate-up": "knex migrate:up",
@@ -33,7 +33,7 @@
     "migrate-rollback": "knex migrate:rollback",
     "make-migrate": "knex migrate:make -x ts",
     "start": "yarn run build && node dist/",
-    "test": "yarn run build && jest --coverage --coverageReporters=text-lcov --forceExit --detectOpenHandles"
+    "test": "yarn run build && jest --forceExit --detectOpenHandles"
   },
   "dependencies": {
     "@feathersjs/authentication": "^4.3.0-pre.1",
