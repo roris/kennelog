@@ -64,7 +64,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
-    "@types/compression": "^0.0.36",
+    "@types/compression": "^1.0.0",
     "@types/cors": "^2.8.5",
     "@types/helmet": "^0.0.43",
     "@types/jest": "^24.0.16",
