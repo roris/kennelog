@@ -7,7 +7,7 @@ import {
   validateTrigger,
   ValidationRules
 } from 'aurelia-validation';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';

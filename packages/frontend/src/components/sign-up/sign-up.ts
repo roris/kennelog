@@ -8,10 +8,11 @@ import {
   validateTrigger,
   Validator
 } from 'aurelia-validation';
+import moment from 'moment';
+
 import { WebApi } from '../../shared/web-api';
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { AppState } from 'shared/app-state';
-import * as moment from 'moment';
 
 interface Credentials {
   email: string;

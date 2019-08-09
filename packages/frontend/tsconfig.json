@@ -12,7 +12,8 @@
     "moduleResolution": "node",
     "baseUrl": "src",
     "allowJs": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["./src/**/*.ts", "./test/**/*.ts", "./types/**/*.d.ts"],
   "atom": {

@@ -1,7 +1,7 @@
 import feathers, { Service, Application } from '@feathersjs/feathers';
 import authentication from '@feathersjs/authentication-client';
 import socketio from '@feathersjs/socketio-client';
-import * as io from 'socket.io-client';
+import io from 'socket.io-client';
 
 const SERVER_URL = 'http://localhost:3030';
 
