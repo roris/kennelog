@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.com/roris/kennelog-client.svg?branch=master)](https://travis-ci.com/roris/kennelog-client)
+[![Coverage Status](https://coveralls.io/repos/github/roris/kennelog-client/badge.svg?branch=master)](https://coveralls.io/github/roris/kennelog-client?branch=master)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/roris/kennelog-client.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/roris/kennelog-client/context:javascript)
 
 # `kennelog-client`
 
