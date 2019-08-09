@@ -3,6 +3,8 @@ import authentication from '@feathersjs/authentication-client';
 import socketio from '@feathersjs/socketio-client';
 import * as io from 'socket.io-client';
 
+const SERVER_URL = 'http://localhost:3030';
+
 export class WebApi {
   blobs: Service<any>;
 
@@ -15,7 +17,7 @@ export class WebApi {
   private client: Application<any>;
 
   constructor() {
-    const socket = io(CONFIG.server); // eslint-disable-line no-undef
+    const socket = io(SERVER_URL); // eslint-disable-line no-undef
     this.client = feathers();
     this.client.configure(socketio(socket));
     this.client.configure(authentication());

@@ -16,8 +16,6 @@
     "aurelia-store": "^1.4.0",
     "aurelia-validation": "^1.4.0",
     "bootstrap": "^4.3.1",
-    "config": "^3.2.2",
-    "config-webpack": "^1.0.4",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "popper.js": "^1.15.0",
