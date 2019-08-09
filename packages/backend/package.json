@@ -25,16 +25,15 @@
   "scripts": {
     "build": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
     "check-types": "tsc --noEmit",
-    "coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "jest": "jest --forceExit",
+    "coverage": "jest --coverage --coverageReporters=text-lcov --forceExit --detectOpenHandles | coveralls",
     "lint": "eslint */**/*.{js,ts}",
-    "migrate-latest": "yarn run knex migrate:latest",
-    "migrate-up": "yarn run knex migrate:up",
-    "migrate-down": "yarn run knex migrate:down",
-    "migrate-rollback": "yarn run knex migrate:rollback",
-    "make-migrate": "yarn run knex migrate:make -x ts",
+    "migrate-latest": "knex migrate:latest",
+    "migrate-up": "knex migrate:up",
+    "migrate-down": "knex migrate:down",
+    "migrate-rollback": "knex migrate:rollback",
+    "make-migrate": "knex migrate:make -x ts",
     "start": "yarn run build && node dist/",
-    "test": "yarn run build && yarn run jest"
+    "test": "yarn run build && jest --forceExit --detectOpenHandles"
   },
   "dependencies": {
     "@feathersjs/authentication": "^4.3.0-pre.1",
