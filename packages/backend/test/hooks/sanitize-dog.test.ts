@@ -8,8 +8,8 @@ describe("'sanitize-dog' hook", () => {
     app = feathers();
 
     app.use('/dummy', {
-      async get(id: any) {
-        return { id };
+      async create(data) {
+        return data;
       }
     });
 
