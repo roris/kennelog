@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/roris/kennelog-client.svg?branch=master)](https://travis-ci.com/roris/kennelog-client)
 [![Coverage Status](https://coveralls.io/repos/github/roris/kennelog-client/badge.svg?branch=master)](https://coveralls.io/github/roris/kennelog-client?branch=master)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/roris/kennelog-client.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/roris/kennelog-client/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/roris/kennelog-client.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/roris/kennelog-client/alerts/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/82f1c450d58c40b88fde7ba6f899a479)](https://app.codacy.com/app/roris/kennelog-client?utm_source=github.com&utm_medium=referral&utm_content=roris/kennelog-client&utm_campaign=Badge_Grade_Dashboard)
 [![Greenkeeper badge](https://badges.greenkeeper.io/roris/kennelog-client.svg)](https://greenkeeper.io/)
 
