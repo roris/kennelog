@@ -95,7 +95,7 @@
     "start": "au run",
     "test": "au test",
     "lint": "eslint */**/*.{js,ts}",
-    "coverage": "cat ./tests/coverage-jest/lcov.info | coveralls"
+    "coverage": "cat ./test/coverage-jest/lcov.info | coveralls"
   },
   "engines": {
     "node": ">=10.16.0"
