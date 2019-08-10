@@ -6,6 +6,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/56f5cc5a3b8d2f41d885/maintainability)](https://codeclimate.com/github/roris/kennelog-client/maintainability)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/82f1c450d58c40b88fde7ba6f899a479)](https://app.codacy.com/app/roris/kennelog-client?utm_source=github.com&utm_medium=referral&utm_content=roris/kennelog-client&utm_campaign=Badge_Grade_Dashboard)
 [![Greenkeeper badge](https://badges.greenkeeper.io/roris/kennelog-client.svg)](https://greenkeeper.io/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Froris%2Fkennelog-client.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Froris%2Fkennelog-client?ref=badge_shield)
 
 This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
 
@@ -32,3 +33,7 @@ Run `au build --env prod`.
 Run `au test` (or `au jest`).
 
 To run in watch mode, `au test --watch` or `au jest --watch`.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Froris%2Fkennelog-client.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Froris%2Fkennelog-client?ref=badge_large)
