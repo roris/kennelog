@@ -1,0 +1,22 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
+    "moduleResolution": "node",
+
+    "allowJs": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true
+  },
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}

@@ -24,7 +24,6 @@
   },
   "scripts": {
     "build": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
-    "check-types": "tsc --noEmit",
     "coverage": "cat ./test/coverage/lcov.info | coveralls",
     "lint": "eslint */**/*.{js,ts}",
     "migrate-latest": "knex migrate:latest",
@@ -88,8 +87,6 @@
     "shx": "^0.3.2",
     "sqlite3": "^4.0.9",
     "ts-jest": "^24.0.2",
-    "ts-node-dev": "^1.0.0-pre.40",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.3"
+    "ts-node-dev": "^1.0.0-pre.40"
   }
 }
