@@ -7,10 +7,22 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap --use-workspaces --hoist",
-    "check-types": "lerna exec --no-bail -- tsc"
+    "check-types": "lerna exec --no-bail -- tsc",
+    "lint": "eslint . --format=codeframe --cache --ext .js,.ts"
   },
   "devDependencies": {
     "@types/node": "^12.7.1",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.15.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
     "husky": "^3.0.3",
     "lerna": "^3.16.4",
     "prettier": "^1.18.2",
