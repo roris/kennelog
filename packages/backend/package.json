@@ -1,34 +1,26 @@
 {
-  "name": "kennelog-server",
-  "description": "Kennelog server",
+  "name": "kennelog-backend",
+  "description": "Kennelog backend",
+  "private": true,
   "version": "0.0.0",
-  "homepage": "",
-  "main": "src",
-  "keywords": [
-    "feathers"
-  ],
+  "license": "MIT",
   "author": {
     "name": "roris",
     "email": "roris@users.noreply.github.com"
   },
-  "contributors": [],
-  "bugs": {},
-  "directories": {
-    "lib": "src",
-    "test": "test/",
-    "config": "config/"
-  },
+  "keywords": [
+    "feathers"
+  ],
   "engines": {
-    "node": "^10.0.0",
-    "yarn": ">= 0.18.0"
+    "node": "^10.0.0"
   },
   "scripts": {
     "build": "babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --no-comments",
+    "make-migrate": "knex migrate:make -x ts",
     "migrate-latest": "knex migrate:latest",
     "migrate-up": "knex migrate:up",
     "migrate-down": "knex migrate:down",
     "migrate-rollback": "knex migrate:rollback",
-    "make-migrate": "knex migrate:make -x ts",
     "start": "yarn run build && node dist/"
   },
   "dependencies": {

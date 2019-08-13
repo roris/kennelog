@@ -1,12 +1,20 @@
 {
-  "name": "kennelog-client",
-  "description": "An Aurelia client application.",
-  "version": "0.1.0",
-  "repository": {
-    "type": "???",
-    "url": "???"
-  },
+  "name": "kennelog-frontend",
+  "description": "Kennelog frontend.",
+  "private": true,
+  "version": "0.0.0",
   "license": "MIT",
+  "author": {
+    "name": "roris",
+    "email": "roris@users.noreply.github.com"
+  },
+  "engines": {
+    "node": "^10.0.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
   "dependencies": {
     "@feathersjs/authentication-client": "^4.0.0-pre",
     "@feathersjs/feathers": "^4.0.0-pre",
@@ -59,12 +67,5 @@
     "webpack-bundle-analyzer": "^3.0.4",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"
-  },
-  "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server"
-  },
-  "engines": {
-    "node": ">=10.16.0"
   }
 }
