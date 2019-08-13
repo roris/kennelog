@@ -157,8 +157,7 @@ module.exports = ({
       { test: /\.html$/i, loader: 'html-loader' },
       {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        options: { reportFiles: [srcDir + '/**/*.ts'] },
+        loader: 'babel-loader',
         include: karma ? [srcDir, testDir] : srcDir
       },
       // embed small images and fonts as Data Urls and larger ones as files:
