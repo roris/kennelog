@@ -26,7 +26,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@^7.1.0", "@babel/core@^7.4.0", "@babel/core@^7.4.4", "@babel/core@^7.5.5":
+"@babel/core@^7.1.0", "@babel/core@^7.4.4", "@babel/core@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.5.5.tgz#17b2686ef0d6bc58f963dddd68ab669755582c30"
   integrity sha512-i4qoSr2KTtce0DmkuuQBV4AuQgGPUcPXMr9L5MyYAtk06z068lQ10a4O009fe5OB/DfNV+h+qqT7ddNV8UnRjg==
@@ -242,7 +242,7 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.0.0", "@babel/parser@^7.1.0", "@babel/parser@^7.4.3", "@babel/parser@^7.4.4", "@babel/parser@^7.5.5":
+"@babel/parser@^7.1.0", "@babel/parser@^7.4.3", "@babel/parser@^7.4.4", "@babel/parser@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.5.5.tgz#02f077ac8817d3df4a832ef59de67565e71cca4b"
   integrity sha512-E5BN68cqR7dhKan1SfqgPGhQ178bkVKpXTPEXnFJBrEt8/DKRZlybmy+IgYLTeN7tp1R5Ccmbm2rBk17sHYU3g==
@@ -256,7 +256,7 @@
     "@babel/helper-remap-async-to-generator" "^7.1.0"
     "@babel/plugin-syntax-async-generators" "^7.2.0"
 
-"@babel/plugin-proposal-class-properties@^7.4.0", "@babel/plugin-proposal-class-properties@^7.4.4", "@babel/plugin-proposal-class-properties@^7.5.5":
+"@babel/plugin-proposal-class-properties@^7.4.4", "@babel/plugin-proposal-class-properties@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.5.5.tgz#a974cfae1e37c3110e71f3c6a2e48b8e71958cd4"
   integrity sha512-AF79FsnWFxjlaosgdi421vmYG6/jg79bVD0dpD44QdgobzHKuLZ6S3vl8la9qIeSwGi8i1fS0O1mfuDAAdo1/A==
@@ -264,7 +264,7 @@
     "@babel/helper-create-class-features-plugin" "^7.5.5"
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-proposal-decorators@^7.4.0", "@babel/plugin-proposal-decorators@^7.4.4":
+"@babel/plugin-proposal-decorators@^7.4.4":
   version "7.4.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.4.4.tgz#de9b2a1a8ab0196f378e2a82f10b6e2a36f21cc0"
   integrity sha512-z7MpQz3XC/iQJWXH9y+MaWcLPNSMY9RQSthrLzak8R8hCj0fuyNk+Dzi9kfNe/JxxlWQ2g7wkABbgWjW36MTcw==
@@ -633,7 +633,7 @@
     "@babel/helper-regex" "^7.4.4"
     regexpu-core "^4.5.4"
 
-"@babel/preset-env@^7.4.2", "@babel/preset-env@^7.5.5":
+"@babel/preset-env@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.5.5.tgz#bc470b53acaa48df4b8db24a570d6da1fef53c9a"
   integrity sha512-GMZQka/+INwsMz1A5UEql8tG015h5j/qjptpKY2gJ7giy8ohzU710YciJB5rcKsWGWHiW3RUnHib0E5/m3Tp3A==
@@ -697,7 +697,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.3.2"
 
-"@babel/register@^7.4.0", "@babel/register@^7.4.4":
+"@babel/register@^7.4.4":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.5.5.tgz#40fe0d474c8c8587b28d6ae18a03eddad3dac3c1"
   integrity sha512-pdd5nNR+g2qDkXZlW1yRCWFlNrAn2PPdnZUB72zjX4l1Vv4fMRRLwyf+n/idFCLI1UgVGboUU8oVziwTBiyNKQ==
@@ -718,7 +718,7 @@
     "@babel/parser" "^7.4.4"
     "@babel/types" "^7.4.4"
 
-"@babel/traverse@^7.0.0", "@babel/traverse@^7.1.0", "@babel/traverse@^7.4.3", "@babel/traverse@^7.4.4", "@babel/traverse@^7.5.5":
+"@babel/traverse@^7.1.0", "@babel/traverse@^7.4.3", "@babel/traverse@^7.4.4", "@babel/traverse@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.5.5.tgz#f664f8f368ed32988cd648da9f72d5ca70f165bb"
   integrity sha512-MqB0782whsfffYfSjH4TM+LMjrJnhCNEDMDIjeTpl+ASaUvxcjoiVCo/sM1GhS1pHOXYfWVCYneLjMckuUxDaQ==
@@ -2045,7 +2045,7 @@
   resolved "https://registry.yarnpkg.com/@types/jest-diff/-/jest-diff-20.0.1.tgz#35cc15b9c4f30a18ef21852e255fdb02f6d59b89"
   integrity sha512-yALhelO3i0hqZwhjtcr6dYyaLoCHbAMshwtj6cGxTvHZAKXHsYGdff6E8EPw3xLKY0ELUTQ69Q1rQiJENnccMA==
 
-"@types/jest@^24.0.16", "@types/jest@^24.0.9":
+"@types/jest@^24.0.9":
   version "24.0.17"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.17.tgz#b66ea026efb746eb5db1356ee28518aaff7af416"
   integrity sha512-1cy3xkOAfSYn78dsBWy4M3h/QF/HeWPchNFDjysVtp3GHeTdSmtluNnELfCmfNRRHo0OWEcpf+NsEJQvwQfdqQ==
@@ -3219,18 +3219,6 @@ babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-eslint@^10.0.1:
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-10.0.2.tgz#182d5ac204579ff0881684b040560fdcc1558456"
-  integrity sha512-UdsurWPtgiPgpJ06ryUnuaSXC2s0WoSZnQmEpbAH65XZSdwowgN5MvyP7e88nW07FYXv72erVtpBkxyDVKhH1Q==
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    "@babel/parser" "^7.0.0"
-    "@babel/traverse" "^7.0.0"
-    "@babel/types" "^7.0.0"
-    eslint-scope "3.7.1"
-    eslint-visitor-keys "^1.0.0"
-
 babel-generator@^6.18.0:
   version "6.26.1"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.26.1.tgz#1844408d3b8f0d35a404ea7ac180f087a601bd90"
@@ -3245,7 +3233,7 @@ babel-generator@^6.18.0:
     source-map "^0.5.7"
     trim-right "^1.0.1"
 
-babel-jest@^24.5.0, babel-jest@^24.8.0:
+babel-jest@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.8.0.tgz#5c15ff2b28e20b0f45df43fe6b7f2aae93dba589"
   integrity sha512-+5/kaZt4I9efoXzPlZASyK/lN9qdRKmmUav9smVc0ruPQD7IsfucQ87gpOE8mn2jbDuS6M/YOW6n3v9ZoIfgnw==
@@ -3257,16 +3245,6 @@ babel-jest@^24.5.0, babel-jest@^24.8.0:
     babel-preset-jest "^24.6.0"
     chalk "^2.4.2"
     slash "^2.0.0"
-
-babel-loader@^8.0.5:
-  version "8.0.6"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.6.tgz#e33bdb6f362b03f4bb141a0c21ab87c501b70dfb"
-  integrity sha512-4BmWKtBOBm13uoUwd08UwjZlaw3O9GWf456R9j+5YykFZ6LUIjIKLc0zEZf+hauxPOJs96C8k6FvYD09vWzhYw==
-  dependencies:
-    find-cache-dir "^2.0.0"
-    loader-utils "^1.0.2"
-    mkdirp "^0.5.1"
-    pify "^4.0.1"
 
 babel-messages@^6.23.0:
   version "6.23.0"
@@ -3282,7 +3260,7 @@ babel-plugin-dynamic-import-node@^2.3.0:
   dependencies:
     object.assign "^4.1.0"
 
-babel-plugin-istanbul@^5.1.0, babel-plugin-istanbul@^5.1.1:
+babel-plugin-istanbul@^5.1.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-istanbul/-/babel-plugin-istanbul-5.2.0.tgz#df4ade83d897a92df069c4d9a25cf2671293c854"
   integrity sha512-5LphC0USA8t4i1zCtjbbNb6jJj/9+X6P37Qfirc/70EQ34xKlMW+a1RHGwxGI+SwWpNwZ27HqvzAobeqaXwiZw==
@@ -5605,14 +5583,6 @@ eslint-plugin-standard@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-4.0.0.tgz#f845b45109c99cd90e77796940a344546c8f6b5c"
   integrity sha512-OwxJkR6TQiYMmt1EsNRMe5qG3GsbjlcOhbGUBY4LtavF9DsLaTcoR+j2Tdjqi23oUwKNUqX7qcn5fPStafMdlA==
-
-eslint-scope@3.7.1:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.1.tgz#3d63c3edfda02e06e01a452ad88caacc7cdcb6e8"
-  integrity sha1-PWPD7f2gLgbgGkUq2IyqzHzctug=
-  dependencies:
-    esrecurse "^4.1.0"
-    estraverse "^4.1.1"
 
 eslint-scope@^4.0.0, eslint-scope@^4.0.3:
   version "4.0.3"
@@ -8239,7 +8209,7 @@ jest-worker@^24.6.0:
     merge-stream "^1.0.1"
     supports-color "^6.1.0"
 
-jest@^24.1.0, jest@^24.8.0:
+jest@^24.1.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/jest/-/jest-24.8.0.tgz#d5dff1984d0d1002196e9b7f12f75af1b2809081"
   integrity sha512-o0HM90RKFRNWmAWvlyV8i5jGZ97pFwkeVoGvPW1EtLTgJc2+jcuqcbbqcSZLE/3f2S5pt0y2ZBETuhpWNl1Reg==
