@@ -37,12 +37,15 @@ module.exports = ({
 } = {}) => ({
   resolve: {
     extensions: ['.ts', '.js'],
-    modules: [srcDir, 'node_modules'],
+    modules: [srcDir, 'node_modules']
     // Enforce single aurelia-binding, to avoid v1/v2 duplication due to
-    // out-of-date dependencies on 3rd party aurelia plugins
-    alias: {
-      'aurelia-binding': path.resolve(__dirname, 'node_modules/aurelia-binding')
-    }
+    // out-of-date dependencies on 3rd party aurelia plugins.
+    // Was causing problems with build, possibly because of the use of __dirname. There is
+    // possibly a way to have the root directory used instead of __dirname. But commenting
+    // out makes the build go smoothly ;)
+    // alias: {
+    //  'aurelia-binding': path.resolve(__dirname, 'node_modules/aurelia-binding')
+    // }
   },
   entry: {
     app: ['aurelia-bootstrapper']
