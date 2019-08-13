@@ -181,7 +181,7 @@ export class NewDog {
       .displayName('Microchip #')
       .maxLength(15)
       .minLength(9)
-      .matches(/^[0-9a-zA-z]+$/)
+      .matches(/^[0-9a-zA-Z]+$/)
       .withMessage('${$displayName} can have alphanumeric characters only')
       //
       .ensure<string>('gender')
