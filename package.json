@@ -9,7 +9,8 @@
     "bootstrap": "lerna bootstrap --use-workspaces",
     "build": "lerna run --parallel --no-bail build",
     "check-types": "lerna exec --no-bail -- tsc",
-    "lint": "eslint . --format=codeframe --cache --ext .js,.ts"
+    "lint": "eslint . --format=codeframe --cache --ext .js,.ts",
+    "test": "jest --forceExit --detectOpenHandles"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -20,6 +21,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.17",
     "@types/node": "^12.7.1",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
@@ -33,9 +35,12 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^3.0.3",
+    "jest": "^24.8.0",
+    "jest-transform-stub": "^2.0.0",
     "lerna": "^3.16.4",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   },
   "husky": {

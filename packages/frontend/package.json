@@ -37,7 +37,6 @@
     "aurelia-webpack-plugin": "^4.0.0",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.0",
-    "coveralls": "^3.0.6",
     "css-loader": "^3.2.0",
     "del": "^5.0.0",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
@@ -48,16 +47,12 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "istanbul-instrumenter-loader": "^3.0.1",
-    "jest": "^24.1.0",
-    "jest-cli": "^24.1.0",
-    "jest-transform-stub": "^2.0.0",
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^0.8.0",
     "minimatch": "^3.0.4",
     "promise-polyfill": "^8.1.0",
     "style-loader": "^1.0.0",
     "through2": "^3.0.0",
-    "ts-jest": "^24.0.0",
     "url-loader": "^2.1.0",
     "vinyl-fs": "^3.0.3",
     "webpack": "^4.27.0",
@@ -67,9 +62,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server",
-    "test": "jest --forceExit --detectOpenHandles",
-    "coverage": "cat ./test/coverage-jest/lcov.info | coveralls"
+    "start": "webpack-dev-server"
   },
   "engines": {
     "node": ">=10.16.0"
