@@ -7,10 +7,19 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap --use-workspaces --hoist",
+    "build": "lerna run --parallel --no-bail build",
     "check-types": "lerna exec --no-bail -- tsc",
     "lint": "eslint . --format=codeframe --cache --ext .js,.ts"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
     "@types/node": "^12.7.1",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",

@@ -23,7 +23,7 @@
     "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "build": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
+    "build": "babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --no-comments",
     "coverage": "cat ./test/coverage/lcov.info | coveralls",
     "migrate-latest": "knex migrate:latest",
     "migrate-up": "knex migrate:up",
@@ -55,13 +55,6 @@
     "winston": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-typescript": "^7.3.3",
     "@types/compression": "^1.0.0",
     "@types/cors": "^2.8.5",
     "@types/helmet": "^0.0.43",

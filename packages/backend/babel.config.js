@@ -1,18 +1,13 @@
 module.exports = {
+  extends: '../../babel.config.js',
   presets: [
     [
-      "@babel/preset-env",
-      { 
+      '@babel/preset-env',
+      {
         targets: {
-          node: "current"
+          node: 'current'
         }
       }
-    ],
-    "@babel/preset-typescript"
-  ],
-  plugins: [
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-object-rest-spread",
-    "@babel/plugin-proposal-numeric-separator"
+    ]
   ]
 };
