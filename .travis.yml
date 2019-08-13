@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - '10'
+cache:
+  yarn: true
+  directories:
+    - 'node_modules'
+env:
+  - NODE_ENV=development
+
+before_script:
+  # setup the database (sqlite)
+  - lerna run migrate-latest --scope=kennelog-backend
