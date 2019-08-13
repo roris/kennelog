@@ -1,4 +1,14 @@
 module.exports = api => {
+  const nodeTarget = {
+    node: process.env.IN_PROTRACTOR ? 6 : 'current'
+  };
+  const browserTarget = {
+    browsers: ['last 2 version']
+  };
+
+  const target =
+    process.env.BABEL_TARGET === 'node' ? nodeTarget : browserTarget;
+
   api.cache.using(() => {
     // cache based on the two env vars
     return (
@@ -11,21 +21,14 @@ module.exports = api => {
 
   return {
     extends: '../../babel.config.js',
-
     presets: [
       [
         '@babel/preset-env',
         {
-          targets:
-            process.env.BABEL_TARGET === 'node'
-              ? {
-                  node: process.env.IN_PROTRACTOR ? '6' : 'current'
-                }
-              : {
-                  browsers: ['last 2 versions']
-                },
-          loose: true,
-          modules: process.env.BABEL_TARGET === 'node' ? 'commonjs' : false
+          useBuiltIns: 'usage',
+          corejs: 3,
+          targets: target,
+          loose: true
         }
       ]
     ]
