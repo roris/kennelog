@@ -9,5 +9,12 @@ env:
   - NODE_ENV=development
 
 before_script:
+  # setup codeclimate coverage tool
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
   # setup the database (sqlite)
   - lerna run migrate-latest --scope=kennelog-backend
+after_script:
+  # send coverage data to codeclimate
+  - ./cc-test-reporter after-build
