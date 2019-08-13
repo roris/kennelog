@@ -148,14 +148,7 @@ export class SignUp {
       //
       .ensure<string>('dateOfBirth')
       .required()
-      .satisfies(
-        d =>
-          Date.parse(d) <
-          moment()
-            .subtract(18, 'y')
-            .toDate()
-            .getMilliseconds()
-      )
+      .satisfies(d => moment().diff(Date.parse(d), 'years') >= 18)
       .withMessage('You must be at least 18 years old')
       //
       .ensure<string>('licenseNo')
