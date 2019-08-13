@@ -110,9 +110,8 @@ export class SignUp {
       await this.api.users.create(this.credentials);
       const response = await this.api.login(this.credentials);
       this.state.onLogin(this.store, response.user);
-    } catch (error) {
-      // -- what to do?
-    }
+      this.router.navigateToRoute('dogs');
+    } catch (error) {}
   }
 
   canActivate(): boolean | Redirect {
