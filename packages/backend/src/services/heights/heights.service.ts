@@ -8,11 +8,11 @@ import hooks from './heights.hooks';
 // Add this service to the service type index
 declare module '../../declarations' {
   interface ServiceTypes {
-    'heights': Heights & ServiceAddons<any>;
+    heights: Heights & ServiceAddons<any>;
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 

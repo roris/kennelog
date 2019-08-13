@@ -1,13 +1,14 @@
 import * as Knex from 'knex';
 
-
 export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable('litters', table => {
-    table.increments('id')
+    table
+      .increments('id')
       .unsigned()
       .notNullable()
       .primary();
-    table.integer('parents')
+    table
+      .integer('parents')
       .unsigned()
       .nullable()
       .references('id')
@@ -18,8 +19,6 @@ export async function up(knex: Knex): Promise<any> {
   });
 }
 
-
 export async function down(knex: Knex): Promise<any> {
   return knex.schema.dropTable('litters');
 }
-

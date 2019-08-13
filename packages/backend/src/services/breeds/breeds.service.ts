@@ -8,11 +8,11 @@ import hooks from './breeds.hooks';
 // Add this service to the service type index
 declare module '../../declarations' {
   interface ServiceTypes {
-    'breeds': Breeds & ServiceAddons<any>;
+    breeds: Breeds & ServiceAddons<any>;
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 

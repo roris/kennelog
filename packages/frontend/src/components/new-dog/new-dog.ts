@@ -117,17 +117,16 @@ export class NewDog {
     } catch (error) {
       console.error('Error while creating dog:', error.code, error.message);
     }
-    return;
   }
 
   async sendToServer(uri?): Promise<void> {
     try {
-      let upload = undefined;
+      let upload;
       if (uri) {
         const blob = await this.api.blobs.create({ uri: uri });
         upload = await this.api.uploads.create({ path: blob.id });
       }
-      let payload: any = {};
+      const payload: any = {};
       payload.gender = this.dog.gender;
 
       if (this.dog.name != '') {
@@ -160,7 +159,6 @@ export class NewDog {
     }
 
     this.submitting = false;
-    return;
   }
 
   canActivate(): boolean | Redirect {

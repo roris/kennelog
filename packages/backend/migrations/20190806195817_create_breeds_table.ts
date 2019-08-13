@@ -2,11 +2,13 @@ import * as Knex from 'knex';
 
 export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable('breeds', table => {
-    table.increments('id')
+    table
+      .increments('id')
       .unsigned()
       .primary()
       .notNullable();
-    table.string('name')
+    table
+      .string('name')
       .notNullable()
       .unique();
     table.timestamp('createdAt');
