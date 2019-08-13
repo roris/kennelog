@@ -1,15 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2019",
-    "moduleResolution": "node",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false
+    "rootDir": "./src"
   },
-  "include": ["src"],
-  "exclude": ["test"]
+  "extends": "../../tsconfig.json",
+  "include": ["./src/**/*.ts"]
 }

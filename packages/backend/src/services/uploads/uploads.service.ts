@@ -8,11 +8,11 @@ import hooks from './uploads.hooks';
 // Add this service to the service type index
 declare module '../../declarations' {
   interface ServiceTypes {
-    'uploads': Uploads & ServiceAddons<any>;
+    uploads: Uploads & ServiceAddons<any>;
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 

@@ -7,9 +7,11 @@ const gravatarUrl = 'https://s.gravatar.com/avatar';
 
 export default (options = {}): Hook => {
   return async (context: HookContext) => {
-
     const { email } = context.data;
-    const hash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
+    const hash = crypto
+      .createHash('md5')
+      .update(email.toLowerCase())
+      .digest('hex');
 
     context.data.avatar = `${gravatarUrl}/${hash}`;
 

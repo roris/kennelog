@@ -9,5 +9,5 @@ export interface AppState {
  * The initial state used by aurelia-store.
  */
 export const initialState: AppState = {
-  authenticated: false,
+  authenticated: false
 };

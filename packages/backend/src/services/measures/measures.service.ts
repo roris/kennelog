@@ -8,11 +8,11 @@ import hooks from './measures.hooks';
 // Add this service to the service type index
 declare module '../../declarations' {
   interface ServiceTypes {
-    'measures': Measures & ServiceAddons<any>;
+    measures: Measures & ServiceAddons<any>;
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 

@@ -12,7 +12,7 @@ import moment from 'moment';
 
 import { WebApi } from '../../shared/web-api';
 import { ViewModelState as State } from '../../shared/view-model-state';
-import { AppState } from 'shared/app-state';
+import { AppState } from '../../shared/app-state';
 
 interface Credentials {
   email: string;
@@ -24,15 +24,15 @@ interface Credentials {
 
 @inject(Router, State, Store, ValidationControllerFactory, Validator, WebApi)
 export class SignUp {
-  email: string;
+  email: string = '';
 
-  password: string;
+  password: string = '';
 
-  name: string;
+  name: string = '';
 
-  dateOfBirth: string;
+  dateOfBirth: string = '';
 
-  licenseNo: string;
+  licenseNo: string = '';
 
   api: WebApi;
 

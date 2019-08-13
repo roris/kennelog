@@ -8,11 +8,11 @@ import hooks from './weights.hooks';
 // Add this service to the service type index
 declare module '../../declarations' {
   interface ServiceTypes {
-    'weights': Weights & ServiceAddons<any>;
+    weights: Weights & ServiceAddons<any>;
   }
 }
 
-export default function (app: Application) {
+export default function(app: Application) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 

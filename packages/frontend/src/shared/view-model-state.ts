@@ -1,7 +1,7 @@
 import { AppState } from './app-state';
 import { Store } from 'aurelia-store';
-import { loginAction } from 'store-actions/login-action';
-import { logoutAction } from 'store-actions/logout-action';
+import { loginAction } from '../store-actions/login-action';
+import { logoutAction } from '../store-actions/logout-action';
 import { inject } from 'aurelia-framework';
 
 /**

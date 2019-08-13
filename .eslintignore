@@ -1,0 +1,9 @@
+
+packages/*/node_modules
+packages/*/dist
+packages/*/lib
+
+packages/**/*.d.ts
+
+# aurelia-cli generated sources
+packages/frontend/aurelia_project/

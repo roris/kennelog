@@ -1,45 +1,43 @@
 // Update with your config settings.
 
 module.exports = {
-
   development: {
-    client: "sqlite3",
+    client: 'sqlite3',
     connection: {
-      filename: "./kennelog.sqlite3"
+      filename: './kennelog.sqlite3'
     },
     useNullAsDefault: false
   },
 
   staging: {
-    client: "postgres",
+    client: 'postgres',
     connection: {
-      database: "kennelog",
-      user: "username",
-      password: "password"
+      database: 'kennelog',
+      user: 'username',
+      password: 'password'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: "knex_migrations"
+      tableName: 'knex_migrations'
     }
   },
 
   production: {
-    client: "postgres",
+    client: 'postgres',
     connection: {
-      database: "kennelog",
-      user: "username",
-      password: "password"
+      database: 'kennelog',
+      user: 'username',
+      password: 'password'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: "knex_migrations"
+      tableName: 'knex_migrations'
     }
   }
-
 };

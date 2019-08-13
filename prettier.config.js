@@ -1,6 +1,6 @@
 module.exports = {
-  singleQuote: true,
   semi: true,
+  singleQuote: true,
   trailingComma: 'none',
   tabWidth: 2,
   overrides: [

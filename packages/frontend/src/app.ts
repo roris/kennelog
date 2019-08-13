@@ -10,19 +10,19 @@ import { Subscription } from 'rxjs';
 import { routeMap } from './route-map';
 import { WebApi } from './shared/web-api';
 import { AppState as State } from './shared/app-state';
-import { ViewModelState } from 'shared/view-model-state';
+import { ViewModelState } from './shared/view-model-state';
 
 @inject(Store, ViewModelState, WebApi)
 export class App {
   api: WebApi;
 
-  router: Router;
+  router!: Router;
 
-  state: State;
+  state!: State;
 
   store: Store<State>;
 
-  subscription: Subscription;
+  subscription!: Subscription;
 
   viewModelState: ViewModelState;
 
@@ -45,7 +45,8 @@ export class App {
   }
 
   get currentRoute(): string {
-    return this.router.currentInstruction.config.name;
+    const result = this.router.currentInstruction.config.name;
+    return result || '';
   }
 
   get signingOut(): boolean {
@@ -80,6 +81,7 @@ export class App {
   }
 
   async activate(): Promise<void> {
+    // @ts-ignore
     const storedState = JSON.parse(localStorage.getItem('kennelog-store'));
     if (!storedState) {
       return;
