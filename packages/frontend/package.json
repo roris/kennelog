@@ -23,6 +23,7 @@
     "validator": "^11.1.0"
   },
   "devDependencies": {
+    "@babel/register": "^7.5.5",
     "@types/config": "^0.0.34",
     "@types/jest": "^24.0.9",
     "@types/lodash": "^4.14.117",
@@ -53,7 +54,6 @@
     "mini-css-extract-plugin": "^0.8.0",
     "minimatch": "^3.0.4",
     "promise-polyfill": "^8.1.0",
-    "regenerator-runtime": "0.13.3",
     "style-loader": "^1.0.0",
     "through2": "^3.0.0",
     "ts-jest": "^24.0.0",
@@ -65,8 +65,8 @@
     "webpack-dev-server": "^3.1.9"
   },
   "scripts": {
-    "build": "au build",
-    "start": "au run",
+    "build": "webpack",
+    "start": "webpack-dev-server",
     "test": "jest --forceExit --detectOpenHandles",
     "coverage": "cat ./test/coverage-jest/lcov.info | coveralls"
   },

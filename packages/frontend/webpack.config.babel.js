@@ -1,15 +1,23 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
-const project = require('./aurelia_project/aurelia.json');
-const {
+import { resolve as _resolve } from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
+import { platform } from './aurelia_project/aurelia.json';
+import {
   AureliaPlugin,
   ModuleDependenciesPlugin
-} = require('aurelia-webpack-plugin');
-const { ProvidePlugin } = require('webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+} from 'aurelia-webpack-plugin';
+import { ProvidePlugin } from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+
+// use nothing ):
+const analyze = false;
+const coverage = false;
+const extractCss = false;
+const production = process.env.NODE_ENV === 'production';
+const server = false;
+const karma = false;
 
 // config helpers:
 const ensureArray = config =>
@@ -18,23 +26,16 @@ const when = (condition, config, negativeConfig) =>
   condition ? ensureArray(config) : ensureArray(negativeConfig);
 
 // primary config:
-const title = 'Aurelia Navigation Skeleton';
-const outDir = path.resolve(__dirname, project.platform.output);
-const srcDir = path.resolve(__dirname, 'src');
-const testDir = path.resolve(__dirname, 'test', 'unit');
-const nodeModulesDir = path.resolve(__dirname, 'node_modules');
+const title = 'Kennelog';
+const outDir = _resolve(__dirname, platform.output);
+const srcDir = _resolve(__dirname, 'src');
+const testDir = _resolve(__dirname, 'test', 'unit');
+const nodeModulesDir = _resolve(__dirname, 'node_modules');
 const baseUrl = '/';
 
 const cssRules = [{ loader: 'css-loader' }];
 
-module.exports = ({
-  production,
-  server,
-  extractCss,
-  coverage,
-  analyze,
-  karma
-} = {}) => ({
+export default () => ({
   resolve: {
     extensions: ['.ts', '.js'],
     modules: [srcDir, 'node_modules']
