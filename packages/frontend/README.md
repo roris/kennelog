@@ -1,6 +1,6 @@
 # `kennelog-client`
 
-[![Build Status](https://travis-ci.com/roris/kennelog-client.svg?branch=master)](https://travis-ci.com/roris/kennelog-client)
+[![Build Status](https://travis-ci.com/roris/kennelog.svg?branch=master)](https://travis-ci.com/roris/kennelog)
 [![Coverage Status](https://coveralls.io/repos/github/roris/kennelog-client/badge.svg?branch=master)](https://coveralls.io/github/roris/kennelog-client?branch=master)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/roris/kennelog-client.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/roris/kennelog-client/alerts/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/56f5cc5a3b8d2f41d885/maintainability)](https://codeclimate.com/github/roris/kennelog-client/maintainability)
@@ -34,6 +34,10 @@ Run `au test` (or `au jest`).
 
 To run in watch mode, `au test --watch` or `au jest --watch`.
 
-
 ## License
+
+Copyright (c) 2019
+
+Licensed under the [MIT license](LICENSE).
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Froris%2Fkennelog-client.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Froris%2Fkennelog-client?ref=badge_large)
