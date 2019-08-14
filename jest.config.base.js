@@ -14,6 +14,8 @@ module.exports = {
     '!**/node_modules/**',
     '!**/test/**'
   ],
+  coverageDirectory: '<rootDir>/coverage/',
+  coverageReporters: ['lcov', 'json', 'text', 'html'],
   verbose: true,
 
   //

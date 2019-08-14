@@ -11,7 +11,7 @@
     "check-types": "lerna exec --no-bail -- tsc",
     "lint": "eslint . --format=codeframe --cache --ext .js,.ts",
     "start": "lerna run --parallel start",
-    "test": "jest --forceExit --detectOpenHandles"
+    "test": "lerna exec  --no-bail -- jest --forceExit --detectOpenHandles --colors"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",

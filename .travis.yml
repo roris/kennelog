@@ -20,6 +20,9 @@ before_script:
 
 after_script:
   # send coverage data to codeclimate
-  - ./cc-test-reporter after-build
+  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.backend.json packages/backend/coverage/lcov.info # Format backend coverage
+  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json packages/frontend/coverage/lcov.info # Format frontend coverage
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2
+  - ./cc-test-reporter upload-coverage
   # send coverage data to codecov
   - codecov
