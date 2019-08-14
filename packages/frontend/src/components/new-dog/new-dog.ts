@@ -101,8 +101,6 @@ export class NewDog {
         reader.addEventListener(
           'load',
           () => {
-            // const uri = reader.result;
-            const uri = reader.result;
             this.sendToServer(reader.result)
               .then(() => {})
               .catch(() => {});

@@ -30,7 +30,6 @@ const title = 'Kennelog';
 const outDir = _resolve(__dirname, platform.output);
 const srcDir = _resolve(__dirname, 'src');
 const testDir = _resolve(__dirname, 'test', 'unit');
-const nodeModulesDir = _resolve(__dirname, 'node_modules');
 const baseUrl = '/';
 
 const cssRules = [{ loader: 'css-loader' }];

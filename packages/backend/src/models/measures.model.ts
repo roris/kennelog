@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema, RelationMappings } from 'objection';
+import { Model, JsonSchema } from 'objection';
 import { Application } from '../declarations';
 
 class Measures extends Model {

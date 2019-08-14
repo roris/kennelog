@@ -30,7 +30,6 @@ export class SignOut {
 
   async submit(): Promise<void> {
     try {
-      const response = await this.api.logout();
       this.state.onLogout(this.store);
       this.router.navigateToRoute('sign-in');
     } catch (error) {
