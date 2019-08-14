@@ -1,12 +1,7 @@
-import { bootstrap } from 'aurelia-bootstrapper';
-import { StageComponent } from 'aurelia-testing';
-import { PLATFORM } from 'aurelia-pal';
 import { App } from '../../src/app';
 import { Store } from 'aurelia-store';
 import { initialState, AppState as State } from '../../src/shared/app-state';
 import { ViewModelState } from '../../src/shared/view-model-state';
-import { async } from 'rxjs/internal/scheduler/async';
-import { loginAction } from '../../src/store-actions/login-action';
 
 const user = { name: 'Nobody', email: 'test@example.com' };
 
