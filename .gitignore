@@ -61,7 +61,7 @@ typings/
 .next
 
 # custom stuff
-dist/
-config/local*
+**/dist/
+**/config/local*
 *.sqlite3
-public/uploads/
+**/public/uploads/
