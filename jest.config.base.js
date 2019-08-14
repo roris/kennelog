@@ -9,6 +9,7 @@ module.exports = {
   // coverageIgnorePatterns: ['(tests/.*.mock).(jsx?|tsx?)$'],
   collectCoverageFrom: [
     'src/**/*.{js,ts}',
+    '!**/*.d.ts',
     '!**/*.spec.{js,ts}',
     '!**/*.test.{js,ts}',
     '!**/node_modules/**',
