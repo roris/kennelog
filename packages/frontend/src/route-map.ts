@@ -9,6 +9,12 @@ export const routeMap: RouteConfig[] = [
     moduleId: PLATFORM.moduleName('./components/breeder-dogs/breeder-dogs')
   },
   {
+    name: 'dogs/page',
+    moduleId: PLATFORM.moduleName('./components/breeder-dogs/breeder-dogs'),
+    route: ['dogs/page/:page'],
+    title: 'Your dogs'
+  },
+  {
     route: ['dogs/new'],
     name: 'new-dog',
     title: 'Add new dog',

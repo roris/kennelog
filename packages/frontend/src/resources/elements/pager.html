@@ -1,0 +1,33 @@
+<template>
+  <nav aria-label="${label}" if.bind="canCompose">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" class.bind="currentPage != firstPage ? '' : 'disabled'">
+        <a class="page-link" route-href="route: dogs/page; params.bind: { page: firstPage }">
+          First
+        </a>
+      </li>
+
+      <li class="page-item" class.bind="currentPage != firstPage ? '' : 'disabled'">
+        <a class="page-link" route-href="route: dogs/page; params.bind: { page: prevPage }">
+          Prev
+        </a>
+      </li>
+
+      <li class="page-item" class.bind="currentIndex == $index ? 'active' : ''" repeat.for="page of pages">
+        <a class="page-link" route-href="route: dogs/page; params.bind: { page: page.offset }">${page.offset}</a>
+      </li>
+
+      <li class="page-item" class.bind="currentPage != lastPage ? '' : 'disabled'">
+        <a class="page-link" route-href="route: dogs/page; params.bind: { page: nextPage }">
+          Next
+        </a>
+      </li>
+
+      <li class="page-item" class.bind="currentPage != lastPage ? '' : 'disabled'">
+        <a class="page-link" route-href="route: dogs/page; params.bind: { page: lastPage }">
+          Last
+        </a>
+      </li>
+    </ul>
+  </nav>
+</template>
