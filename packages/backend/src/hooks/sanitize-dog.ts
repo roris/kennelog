@@ -3,7 +3,7 @@
 import { Hook, HookContext } from '@feathersjs/feathers';
 
 const sanitizeGender = (gender: string) => {
-  if (gender == '') {
+  if (!gender) {
     throw new Error('gender is required');
   }
 
@@ -23,15 +23,15 @@ export default (options = {}): Hook => {
     // gender is the only required property
     data.gender = sanitizeGender(context.data.gender);
 
-    if (context.data.name != '') {
+    if (context.data.name) {
       data.name = context.data.name;
     }
 
-    if (context.data.microchipNo != '') {
+    if (context.data.microchipNo) {
       data.microchipNo = context.data.microchipNo;
     }
 
-    if (context.data.dateOfBirth != '') {
+    if (context.data.dateOfBirth) {
       data.dateOfBirth = context.data.dateOfBirth;
     }
 

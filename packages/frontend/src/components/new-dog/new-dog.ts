@@ -191,7 +191,7 @@ export class NewDog {
       .ensure<string>('dob')
       .displayName('Date of birth')
       .satisfies(dob => Date.parse(dob) <= Date.now())
-      .when(dog => dog.dob != '')
+      .when(dog => !!dog.dob)
       .withMessage('${$displayName} must be before or on today')
       //
       .ensure<File[]>('imageFiles')
