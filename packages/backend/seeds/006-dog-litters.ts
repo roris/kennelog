@@ -1,13 +1,13 @@
 import * as Knex from 'knex';
 
 const updateBirthdays = (knex: Knex, pups, user) => {
-  for (let i = 0; i < pups.length; ++i) {
-    pups[i].dateOfBirth = pups[0].dateOfBirth;
-    pups[i].owner = user;
-    pups[i].breeder = user;
+  for (let pup of pups) {
+    pup.dateOfBirth = pups[0].dateOfBirth;
+    pup.owner = user;
+    pup.breeder = user;
     knex('dogs')
       .update({ dateOfBirth: pups[0].dateOfBirth, owner: user, breeder: user })
-      .where({ id: pups[i].id });
+      .where({ id: pup.id });
   }
 
   return pups;
