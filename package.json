@@ -10,6 +10,8 @@
     "build": "lerna run --parallel --no-bail build",
     "check-types": "lerna exec --no-bail -- tsc",
     "lint": "eslint . --format=codeframe --cache --ext .js,.ts",
+    "migrate": "lerna run migrate-latest --scope=kennelog-backend --",
+    "seed": "lerna run seed --scope=kennelog-backend --",
     "start": "lerna run --parallel start",
     "test": "lerna exec  --no-bail -- jest --forceExit --detectOpenHandles --colors"
   },

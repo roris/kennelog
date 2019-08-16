@@ -21,6 +21,7 @@
     "migrate-up": "knex migrate:up",
     "migrate-down": "knex migrate:down",
     "migrate-rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
     "start": "yarn run build && node dist/"
   },
   "dependencies": {
