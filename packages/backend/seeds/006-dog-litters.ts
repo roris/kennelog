@@ -1,13 +1,18 @@
 import * as Knex from 'knex';
+import { updateRecord } from './util/common';
 
-const updateBirthdays = (knex: Knex, pups, user) => {
+const updateDogs = (knex: Knex, pups: any[], user: number) => {
   for (let pup of pups) {
     pup.dateOfBirth = pups[0].dateOfBirth;
     pup.owner = user;
     pup.breeder = user;
-    knex('dogs')
-      .update({ dateOfBirth: pups[0].dateOfBirth, owner: user, breeder: user })
-      .where({ id: pup.id });
+    pup.breed = pups[0].breed;
+    updateRecord(knex, pup.id, {
+      dateOfBirth: pups[0].dateOfBirth,
+      owner: user,
+      breeder: user,
+      breed: pups[0].breed
+    });
   }
 
   return pups;
@@ -58,12 +63,9 @@ export async function seed(knex: Knex): Promise<any> {
   const malePups = await getPups(knex, dame, sire, 'M');
   const femalePups = await getPups(knex, dame, sire, 'F');
 
-  // update the birthdays to the same date
-  const pups = updateBirthdays(
-    knex,
-    malePups.concat(femalePups),
-    pair.pairedBy
-  );
+  // update the properties of the pups
+  malePups[0].breed = sire.breed;
+  const pups = updateDogs(knex, malePups.concat(femalePups), pair.pairedBy);
 
   // create a record for each selected dog
   const dogsLitters = pups.map(pup => {
