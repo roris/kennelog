@@ -58,3 +58,13 @@ export const insertMeasures = async (
 
   return inserted.map(measures => measures.id);
 };
+
+export const updateRecord = (knex: Knex, id: number, params): void => {
+  if (params.id) {
+    delete params['id'];
+  }
+
+  knex('dogs')
+    .update(params)
+    .where({ id: id });
+};

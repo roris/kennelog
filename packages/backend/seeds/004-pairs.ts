@@ -1,5 +1,5 @@
 import * as Knex from 'knex';
-import { getUserByEmail } from './util/common';
+import { getUserByEmail, updateRecord } from './util/common';
 
 const getEldestDogByOwnerAndGender = async (
   knex: Knex,
@@ -21,6 +21,9 @@ export async function seed(knex: Knex): Promise<any> {
   const owner = await getUserByEmail(knex, 'johnsmith@email.local');
   const sire = await getEldestDogByOwnerAndGender(knex, owner.id, 'M');
   const dame = await getEldestDogByOwnerAndGender(knex, owner.id, 'F');
+
+  // update the dame's breed
+  updateRecord(knex, dame.id, { breed: sire.breed });
 
   // Deletes ALL existing entries
   return knex('pairs')
