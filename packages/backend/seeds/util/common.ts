@@ -38,15 +38,14 @@ export const getLastNRecords = async (
     .limit(limit);
 };
 
-export const insertMeasures = async (
-  knex: Knex,
-  dog: number,
-  datesMeasuredOn: string[]
-) => {
-  const data = datesMeasuredOn.map(date => {
+export const insertMeasures = async (knex: Knex) => {
+  const measurementDates = ['2015-01-01', '2016-01-01', '2017-01-01'];
+  const user = await getUserByEmail(knex, 'johnsmith@email.local');
+  const dog = await getEldestDogByOwnerAndGender(knex, user.id, 'M');
+  const data = measurementDates.map(date => {
     return {
       measuredOn: date,
-      dog: dog,
+      dog: dog.id,
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -67,4 +66,31 @@ export const updateRecord = (knex: Knex, id: number, params): void => {
   knex('dogs')
     .update(params)
     .where({ id: id });
+};
+
+export const mergeIdAndData = (ids: number[], data: any[]) => {
+  const shorter = ids.length < data.length ? ids : data;
+  const mergedData = new Array(shorter.length).fill({}).map((value, index) => {
+    return {
+      id: ids[index],
+      ...data[index]
+    };
+  });
+
+  return mergedData;
+};
+
+export const getEldestDogByOwnerAndGender = async (
+  knex: Knex,
+  ownerId: number,
+  gender: string
+) => {
+  const dogs = await knex
+    .select()
+    .from('dogs')
+    .where({ owner: ownerId })
+    .andWhere({ gender: gender })
+    .orderBy('dateOfBirth', 'asc')
+    .limit(1);
+  return dogs[0];
 };

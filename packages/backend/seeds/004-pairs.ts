@@ -1,20 +1,9 @@
 import * as Knex from 'knex';
-import { getUserByEmail, updateRecord } from './util/common';
-
-const getEldestDogByOwnerAndGender = async (
-  knex: Knex,
-  ownerId: number,
-  gender: string
-) => {
-  const dogs = await knex
-    .select()
-    .from('dogs')
-    .where({ owner: ownerId })
-    .andWhere({ gender: gender })
-    .orderBy('dateOfBirth', 'asc')
-    .limit(1);
-  return dogs[0];
-};
+import {
+  getUserByEmail,
+  updateRecord,
+  getEldestDogByOwnerAndGender
+} from './util/common';
 
 // creates one pair
 export async function seed(knex: Knex): Promise<any> {
