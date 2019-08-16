@@ -6,6 +6,7 @@ export async function up(knex: Knex): Promise<any> {
       .integer('id')
       .unsigned()
       .notNullable()
+      .primary()
       .references('id')
       .inTable('measures')
       .onDelete('CASCADE');
