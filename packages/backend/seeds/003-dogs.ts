@@ -1,6 +1,5 @@
 import * as Knex from 'knex';
 import { uniq, random } from 'lodash';
-import breeds from './data/nomenclature.json';
 
 const randomDate = (start, end = new Date()) => {
   return new Date(Math.ceil(random(start.getTime(), end.getTime(), false)))
@@ -8,7 +7,11 @@ const randomDate = (start, end = new Date()) => {
     .substr(0, 10);
 };
 
-const createDog = (name = '', breed = random(1, breeds.length + 1)) => {
+const getAllBreeds = (knex: Knex) => {
+  return knex.select().from('breeds');
+};
+
+const createDog = (name, breed) => {
   return {
     name: name,
     dateOfBirth: randomDate(new Date('2001-01-01')),
@@ -37,31 +40,32 @@ const setMicrochipNos = dogs => {
   });
 };
 
-const generateDogs = length => {
+const generateDogs = (length, breeds) => {
   // create the dogs (without microchip nos)
   const dogs = Array(length)
     .fill(0)
-    .map(() => createDog());
+    .map(() => createDog('', random(0, breeds.length - 1)));
 
   // return the dogs with the microchip nos
   return setMicrochipNos(dogs);
 };
 
 export async function seed(knex: Knex): Promise<any> {
+  const breeds = await getAllBreeds(knex);
   // Deletes ALL existing entries
   return knex('dogs')
     .del()
     .then(async () => {
       // Inserts seed entries
-      await knex('dogs').insert(generateDogs(100));
-      await knex('dogs').insert(generateDogs(100));
-      await knex('dogs').insert(generateDogs(100));
-      await knex('dogs').insert(generateDogs(100));
-      await knex('dogs').insert(generateDogs(100));
-      await knex('dogs').insert(generateDogs(100));
-      await knex('dogs').insert(generateDogs(100));
-      await knex('dogs').insert(generateDogs(100));
-      await knex('dogs').insert(generateDogs(100));
-      return knex('dogs').insert(generateDogs(100));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      await knex('dogs').insert(generateDogs(100, breeds));
+      return knex('dogs').insert(generateDogs(100, breeds));
     });
 }
