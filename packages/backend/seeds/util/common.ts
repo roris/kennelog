@@ -22,6 +22,10 @@ export const getRecords = async (
     .limit(limit);
 };
 
+export const getAllRecords = async (knex: Knex, table: string) => {
+  return knex.select().from(table);
+};
+
 export const getLastNRecords = async (
   knex: Knex,
   table: string,
