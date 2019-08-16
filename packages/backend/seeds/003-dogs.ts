@@ -1,6 +1,6 @@
 import * as Knex from 'knex';
 import { uniq, random } from 'lodash';
-import { breeds } from './data/nomenclature';
+import breeds from './data/nomenclature.json';
 
 const randomDate = (start, end = new Date()) => {
   return new Date(Math.ceil(random(start.getTime(), end.getTime(), false)))

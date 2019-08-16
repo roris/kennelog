@@ -1,5 +1,5 @@
 import * as Knex from 'knex';
-import { breeds } from './data/nomenclature';
+import breeds from './data/nomenclature.json';
 
 export async function seed(knex: Knex): Promise<any> {
   // Deletes ALL existing entries
