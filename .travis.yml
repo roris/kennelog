@@ -16,7 +16,8 @@ before_script:
   # setup for codecov
   - yarn global add codecov
   # setup the database (sqlite)
-  - lerna run migrate-latest --scope=kennelog-backend
+  - yarn migrate
+  - yarn seed
 
 after_script:
   # send coverage data to codeclimate
