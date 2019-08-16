@@ -50,11 +50,7 @@ export const insertMeasures = async (
 
   await knex('measures').insert(data);
 
-  const inserted = await knex
-    .select()
-    .from('measures')
-    .orderBy('id', 'desc')
-    .limit(data.length);
+  const inserted = await getLastNRecords(knex, 'measures', data.length);
 
   return inserted.map(measures => measures.id);
 };
