@@ -1,13 +1,13 @@
 import * as Knex from 'knex';
 import { updateRecord } from './util/common';
 
-const updateDogs = (knex: Knex, pups: any[], user: number) => {
+const updateDogs = async (knex: Knex, pups: any[], user: number) => {
   for (let pup of pups) {
     pup.dateOfBirth = pups[0].dateOfBirth;
     pup.owner = user;
     pup.breeder = user;
     pup.breed = pups[0].breed;
-    updateRecord(knex, pup.id, {
+    await updateRecord(knex, 'dogs', pup.id, {
       dateOfBirth: pups[0].dateOfBirth,
       owner: user,
       breeder: user,
@@ -65,17 +65,27 @@ export async function seed(knex: Knex): Promise<any> {
 
   // update the properties of the pups
   malePups[0].breed = sire.breed;
-  const pups = updateDogs(knex, malePups.concat(femalePups), pair.pairedBy);
+  const pups = await updateDogs(
+    knex,
+    malePups.concat(femalePups),
+    pair.pairedBy
+  );
 
   // create a record for each selected dog
   const dogsLitters = pups.map(pup => {
     return { dog: pup.id, litter: litter.id };
   });
 
-  return knex('dogs_litters')
-    .del()
-    .then(() => {
-      // Inserts seed entries
-      return knex('dogs_litters').insert(dogsLitters);
-    });
+  await knex('dogs_litters').del();
+  await knex('dogs_litters').insert(dogsLitters);
+
+  return knex('dogs')
+    .where('owner', sire.owner)
+    .andWhereNot('id', sire.id)
+    .andWhereNot('id', dame.id)
+    .andWhereNot('id', pups[0].id)
+    .andWhereNot('id', pups[1].id)
+    .andWhereNot('id', pups[2].id)
+    .andWhereNot('id', pups[3].id)
+    .del();
 }

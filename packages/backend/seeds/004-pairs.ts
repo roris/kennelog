@@ -12,7 +12,7 @@ export async function seed(knex: Knex): Promise<any> {
   const dame = await getEldestDogByOwnerAndGender(knex, owner.id, 'F');
 
   // update the dame's breed
-  updateRecord(knex, dame.id, { breed: sire.breed });
+  await updateRecord(knex, 'dogs', dame.id, { breed: sire.breed });
 
   // Deletes ALL existing entries
   return knex('pairs')

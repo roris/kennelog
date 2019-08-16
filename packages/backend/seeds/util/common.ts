@@ -58,14 +58,19 @@ export const insertMeasures = async (knex: Knex) => {
   return inserted.map(measures => measures.id);
 };
 
-export const updateRecord = (knex: Knex, id: number, params): void => {
+export const updateRecord = async (
+  knex: Knex,
+  table: string,
+  id: number,
+  params
+) => {
   if (params.id) {
     delete params['id'];
   }
 
-  knex('dogs')
-    .update(params)
-    .where({ id: id });
+  await knex(table)
+    .where({ id: id })
+    .update(params);
 };
 
 export const mergeIdAndData = (ids: number[], data: any[]) => {
