@@ -11,7 +11,7 @@ const getAllBreeds = (knex: Knex) => {
   return knex.select().from('breeds');
 };
 
-const createDog = (name, breed) => {
+const generateDog = (name, breed) => {
   return {
     name: name,
     dateOfBirth: randomDate(new Date('2001-01-01')),
@@ -24,14 +24,14 @@ const createDog = (name, breed) => {
   };
 };
 
-const genMicrochipNos = length =>
+const generateMicrochipNos = length =>
   Array(length)
     .fill(0)
     .map(() => `${random(100000000000000, 999999999999999)}`.substr(0, 15));
 
 const setMicrochipNos = dogs => {
   // generate random 15 digit numbers
-  const microchipNos = uniq(genMicrochipNos(dogs.length));
+  const microchipNos = uniq(generateMicrochipNos(dogs.length));
 
   return dogs.map((dog, i) => {
     // map microchips onto dogs
@@ -44,7 +44,7 @@ const generateDogs = (length, breeds) => {
   // create the dogs (without microchip nos)
   const dogs = Array(length)
     .fill(0)
-    .map(() => createDog('', random(0, breeds.length - 1)));
+    .map(() => generateDog('', random(0, breeds.length - 1)));
 
   // return the dogs with the microchip nos
   return setMicrochipNos(dogs);
