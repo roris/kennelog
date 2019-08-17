@@ -100,7 +100,11 @@ export class BreederDogs {
 
   async fetchBreeds(): Promise<void> {
     try {
-      const { data } = await this.breedsService.find();
+      const { total } = await this.breedsService.find({ query: { $limit: 0 } });
+      const { data } = await this.breedsService.find({
+        query: { $limit: total }
+      });
+
       this.breeds = data;
     } catch (error) {
       this.errors.push({
@@ -112,8 +116,24 @@ export class BreederDogs {
 
   activate(params) {
     const page = params && params.page ? Number(params.page) : 1;
-    this.fetchDogs(page);
-    this.fetchBreeds();
+    this.fetchDogs(page)
+      .then(() => this.fetchBreeds())
+      .then(() => {
+        // create a dict from the breeds
+        const dict = Object.assign({});
+        this.breeds.forEach(breed => (dict[breed.id] = breed.name));
+        this.dogs = this.dogs.map(dog => {
+          dog.breed = dict[dog.breed];
+          return dog;
+        });
+        return true;
+      })
+      .catch(() => {
+        this.errors.push({
+          title: 'Error',
+          message: `Unexpected error while processing lists. ${tryRefreshing}`
+        });
+      });
   }
 
   async getNumberOfDogs(): Promise<number> {
@@ -126,6 +146,7 @@ export class BreederDogs {
     return total;
   }
 
+  // Remove the alert through bootstrap and then remove the error from the array
   removeError(index, error) {
     $(`#alert${index}`).on('closed.bs.alert', () => {
       this.errors.splice(this.errors.findIndex(error), 1);
