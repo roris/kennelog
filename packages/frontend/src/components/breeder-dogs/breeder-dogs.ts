@@ -1,19 +1,25 @@
 import { inject } from 'aurelia-dependency-injection';
-import { Redirect, RouterConfiguration } from 'aurelia-router';
+import { Redirect } from 'aurelia-router';
+import { uniq } from 'lodash';
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
+import { BreedsService } from '../../services/breeds-service';
 import { PaginationModel } from '../../resources/elements/pager';
 import { generatePages } from '../../util/pagination-util';
 
-@inject(State, WebApi)
+@inject(State, BreedsService, WebApi)
 export class BreederDogs {
-  dogs;
-
-  breeds;
-
   api: WebApi;
 
-  state: State;
+  private breedsService: BreedsService;
+
+  breeds: any[] = [];
+
+  breedsFilter = '';
+
+  dogs;
+
+  ownedBreeds: string[] = [];
 
   paginationModel: PaginationModel = {
     currentIndex: 0,
@@ -22,8 +28,11 @@ export class BreederDogs {
     pages: []
   };
 
-  constructor(state: State, api: WebApi) {
+  state: State;
+
+  constructor(state: State, breedsService: BreedsService, api: WebApi) {
     this.api = api;
+    this.breedsService = breedsService;
     this.state = state;
   }
 
@@ -79,12 +88,23 @@ export class BreederDogs {
     this.dogs = data;
   }
 
+  async fetchBreeds(): Promise<void> {
+    try {
+      const { data } = await this.breedsService.find();
+      this.breeds = data;
+    } catch (error) {
+      // TODO: display error message
+    }
+  }
+
   activate(params) {
     if (params && params.page) {
       this.fetchDogs(Number(params.page));
     } else {
       this.fetchDogs(1);
     }
+
+    this.fetchBreeds();
   }
 
   async getNumberOfDogs(): Promise<number> {
