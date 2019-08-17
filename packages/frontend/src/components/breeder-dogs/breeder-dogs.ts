@@ -111,12 +111,8 @@ export class BreederDogs {
   }
 
   activate(params) {
-    if (params && params.page) {
-      this.fetchDogs(Number(params.page));
-    } else {
-      this.fetchDogs(1);
-    }
-
+    const page = params && params.page ? Number(params.page) : 1;
+    this.fetchDogs(page);
     this.fetchBreeds();
   }
 
