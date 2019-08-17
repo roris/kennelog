@@ -1,11 +1,13 @@
 import { inject } from 'aurelia-dependency-injection';
 import { Redirect } from 'aurelia-router';
-import { uniq } from 'lodash';
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
 import { BreedsService } from '../../services/breeds-service';
 import { PaginationModel } from '../../resources/elements/pager';
 import { generatePages } from '../../util/pagination-util';
+import $ from 'jquery';
+
+const tryRefreshing = 'Try refreshing the page after a while.';
 
 @inject(State, BreedsService, WebApi)
 export class BreederDogs {
@@ -18,6 +20,8 @@ export class BreederDogs {
   breedsFilter = '';
 
   dogs;
+
+  errors: any[] = [];
 
   ownedBreeds: string[] = [];
 
@@ -70,22 +74,28 @@ export class BreederDogs {
       current = 1;
     }
 
-    const totalDogs = await this.getNumberOfDogs();
-    const totalPages = Math.ceil(totalDogs / 10);
-    this.paginate(totalPages, current);
-
-    const { data } = await this.api.dogs.find({
-      query: {
-        owner: this.state.user.id,
-        $skip: 10 * (current - 1),
-        $limit: 10,
-        $sort: {
-          updatedAt: -1
+    try {
+      const totalDogs = await this.getNumberOfDogs();
+      const totalPages = Math.ceil(totalDogs / 10);
+      this.paginate(totalPages, current);
+      const { data } = await this.api.dogs.find({
+        query: {
+          owner: this.state.user.id,
+          $skip: 10 * (current - 1),
+          $limit: 10,
+          $sort: {
+            updatedAt: -1
+          }
         }
-      }
-    });
+      });
 
-    this.dogs = data;
+      this.dogs = data;
+    } catch (error) {
+      this.errors.push({
+        title: 'Error',
+        message: `Could not fetch list of your dogs from the server. ${tryRefreshing}`
+      });
+    }
   }
 
   async fetchBreeds(): Promise<void> {
@@ -93,7 +103,10 @@ export class BreederDogs {
       const { data } = await this.breedsService.find();
       this.breeds = data;
     } catch (error) {
-      // TODO: display error message
+      this.errors.push({
+        title: 'Error',
+        message: `Could not fetch list of dog breeds from the server. ${tryRefreshing}`
+      });
     }
   }
 
@@ -115,5 +128,11 @@ export class BreederDogs {
       }
     });
     return total;
+  }
+
+  removeError(index, error) {
+    $(`#alert${index}`).on('closed.bs.alert', () => {
+      this.errors.splice(this.errors.findIndex(error), 1);
+    });
   }
 }

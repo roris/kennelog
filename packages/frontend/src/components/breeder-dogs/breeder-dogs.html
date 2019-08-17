@@ -39,5 +39,19 @@
     <breeder-dogs-detail repeat.for="dog of dogs" model.bind="dog"></breeder-dogs-detail>
 
     <pager model.bind="paginationModel"></pager>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" repeat.for="error of errors">
+      <strong>${error.title}:</strong> ${error.message}
+      <button
+        type="button"
+        id="alert${$index}"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+        click.delegate="removeError($index, error)"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
   </div>
 </template>
