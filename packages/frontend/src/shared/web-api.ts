@@ -43,4 +43,8 @@ export class WebApi {
   async logout(): Promise<any> {
     return this.client.logout();
   }
+
+  service(name: string): Service<any> {
+    return this.client.service(name);
+  }
 }
