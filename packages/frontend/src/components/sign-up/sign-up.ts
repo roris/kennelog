@@ -50,12 +50,6 @@ export class SignUp {
 
   validator: Validator;
 
-  // emailErrors = []
-  // nameErrors = []
-  // passwordErrors = []
-  // dateOfBirthErrors = []
-  // licenseNoErrors = []
-
   constructor(
     router: Router,
     state: State,
@@ -69,9 +63,7 @@ export class SignUp {
     this.controller = controllerFactory.createForCurrentScope(validator);
     this.controller.validateTrigger = validateTrigger.changeOrBlur;
     this.controller.subscribe(() => this.validateWhole());
-
     this.validator = validator;
-
     this.router = router;
     this.state = state;
     this.store = store;
@@ -107,7 +99,8 @@ export class SignUp {
 
   async submit(): Promise<void> {
     try {
-      await this.api.users.create(this.credentials);
+      const usersService = this.api.service('users');
+      await usersService.create(this.credentials);
       const response = await this.api.login(this.credentials);
       this.state.onLogin(this.store, response.user);
       this.router.navigateToRoute('dogs');

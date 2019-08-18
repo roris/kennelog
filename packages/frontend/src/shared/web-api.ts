@@ -11,12 +11,6 @@ import { Service } from '../services/service';
 const SERVER_URL = 'http://localhost:3030';
 
 export class WebApi {
-  blobs: FeathersService<any>;
-
-  users: FeathersService<any>;
-
-  uploads: FeathersService<any>;
-
   private client: Application<any>;
 
   constructor() {
@@ -24,10 +18,6 @@ export class WebApi {
     this.client = feathers();
     this.client.configure(socketio(socket));
     this.client.configure(authentication());
-
-    this.blobs = this.client.service('blobs');
-    this.uploads = this.client.service('uploads');
-    this.users = this.client.service('users');
   }
 
   async login(credentials: any = false): Promise<any> {

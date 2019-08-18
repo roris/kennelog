@@ -11,6 +11,7 @@ import moment from 'moment';
 
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
+import { Service } from '../../services/service';
 
 class Dog {
   name: string = '';
@@ -36,6 +37,8 @@ export class NewDog {
 
   controller: ValidationController;
 
+  dog: Dog = new Dog();
+
   isBreeder: boolean = true;
 
   isOwner: boolean = true;
@@ -51,8 +54,6 @@ export class NewDog {
   state: State;
 
   validator: Validator;
-
-  dog: Dog = new Dog();
 
   constructor(
     controllerFactory: ControllerFactory,
@@ -112,17 +113,18 @@ export class NewDog {
       } else {
         await this.sendToServer();
       }
-    } catch (error) {
-      console.error('Error while creating dog:', error.code, error.message);
-    }
+    } catch (error) {}
   }
 
   async sendToServer(uri?): Promise<void> {
     try {
       let upload;
+      const blobsService = this.api.service('blobs');
+      const uploadsService = this.api.service('uploads');
+
       if (uri) {
-        const blob = await this.api.blobs.create({ uri: uri });
-        upload = await this.api.uploads.create({ path: blob.id });
+        const blob = await blobsService.create({ uri: uri });
+        upload = await uploadsService.create({ path: blob.id });
       }
       const payload: any = {};
       payload.gender = this.dog.gender;
@@ -151,10 +153,9 @@ export class NewDog {
         payload.picture = upload.id;
       }
 
-      await this.api.dogs.create(payload);
-    } catch (error) {
-      console.log(error.code, error.message);
-    }
+      const dogsService = this.api.service('dogs');
+      await dogsService.create(payload);
+    } catch (error) {}
 
     this.submitting = false;
   }
