@@ -11,7 +11,7 @@ export async function seed(knex: Knex): Promise<any> {
     .del()
     .then(() => {
       return knex('litters').insert({
-        parents: pairs[0].id
+        pairId: pairs[0].id
       });
     });
 }

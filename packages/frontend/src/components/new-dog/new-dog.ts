@@ -128,28 +128,32 @@ export class NewDog {
       const payload: any = {};
       payload.gender = this.dog.gender;
 
-      if (this.dog.name != '') {
+      if (this.dog.name) {
         payload.name = this.dog.name;
       }
 
-      if (this.dog.dob != '') {
+      // if (this.dog.breed) {
+      //  payload.breed = this.dog.breedId;
+      // }
+
+      if (this.dog.dob) {
         payload.dateOfBirth = this.dog.dob;
       }
 
-      if (this.dog.microchipNo != '') {
+      if (this.dog.microchipNo) {
         payload.microchipNo = this.dog.microchipNo;
       }
 
       if (this.isBreeder) {
-        payload.breeder = this.state.user.id;
+        payload.breederId = this.state.user.id;
       }
 
       if (this.isOwner) {
-        payload.owner = this.state.user.id;
+        payload.ownerId = this.state.user.id;
       }
 
       if (upload) {
-        payload.picture = upload.id;
+        payload.pictureId = upload.id;
       }
 
       const dogsService = this.api.service('dogs');

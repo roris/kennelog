@@ -4,14 +4,14 @@ import { updateRecord } from './util/common';
 const updateDogs = async (knex: Knex, pups: any[], user: number) => {
   for (let pup of pups) {
     pup.dateOfBirth = pups[0].dateOfBirth;
-    pup.owner = user;
-    pup.breeder = user;
-    pup.breed = pups[0].breed;
+    pup.ownerId = user;
+    pup.breederId = user;
+    pup.breedId = pups[0].breedId;
     await updateRecord(knex, 'dogs', pup.id, {
       dateOfBirth: pups[0].dateOfBirth,
-      owner: user,
-      breeder: user,
-      breed: pups[0].breed
+      ownerId: user,
+      breederId: user,
+      breedId: pups[0].breedId
     });
   }
 
@@ -57,9 +57,9 @@ const getPups = async (knex: Knex, dame, sire, gender: string) => {
 
 export async function seed(knex: Knex): Promise<any> {
   const litter = await getLitter(knex);
-  const pair = await getPair(knex, litter.parents);
-  const sire = await getDog(knex, pair.sire);
-  const dame = await getDog(knex, pair.dame);
+  const pair = await getPair(knex, litter.pairId);
+  const sire = await getDog(knex, pair.sireId);
+  const dame = await getDog(knex, pair.dameId);
   const malePups = await getPups(knex, dame, sire, 'M');
   const femalePups = await getPups(knex, dame, sire, 'F');
 
@@ -73,14 +73,14 @@ export async function seed(knex: Knex): Promise<any> {
 
   // create a record for each selected dog
   const dogsLitters = pups.map(pup => {
-    return { dog: pup.id, litter: litter.id };
+    return { dogId: pup.id, litterId: litter.id };
   });
 
   await knex('dogs_litters').del();
   await knex('dogs_litters').insert(dogsLitters);
 
   return knex('dogs')
-    .where('owner', sire.owner)
+    .where('ownerId', sire.ownerId)
     .andWhereNot('id', sire.id)
     .andWhereNot('id', dame.id)
     .andWhereNot('id', pups[0].id)

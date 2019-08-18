@@ -19,7 +19,7 @@ class Measures extends Model {
 
       properties: {
         measuredOn: { type: 'string' },
-        dog: { type: 'integer' }
+        dogId: { type: 'integer' }
       }
     };
   }

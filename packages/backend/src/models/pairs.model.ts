@@ -16,8 +16,8 @@ class Pairs extends Model {
     return {
       type: 'object',
       properties: {
-        sire: { type: ['number', 'null'] },
-        dame: { type: ['number', 'null'] },
+        sireId: { type: ['number', 'null'] },
+        dameId: { type: ['number', 'null'] },
         pairedBy: { type: ['number', 'null'] },
         pairedOn: { type: ['string', 'null'] }
       }

@@ -24,9 +24,9 @@
 
       <div>
         <span if.bind="model.breed" class="text-muted text-capitalize">
-          ${model.breed}
+          ${model.breed.name}
         </span>
-        <i if.bind="!model.breed" class="text-muted">Unknown breed</i>
+        <i if.bind="!model.breedId" class="text-muted">Unknown breed</i>
       </div>
 
       <div style="position: absolute; bottom: 0;">

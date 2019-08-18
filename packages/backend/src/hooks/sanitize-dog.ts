@@ -35,20 +35,20 @@ export default (options = {}): Hook => {
       data.dateOfBirth = context.data.dateOfBirth;
     }
 
-    if (context.data.breed) {
-      data.breed = context.data.breed;
+    if (context.data.breedId) {
+      data.breedId = context.data.breedId;
     }
 
-    if (context.data.picture) {
-      data.picture = context.data.picture;
+    if (context.data.pictureId) {
+      data.pictureId = context.data.pictureId;
     }
 
-    if (context.data.breeder) {
-      data.breeder = context.data.breeder;
+    if (context.data.breederId) {
+      data.breederId = context.data.breederId;
     }
 
-    if (context.data.owner) {
-      data.owner = context.data.owner;
+    if (context.data.ownerId) {
+      data.ownerId = context.data.ownerId;
     }
 
     context.data = data;

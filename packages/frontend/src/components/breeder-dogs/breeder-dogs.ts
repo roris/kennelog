@@ -100,7 +100,7 @@ export class BreederDogs {
   async fetchDogsCount(query?): Promise<number> {
     return this.dogsService.count({
       query: {
-        owner: this.state.user.id,
+        ownerId: this.state.user.id,
         ...query
       }
     });
@@ -111,7 +111,7 @@ export class BreederDogs {
       const params = {
         query: {
           ...query,
-          owner: this.state.user.id,
+          ownerId: this.state.user.id,
           $skip: this.dogsPerPage * (this.params.page - 1),
           $limit: this.dogsPerPage,
           $sort: {
@@ -138,7 +138,7 @@ export class BreederDogs {
   }
 
   private async applyFilters() {
-    const breedFilter = this.breedFilter ? { breed: this.breedFilter } : {};
+    const breedFilter = this.breedFilter ? { breedId: this.breedFilter } : {};
     const nameFilter = this.nameFilter
       ? { name: { $like: `${this.nameFilter}%` } }
       : {};
@@ -157,7 +157,7 @@ export class BreederDogs {
     );
 
     dogs.forEach(dog => {
-      dog.breed = dict[dog.breed] ? dict[dog.breed] : dog.breed;
+      dog.breed = dict[dog.breed] ? dict[dog.breed] : undefined;
       dog.dateOfBirth = moment(dog.dateOfBirth).format('dddd, MMMM Do YYYY');
     });
     return dogs;

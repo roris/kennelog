@@ -16,9 +16,13 @@ class Dogs extends Model {
 
   name!: string;
 
-  owner!: number;
+  ownerId!: number;
 
-  breeder!: number;
+  breederId!: number;
+
+  breedId!: number;
+
+  pictureId!: number;
 
   static get tableName() {
     return 'dogs';
@@ -34,8 +38,10 @@ class Dogs extends Model {
         gender: { type: 'string' },
         microchipNo: { type: ['string', 'null'] },
         dateOfBirth: { type: ['string', 'null'] },
-        owner: { type: ['integer', 'null'] },
-        breeder: { type: ['integer', 'null'] }
+        ownerId: { type: ['integer', 'null'] },
+        breederId: { type: ['integer', 'null'] },
+        breedId: { type: ['integer', 'null'] },
+        pictureId: { type: ['integer', 'null'] }
       }
     };
   }

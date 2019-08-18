@@ -8,7 +8,7 @@ export async function up(knex: Knex): Promise<any> {
       .notNullable()
       .primary();
     table
-      .integer('parents')
+      .integer('pairId')
       .unsigned()
       .nullable()
       .references('id')

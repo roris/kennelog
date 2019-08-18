@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<any> {
       .notNullable();
     table.date('measuredOn').notNullable();
     table
-      .integer('dog')
+      .integer('dogId')
       .unsigned()
       .notNullable()
       .references('id')

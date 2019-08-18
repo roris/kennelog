@@ -18,8 +18,8 @@ class DogsLitters extends Model {
       required: ['dog', 'litter'],
 
       properties: {
-        dog: { type: 'integer' },
-        litter: { type: 'integer' }
+        dogId: { type: 'integer' },
+        litterId: { type: 'integer' }
       }
     };
   }

@@ -17,7 +17,7 @@ class Litters extends Model {
       type: 'object',
 
       properties: {
-        parents: { type: ['integer', 'null'] }
+        pairId: { type: ['integer', 'null'] }
       }
     };
   }

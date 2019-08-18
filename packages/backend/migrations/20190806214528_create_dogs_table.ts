@@ -16,28 +16,28 @@ export async function up(knex: Knex): Promise<any> {
     table.string('gender', 1).notNullable();
     table.date('dateOfBirth').nullable();
     table
-      .integer('owner')
+      .integer('ownerId')
       .unsigned()
       .nullable()
       .references('id')
       .inTable('users')
       .onDelete('SET NULL');
     table
-      .integer('breeder')
+      .integer('breederId')
       .unsigned()
       .nullable()
       .references('id')
       .inTable('users')
       .onDelete('SET NULL');
     table
-      .integer('breed')
+      .integer('breedId')
       .unsigned()
       .nullable()
       .references('id')
       .inTable('breeds')
       .onDelete('SET NULL');
     table
-      .integer('picture')
+      .integer('pictureId')
       .unsigned()
       .nullable()
       .unique()
