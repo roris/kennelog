@@ -24,6 +24,7 @@ export class BreederDogs {
   dogsPerPage = 10;
 
   ownedBreeds: string[] = [];
+
   paginationModel!: PaginationModel;
 
   params: any = { page: 1, breed: '', name: '' };
@@ -140,11 +141,10 @@ export class BreederDogs {
   private async applyFilters() {
     const breedFilter = this.breedFilter ? { breed: this.breedFilter } : {};
     const nameFilter = this.nameFilter
-      ? { name: { $like: this.nameFilter } }
+      ? { name: { $like: `${this.nameFilter}%` } }
       : {};
 
     const query = { ...breedFilter, ...nameFilter };
-    console.log('applyFilter.query => ', query);
 
     const total = await this.fetchDogsCount(query);
     await this.fetchDogs(query);
