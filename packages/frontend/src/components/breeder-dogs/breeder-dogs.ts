@@ -4,6 +4,7 @@ import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
 import { Service } from '../../services/service';
 import { Model as PaginationModel } from '../../resources/elements/pager';
+import moment from 'moment';
 import $ from 'jquery';
 
 const tryRefreshing =
@@ -22,8 +23,6 @@ export class BreederDogs {
   errors: any[] = [];
 
   dogsPerPage = 10;
-
-  ownedBreeds: string[] = [];
 
   paginationModel!: PaginationModel;
 
@@ -79,10 +78,10 @@ export class BreederDogs {
   activate(params) {
     const page = params && params.page ? Number(params.page) : 1;
     const name = params && params.name ? params.name : '';
-    const breed = params && params.breed ? Number(params.breed) : 0;
+    const breed = params && params.breed ? Number(params.breed) : NaN;
     this.params.page = isNaN(page) ? 1 : page;
     this.params.name = name;
-    this.params.breed = isNaN(breed) ? 0 : breed;
+    this.params.breed = isNaN(breed) ? null : breed;
     this.applyFilters();
   }
 
@@ -122,7 +121,7 @@ export class BreederDogs {
       };
 
       const { data } = await this.dogsService.find(params);
-      this.dogs = this.populateBreeds(data);
+      this.dogs = this.populateDogs(data);
     } catch (error) {
       this.errors.push({
         title: 'Error',
@@ -151,10 +150,16 @@ export class BreederDogs {
     this.paginate(Math.ceil(total / this.dogsPerPage));
   }
 
-  private populateBreeds(dogs: any[]) {
+  private populateDogs(dogs: any[]) {
     const dict: any = {};
-    this.breeds.forEach(breed => (dict[breed.id] = breed.name));
-    dogs.forEach(dog => (dog.breed = dict[dog.breed]));
+    this.breeds.forEach(
+      breed => (dict[breed.id] = breed.name.toLocaleLowerCase())
+    );
+
+    dogs.forEach(dog => {
+      dog.breed = dict[dog.breed] ? dict[dog.breed] : dog.breed;
+      dog.dateOfBirth = moment(dog.dateOfBirth).format('dddd, MMMM Do YYYY');
+    });
     return dogs;
   }
 
