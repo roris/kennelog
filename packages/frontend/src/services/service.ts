@@ -7,7 +7,7 @@ export class Service {
     this.service = service;
   }
 
-  async create(data: Array<Partial<any>> | Partial<any>, params?) {
+  async create(data: Partial<any>[] | Partial<any>, params?) {
     return this.service.create(data, params);
   }
 
