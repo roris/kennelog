@@ -3,7 +3,7 @@ import { range } from 'lodash';
 export const generatePages = (
   current: number,
   last: number,
-  route = (offset: number) => '',
+  params: (offset: number) => any,
   maxLength: number = 5
 ) => {
   const upperLimit = Math.min(current + 4, last);
@@ -14,7 +14,7 @@ export const generatePages = (
   pages = shrinkLeft(pages, current, maxLength);
 
   return pages.map(offset => {
-    return { offset: offset, route: route(offset) };
+    return { offset: offset, params: params(offset) };
   });
 };
 

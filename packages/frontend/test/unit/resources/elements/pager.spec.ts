@@ -1,20 +1,11 @@
 import { ComponentTester, StageComponent } from 'aurelia-testing';
 import { PLATFORM } from 'aurelia-pal';
 import { bootstrap } from 'aurelia-bootstrapper';
-import { Pager } from '../../../../src/resources/elements/pager';
+import { Pager, Model } from '../../../../src/resources/elements/pager';
 
-const model = {
-  currentIndex: 4,
-  currentPage: 5,
-  totalPages: 10,
-  pages: [
-    { offset: 1, route: '' },
-    { offset: 2, route: '' },
-    { offset: 3, route: '' },
-    { offset: 4, route: '' },
-    { offset: 5, route: '' }
-  ]
-};
+const model: Model = new Model(10, 1, 'nowhere', offset => {
+  return { page: offset };
+});
 
 const moduleName = '../../src/resources/elements/pager';
 
@@ -29,28 +20,32 @@ describe('Pager Element', () => {
     await component.create(bootstrap);
   });
 
-  it('should have 1 as the first page', () => {
-    expect(component.viewModel.firstPage).toBe(1);
+  it('should have 1 as the first page number', () => {
+    expect(component.viewModel.firstPageNumber).toBe(1);
   });
 
-  it(`should have ${model.totalPages} as the last page`, () => {
-    expect(component.viewModel.lastPage).toBe(model.totalPages);
+  it(`should have ${model.lastPageNumber} as the last page number`, () => {
+    expect(component.viewModel.lastPageNumber).toBe(model.lastPageNumber);
   });
 
-  it(`should have it's current page as ${model.currentPage}`, () => {
-    expect(component.viewModel.currentPage).toBe(model.currentPage);
+  it(`should have it's current page as ${model.currentPageNumber}`, () => {
+    expect(component.viewModel.currentPageNumber).toBe(model.currentPageNumber);
   });
 
-  it(`should have the current index as ${model.currentIndex}`, () => {
-    expect(component.viewModel.currentIndex).toBe(model.currentIndex);
+  it(`should have the current index as ${model.currentPageIndex}`, () => {
+    expect(component.viewModel.currentIndex).toBe(model.currentPageIndex);
   });
 
-  it(`should have the previous page as ${model.currentPage - 1}`, () => {
-    expect(component.viewModel.prevPage).toBe(model.currentPage - 1);
+  it(`should have the previous page as ${model.prevPage.offset}`, () => {
+    expect(component.viewModel.prevPageNumber).toBe(model.prevPage.offset);
   });
 
-  it(`should have the next page as ${model.currentPage + 1}`, () => {
-    expect(component.viewModel.nextPage).toBe(model.currentPage + 1);
+  it(`should have the next page as ${model.nextPage.offset + 1}`, () => {
+    expect(component.viewModel.nextPageNumber).toBe(model.nextPage.offset);
+  });
+
+  it(`should hold a maximum of 5 pages`, () => {
+    expect(model.pages.length).toBe(5);
   });
 
   it(`should be able to compose`, () => {

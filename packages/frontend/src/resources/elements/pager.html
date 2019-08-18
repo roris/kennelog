@@ -1,30 +1,30 @@
 <template>
   <nav aria-label="${label}" if.bind="canCompose">
     <ul class="pagination justify-content-center">
-      <li class="page-item" class.bind="currentPage != firstPage ? '' : 'disabled'">
-        <a class="page-link" route-href="route: dogs/page; params.bind: { page: firstPage }">
+      <li class="page-item" class.bind="onFirstPage ? 'disabled' : ''">
+        <a class="page-link" route-href="route.bind: route; params.bind: firstPage.params">
           First
         </a>
       </li>
 
-      <li class="page-item" class.bind="currentPage != firstPage ? '' : 'disabled'">
-        <a class="page-link" route-href="route: dogs/page; params.bind: { page: prevPage }">
+      <li class="page-item" class.bind="onFirstPage ? 'disabled' : ''">
+        <a class="page-link" route-href="route.bind: route; params.bind: prevPage.params">
           Prev
         </a>
       </li>
 
       <li class="page-item" class.bind="currentIndex == $index ? 'active' : ''" repeat.for="page of pages">
-        <a class="page-link" route-href="route: dogs/page; params.bind: { page: page.offset }">${page.offset}</a>
+        <a class="page-link" route-href="route.bind: route; params.bind: page.params">${page.offset}</a>
       </li>
 
-      <li class="page-item" class.bind="currentPage != lastPage ? '' : 'disabled'">
-        <a class="page-link" route-href="route: dogs/page; params.bind: { page: nextPage }">
+      <li class="page-item" class.bind="onLastPage ? 'disabled' : ''">
+        <a class="page-link" route-href="route.bind: route; params.bind: nextPage.params">
           Next
         </a>
       </li>
 
-      <li class="page-item" class.bind="currentPage != lastPage ? '' : 'disabled'">
-        <a class="page-link" route-href="route: dogs/page; params.bind: { page: lastPage }">
+      <li class="page-item" class.bind="onLastPage ? 'disabled' : ''">
+        <a class="page-link" route-href="route.bind: route; params.bind: lastPage.params">
           Last
         </a>
       </li>
