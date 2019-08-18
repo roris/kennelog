@@ -1,6 +1,5 @@
 import feathers, { Application } from '@feathersjs/feathers';
 import { populateBreed } from '../../src/hooks/populate-breed';
-import { finished } from 'stream';
 
 describe("'populate-breed' Hook", () => {
   let app: Application;
@@ -28,7 +27,7 @@ describe("'populate-breed' Hook", () => {
 
   it('populates a new dog with its `breed`', async () => {
     expect.assertions(1);
-    const data = await app.service('dogs').create({ breed: 1 });
+    const data = await app.service('dogs').create({ breedId: 1 });
     expect(data.breed).toBe(breed);
   });
 
