@@ -1,33 +1,42 @@
 <template bindable="model">
   <div class="d-table col-12 w-100 py-4 border-bottom">
     <div class="d-table-cell col-2 col-lg-1 align-middle">
-      <img class="avatar" alt="" src="${model.avatar}" width="100" height="100" />
+      <img if.bind="model.avatar" class="img-thumbnail avatar" alt="" src="${model.avatar}" width="100" height="100" />
+      <div if.bind="!model.avatar">
+        <i class="fa fa-image img-thumbnail" style="font-size: 100px"></i>
+        <small class="text-muted text-center">
+          <i>
+            No picture available
+          </i>
+        </small>
+      </div>
     </div>
 
     <div class="d-table-cell col-8">
-      <h4>
-        ${model.name}
-      </h4>
+      <a route-href="route: dog-detail; params.bind: { id: model.id }">
+        <h4>
+          <span if.bind="model.name">${model.name}</span>
+          <i if.bind="!model.name">Unnamed Dog</i>
+        </h4>
+      </a>
 
       <div>
-        <p>
+        <span class="text-muted text-capitalize">
           ${model.breed}
-        </p>
+        </span>
       </div>
 
       <div>
-        <span>
+        <span class="text-muted">
           ${model.gender === "M" ? "♂" : "♀"}
         </span>
       </div>
     </div>
 
     <div class="d-table-cell col-2 text-right">
-      <a route-href="route: dog-detail; params.bind: {id:model.id}">
-        <span>
-          ${model.microchipNo}
-        </span>
-      </a>
+      <small class="text-muted">
+        #${model.microchipNo}
+      </small>
     </div>
   </div>
 </template>
