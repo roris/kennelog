@@ -11,7 +11,7 @@
 
     <div class="position-relative">
       <div class="border-bottom py-3">
-        <form class="d-block d-sm-flex" accept-charset="UTF-8">
+        <form class="d-block d-sm-flex" accept-charset="UTF-8" action="#">
           <div class="mb-3 mb-sm-0 mr-sm-3 col-4">
             <input class="form-control w-100" />
           </div>
@@ -34,8 +34,11 @@
       </div>
     </div>
 
-    <div class="col-12 d-flex w-100 py-4" if.bind="dogs === undefined || dogs.length === 0 ">
-      <span>You do not have any dogs. <a route-href="route: new-dog;">Add a new dog.</a></span>
+    <div class="col-12 d-flex w-100 py-4" if.bind="(dogs === undefined || dogs.length === 0)">
+      <span if.bind="!breedFilter"> You do not have any dogs. <a route-href="route: new-dog;">Add a new dog.</a> </span>
+      <span if.bind="breedFilter">
+        You do not have any dogs that satisfy this criteria. <a route-href="route: new-dog;">Add a new dog.</a>
+      </span>
     </div>
 
     <breeder-dogs-detail repeat.for="dog of dogs" model.bind="dog"></breeder-dogs-detail>

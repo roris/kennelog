@@ -2,42 +2,70 @@ import { inject } from 'aurelia-dependency-injection';
 import { Redirect } from 'aurelia-router';
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
-import { BreedsService } from '../../services/breeds-service';
-import { PaginationModel } from '../../resources/elements/pager';
-import { generatePages } from '../../util/pagination-util';
+import { Service } from '../../services/service';
+import { Model as PaginationModel } from '../../resources/elements/pager';
 import $ from 'jquery';
 
-const tryRefreshing = 'Try refreshing the page after a while.';
+const tryRefreshing =
+  'Try refreshing the page or check your network connection.';
 
-@inject(State, BreedsService, WebApi)
+@inject(State, WebApi)
 export class BreederDogs {
-  api: WebApi;
-
-  private breedsService: BreedsService;
+  private breedsService: Service;
 
   breeds: any[] = [];
 
-  breedsFilter = '';
+  private dogsService: Service;
 
   dogs;
 
   errors: any[] = [];
 
-  ownedBreeds: string[] = [];
+  dogsPerPage = 10;
 
-  paginationModel: PaginationModel = {
-    currentIndex: 0,
-    currentPage: 1,
-    totalPages: 1,
-    pages: []
-  };
+  ownedBreeds: string[] = [];
+  paginationModel!: PaginationModel;
+
+  params: any = { page: 1, breed: '', name: '' };
 
   state: State;
 
-  constructor(state: State, breedsService: BreedsService, api: WebApi) {
-    this.api = api;
-    this.breedsService = breedsService;
+  constructor(state: State, api: WebApi) {
+    this.breedsService = api.service('breeds');
+    this.dogsService = api.service('dogs');
     this.state = state;
+    this.fetchBreeds();
+    this.paginationModel = new PaginationModel(1, 1, 'dogs/page', () => {});
+  }
+
+  get filteredRoute() {
+    if (this.breedFilter && this.nameFilter) {
+      return 'dogs/breed/name';
+    } else if (this.breedFilter && !this.nameFilter) {
+      return 'dogs/breed';
+    } else if (!this.breedFilter && this.nameFilter) {
+      return 'dogs/name';
+    } else {
+      return 'dogs/page';
+    }
+  }
+
+  get breedFilter() {
+    return this.params.breed;
+  }
+
+  set breedFilter(value) {
+    this.params.breed = value;
+    this.applyFilters();
+  }
+
+  get nameFilter() {
+    return this.params.name;
+  }
+
+  set nameFilter(value) {
+    this.params.name = value;
+    this.applyFilters();
   }
 
   canActivate(): boolean | Redirect {
@@ -47,49 +75,53 @@ export class BreederDogs {
     return true;
   }
 
-  paginate(total: number, current: number): void {
-    const paginationModel: PaginationModel = {
-      totalPages: 1,
-      currentPage: 1,
-      pages: [],
-      currentIndex: 0
-    };
-    paginationModel.totalPages = total;
-    paginationModel.currentPage = current;
-    paginationModel.pages = generatePages(
-      current,
-      total,
-      offset => `dogs/pages/${offset}`
-    );
-    paginationModel.pages.forEach((page, index) => {
-      if (page.offset == current) {
-        paginationModel.currentIndex = index;
-      }
-    });
-    this.paginationModel = paginationModel;
+  activate(params) {
+    const page = params && params.page ? Number(params.page) : 1;
+    const name = params && params.name ? params.name : '';
+    const breed = params && params.breed ? Number(params.breed) : 0;
+    this.params.page = isNaN(page) ? 1 : page;
+    this.params.name = name;
+    this.params.breed = isNaN(breed) ? 0 : breed;
+    this.applyFilters();
   }
 
-  async fetchDogs(current): Promise<void> {
-    if (isNaN(current) || current == 0) {
-      current = 1;
-    }
+  fetchBreeds() {
+    this.breedsService
+      .all()
+      .then(breeds => (this.breeds = breeds))
+      .catch(error =>
+        this.errors.push({
+          title: 'Error',
+          message: `Could not fetch list of dog breeds from the server. ${tryRefreshing}`
+        })
+      );
+  }
 
+  async fetchDogsCount(query?): Promise<number> {
+    return this.dogsService.count({
+      query: {
+        owner: this.state.user.id,
+        ...query
+      }
+    });
+  }
+
+  async fetchDogs(query?): Promise<void> {
     try {
-      const totalDogs = await this.getNumberOfDogs();
-      const totalPages = Math.ceil(totalDogs / 10);
-      this.paginate(totalPages, current);
-      const { data } = await this.api.dogs.find({
+      const params = {
         query: {
+          ...query,
           owner: this.state.user.id,
-          $skip: 10 * (current - 1),
-          $limit: 10,
+          $skip: this.dogsPerPage * (this.params.page - 1),
+          $limit: this.dogsPerPage,
           $sort: {
             updatedAt: -1
           }
         }
-      });
+      };
 
-      this.dogs = data;
+      const { data } = await this.dogsService.find(params);
+      this.dogs = this.populateBreeds(data);
     } catch (error) {
       this.errors.push({
         title: 'Error',
@@ -98,58 +130,49 @@ export class BreederDogs {
     }
   }
 
-  async fetchBreeds(): Promise<void> {
-    try {
-      const { total } = await this.breedsService.find({ query: { $limit: 0 } });
-      const { data } = await this.breedsService.find({
-        query: { $limit: total }
-      });
-
-      this.breeds = data;
-    } catch (error) {
-      this.errors.push({
-        title: 'Error',
-        message: `Could not fetch list of dog breeds from the server. ${tryRefreshing}`
-      });
-    }
-  }
-
-  activate(params) {
-    const page = params && params.page ? Number(params.page) : 1;
-    this.fetchDogs(page)
-      .then(() => this.fetchBreeds())
-      .then(() => {
-        // create a dict from the breeds
-        const dict = Object.assign({});
-        this.breeds.forEach(breed => (dict[breed.id] = breed.name));
-        this.dogs = this.dogs.map(dog => {
-          dog.breed = dict[dog.breed];
-          return dog;
-        });
-        return true;
-      })
-      .catch(() => {
-        this.errors.push({
-          title: 'Error',
-          message: `Unexpected error while processing lists. ${tryRefreshing}`
-        });
-      });
-  }
-
-  async getNumberOfDogs(): Promise<number> {
-    const { total } = await this.api.dogs.find({
-      query: {
-        owner: this.state.user.id,
-        $limit: 0
-      }
-    });
-    return total;
-  }
-
   // Remove the alert through bootstrap and then remove the error from the array
   removeError(index, error) {
     $(`#alert${index}`).on('closed.bs.alert', () => {
       this.errors.splice(this.errors.findIndex(error), 1);
     });
+  }
+
+  private async applyFilters() {
+    const breedFilter = this.breedFilter ? { breed: this.breedFilter } : {};
+    const nameFilter = this.nameFilter
+      ? { name: { $like: this.nameFilter } }
+      : {};
+
+    const query = { ...breedFilter, ...nameFilter };
+    console.log('applyFilter.query => ', query);
+
+    const total = await this.fetchDogsCount(query);
+    await this.fetchDogs(query);
+    this.paginate(Math.ceil(total / this.dogsPerPage));
+  }
+
+  private populateBreeds(dogs: any[]) {
+    const dict: any = {};
+    this.breeds.forEach(breed => (dict[breed.id] = breed.name));
+    dogs.forEach(dog => (dog.breed = dict[dog.breed]));
+    return dogs;
+  }
+
+  private paginate(total: number) {
+    const route = this.filteredRoute;
+    const currentPage = this.params.page;
+    const routeParams = offset => {
+      if (this.breedFilter && this.nameFilter) {
+        return { breed: this.breedFilter, name: this.nameFilter, page: offset };
+      } else if (this.breedFilter && !this.nameFilter) {
+        return { breed: this.breedFilter, page: offset };
+      } else if (!this.breedFilter && this.nameFilter) {
+        return { name: this.nameFilter, page: offset };
+      } else {
+        return { page: offset };
+      }
+    };
+
+    this.paginationModel.update(total, currentPage, route, routeParams);
   }
 }
