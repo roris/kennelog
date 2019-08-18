@@ -11,7 +11,6 @@ import moment from 'moment';
 
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
-import { Service } from '../../services/service';
 
 class Dog {
   name: string = '';

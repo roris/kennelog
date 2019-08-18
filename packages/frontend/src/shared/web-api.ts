@@ -1,7 +1,4 @@
-import feathers, {
-  Service as FeathersService,
-  Application
-} from '@feathersjs/feathers';
+import feathers, { Application } from '@feathersjs/feathers';
 import authentication from '@feathersjs/authentication-client';
 import socketio from '@feathersjs/socketio-client';
 import io from 'socket.io-client';
