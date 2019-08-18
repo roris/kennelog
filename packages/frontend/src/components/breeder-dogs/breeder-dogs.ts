@@ -12,11 +12,9 @@ const tryRefreshing =
 
 @inject(State, WebApi)
 export class BreederDogs {
-  private breedsService: Service;
+  api: WebApi;
 
   breeds: any[] = [];
-
-  private dogsService: Service;
 
   dogs;
 
@@ -31,11 +29,10 @@ export class BreederDogs {
   state: State;
 
   constructor(state: State, api: WebApi) {
-    this.breedsService = api.service('breeds');
-    this.dogsService = api.service('dogs');
+    this.api = api;
     this.state = state;
-    this.fetchBreeds();
     this.paginationModel = new PaginationModel(1, 1, 'dogs/page', () => {});
+    this.fetchBreeds();
   }
 
   get filteredRoute() {
@@ -86,7 +83,8 @@ export class BreederDogs {
   }
 
   fetchBreeds() {
-    this.breedsService
+    this.api
+      .service('breeds')
       .all()
       .then(breeds => (this.breeds = breeds))
       .catch(error =>
@@ -98,10 +96,10 @@ export class BreederDogs {
   }
 
   async fetchDogsCount(query?): Promise<number> {
-    return this.dogsService.count({
+    return this.api.service('dogs').count({
       query: {
-        ownerId: this.state.user.id,
-        ...query
+        ...query,
+        ownerId: this.state.user.id
       }
     });
   }
@@ -120,12 +118,13 @@ export class BreederDogs {
         }
       };
 
-      const { data } = await this.dogsService.find(params);
-      this.dogs = this.populateDogs(data);
+      const { data } = await this.api.service('dogs').find(params);
+      this.formatDateOfBirth(data);
+      this.dogs = data;
     } catch (error) {
       this.errors.push({
         title: 'Error',
-        message: `Could not fetch list of your dogs from the server. ${tryRefreshing}`
+        message: `Could not fetch list of your dogs from the server. ${tryRefreshing}.`
       });
     }
   }
@@ -150,17 +149,10 @@ export class BreederDogs {
     this.paginate(Math.ceil(total / this.dogsPerPage));
   }
 
-  private populateDogs(dogs: any[]) {
-    const dict: any = {};
-    this.breeds.forEach(
-      breed => (dict[breed.id] = breed.name.toLocaleLowerCase())
-    );
-
+  private formatDateOfBirth(dogs: any[]) {
     dogs.forEach(dog => {
-      dog.breed = dict[dog.breed] ? dict[dog.breed] : undefined;
       dog.dateOfBirth = moment(dog.dateOfBirth).format('dddd, MMMM Do YYYY');
     });
-    return dogs;
   }
 
   private paginate(total: number) {
