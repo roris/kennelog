@@ -1,5 +1,6 @@
 import { bindable, customElement } from 'aurelia-templating';
 import { generatePages } from '../../util/pagination-util';
+import { clamp } from 'lodash';
 
 export interface Page {
   offset: number;
@@ -8,13 +9,21 @@ export interface Page {
 
 export class Model {
   currentPageIndex: number = 0;
+
   currentPageNumber: number = 1;
+
   lastPageNumber: number = 1;
+
   firstPage!: Page;
+
   lastPage!: Page;
+
   nextPage!: Page;
+
   prevPage!: Page;
+
   pages: Page[] = [];
+
   route: string = '';
 
   constructor(
@@ -32,8 +41,9 @@ export class Model {
     route: string,
     params: (offset: number) => any
   ) {
+    total = total < 1 ? 1 : total;
+    current = current < 1 ? 1 : current;
     this.pages = generatePages(current, total, params);
-
     this.route = route;
     this.firstPage = { offset: 1, params: params(1) };
     this.lastPage = { offset: total, params: params(total) };
@@ -52,6 +62,7 @@ export class Model {
 @customElement('pager')
 export class Pager {
   @bindable model!: Model;
+
   @bindable label: string = 'Search results';
 
   get route(): string {
