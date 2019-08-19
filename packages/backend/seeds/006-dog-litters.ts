@@ -64,7 +64,7 @@ export async function seed(knex: Knex): Promise<any> {
   const femalePups = await getPups(knex, dame, sire, 'F');
 
   // update the properties of the pups
-  malePups[0].breed = sire.breed;
+  malePups[0].breedId = sire.breedId;
   const pups = await updateDogs(
     knex,
     malePups.concat(femalePups),
