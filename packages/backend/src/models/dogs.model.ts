@@ -50,6 +50,7 @@ class Dogs extends Model {
     const Users = require('./users.model')();
     const Breeds = require('./breeds.model')();
     const Events = require('./events.model')();
+    const DogsLitters = require('./dogs-litters.model')();
 
     return {
       owner: {
@@ -82,6 +83,14 @@ class Dogs extends Model {
         join: {
           from: 'dogs.id',
           to: 'events.dogId'
+        }
+      },
+      litter: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: DogsLitters,
+        join: {
+          from: 'dogs.id',
+          to: 'dogs_litters.dogId'
         }
       }
     };
