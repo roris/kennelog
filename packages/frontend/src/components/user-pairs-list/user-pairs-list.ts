@@ -41,25 +41,13 @@ export class UserPairsList {
     this.applyFilters();
   }
 
-  get idFilter() {
+  get nameFilter() {
     return this.params.id;
   }
 
-  set idFilter(value) {
+  set nameFilter(value) {
     this.params.id = value;
     this.applyFilters();
-  }
-
-  get filteredRoute() {
-    if (this.breedFilter && this.idFilter) {
-      return 'pairs/breed/name';
-    } else if (this.breedFilter && !this.idFilter) {
-      return 'pairs/breed';
-    } else if (!this.breedFilter && this.idFilter) {
-      return 'pairs/name';
-    } else {
-      return 'pairs/page';
-    }
   }
 
   canActivate(): boolean | Redirect {
@@ -71,16 +59,32 @@ export class UserPairsList {
   }
 
   activate(params) {
-    const page = params && params.page ? Number(params.page) : 1;
-    const id = params && params.id ? Number(params.id) : NaN;
     const breed = params && params.breed ? Number(params.breed) : NaN;
-    this.params.page = isNaN(page) ? 1 : page;
-    this.params.id = isNaN(id) ? null : id;
+    const page = params && params.page ? Number(params.page) : 1;
+    const name = params && params.name ? params.name : '';
     this.params.breed = isNaN(breed) ? null : breed;
+    this.params.page = isNaN(page) ? 1 : page;
+    this.params.name = name;
     this.applyFilters();
   }
 
-  async fetchBreeds() {
+  removeError(index, error) {
+    $(`#alert${index}`).on('closed.bs.alert', () => {
+      this.errors.splice(this.errors.findIndex(error), 1);
+    });
+  }
+
+  private get breedQuery() {
+    const breed = this.breedFilter;
+    const query = {
+      $joinRelation: '[sire, dame]',
+      $or: [{ 'sire.breedId': breed }, { 'dame.breedId': breed }]
+    };
+
+    return breed ? query : undefined;
+  }
+
+  private async fetchBreeds() {
     try {
       this.breeds = await this.api.service('breeds').all();
     } catch (error) {
@@ -88,18 +92,7 @@ export class UserPairsList {
     }
   }
 
-  async fetchPairsCount(query?): Promise<number> {
-    const params = {
-      query: {
-        ...query,
-        pairedBy: this.state.user.id
-      }
-    };
-
-    return this.api.service('pairs').count(params);
-  }
-
-  async fetchPairs(query?): Promise<void> {
+  private async fetchPairs(query?): Promise<void> {
     try {
       const params = {
         query: {
@@ -115,50 +108,86 @@ export class UserPairsList {
 
       const { data } = await this.api.service('pairs').find(params);
       this.pairs = data;
-      console.log(data);
     } catch (error) {
       this.errors.push(new ApiError(error));
     }
   }
 
-  removeError(index, error) {
-    $(`#alert${index}`).on('closed.bs.alert', () => {
-      this.errors.splice(this.errors.findIndex(error), 1);
-    });
+  private async fetchPairsCount(query?): Promise<number> {
+    const params = {
+      query: {
+        ...query,
+        pairedBy: this.state.user.id
+      }
+    };
+
+    return this.api.service('pairs').count(params);
+  }
+
+  private get filteredRoute() {
+    const breed = this.breedFilter;
+    const name = this.nameFilter;
+
+    let route = 'pairs';
+    route += breed ? '/breed' : '';
+    route += name ? '/name' : '';
+    route += '/page';
+    return route;
+  }
+
+  private get mergedQuery() {
+    const breedQuery: any = this.breedQuery;
+    const nameQuery: any = this.nameQuery;
+    const query: any = {
+      ...breedQuery,
+      ...nameQuery
+    };
+
+    if (breedQuery && nameQuery) {
+      query.$and = [{ $or: breedQuery.$or }, { $or: nameQuery.$or }];
+      delete query.$or;
+    }
+
+    return query;
+  }
+
+  private get nameQuery() {
+    const name = this.nameFilter;
+    const query = {
+      $joinRelation: '[sire, dame]',
+      $or: [
+        { 'sire.name': { $like: `%${name}%` } },
+        { 'dame.name': { $like: `%${name}%` } }
+      ]
+    };
+
+    return name ? query : undefined;
   }
 
   private async applyFilters() {
-    const breedFilter = this.breedFilter
-      ? { $joinRelation: 'sire', breedId: this.breedFilter }
-      : {};
-    const idFilter = this.idFilter
-      ? { id: { $like: `${this.idFilter}%` } }
-      : {};
-
-    const query = { ...breedFilter, ...idFilter };
+    const query = this.mergedQuery;
 
     try {
       const total = await this.fetchPairsCount(query);
       await this.fetchPairs(query);
       this.paginate(Math.ceil(total / this.pairsPerPage));
     } catch (error) {
-      console.log(error);
       this.errors.push(new ApiError(error));
     }
   }
 
   private paginate(total: number) {
+    const name = this.nameFilter;
+    const breed = this.breedFilter;
     const route = this.filteredRoute;
     const currentPage = this.params.page;
     const routeParams = offset => {
-      if (this.breedFilter && this.idFilter) {
-        return { breed: this.breedFilter, name: this.idFilter, page: offset };
-      } else if (this.breedFilter && !this.idFilter) {
-        return { breed: this.breedFilter, page: offset };
-      } else if (!this.breedFilter && this.idFilter) {
-        return { name: this.idFilter, page: offset };
-      } else {
-        return { page: offset };
+      const params = { breed: breed, name: name, page: offset };
+      if (!breed) {
+        delete params.breed;
+      }
+      if (!name) {
+        delete params.name;
       }
     };
 
