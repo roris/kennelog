@@ -19,7 +19,7 @@ export default function(app: Application) {
   const options = {
     Model,
     paginate,
-    whitelist: ['$like', '$joinRelation']
+    whitelist: ['$and', '$like', '$joinRelation']
   };
 
   // Initialize our service with any options it requires
