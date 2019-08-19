@@ -2,10 +2,10 @@ import { inject } from 'aurelia-dependency-injection';
 import { Redirect } from 'aurelia-router';
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
-import { Service } from '../../services/service';
 import { Model as PaginationModel } from '../../resources/elements/pager';
 import moment from 'moment';
 import $ from 'jquery';
+import { ApiError } from '../../util/api-error';
 
 const tryRefreshing =
   'Try refreshing the page or check your network connection.';
@@ -87,12 +87,7 @@ export class BreederDogs {
       .service('breeds')
       .all()
       .then(breeds => (this.breeds = breeds))
-      .catch(error =>
-        this.errors.push({
-          title: 'Error',
-          message: `Could not fetch list of dog breeds from the server. ${tryRefreshing}`
-        })
-      );
+      .catch(error => this.errors.push(new ApiError(error)));
   }
 
   async fetchDogsCount(query?): Promise<number> {
@@ -105,28 +100,21 @@ export class BreederDogs {
   }
 
   async fetchDogs(query?): Promise<void> {
-    try {
-      const params = {
-        query: {
-          ...query,
-          ownerId: this.state.user.id,
-          $skip: this.dogsPerPage * (this.params.page - 1),
-          $limit: this.dogsPerPage,
-          $sort: {
-            updatedAt: -1
-          }
+    const params = {
+      query: {
+        ...query,
+        ownerId: this.state.user.id,
+        $skip: this.dogsPerPage * (this.params.page - 1),
+        $limit: this.dogsPerPage,
+        $sort: {
+          updatedAt: -1
         }
-      };
+      }
+    };
 
-      const { data } = await this.api.service('dogs').find(params);
-      this.formatDateOfBirth(data);
-      this.dogs = data;
-    } catch (error) {
-      this.errors.push({
-        title: 'Error',
-        message: `Could not fetch list of your dogs from the server. ${tryRefreshing}.`
-      });
-    }
+    const { data } = await this.api.service('dogs').find(params);
+    this.formatDateOfBirth(data);
+    this.dogs = data;
   }
 
   // Remove the alert through bootstrap and then remove the error from the array
@@ -144,9 +132,13 @@ export class BreederDogs {
 
     const query = { ...breedFilter, ...nameFilter };
 
-    const total = await this.fetchDogsCount(query);
-    await this.fetchDogs(query);
-    this.paginate(Math.ceil(total / this.dogsPerPage));
+    try {
+      const total = await this.fetchDogsCount(query);
+      await this.fetchDogs(query);
+      this.paginate(Math.ceil(total / this.dogsPerPage));
+    } catch (error) {
+      this.errors.push(new ApiError(error));
+    }
   }
 
   private formatDateOfBirth(dogs: any[]) {

@@ -46,7 +46,7 @@
     <pager model.bind="paginationModel"></pager>
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert" repeat.for="error of errors">
-      <strong>${error.title}:</strong> ${error.message}
+      <strong>${error.code} ${error.name}: </strong>${error.message}
       <button
         type="button"
         id="alert${$index}"
