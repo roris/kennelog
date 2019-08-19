@@ -1,0 +1,35 @@
+<template bindable="model">
+  <div class="d-table col-12 w-100 py-4 border-bottom">
+    <div class="d-table-cell col-8 ml-2">
+      <div>
+        <a route-href="route: litter-detail; params.bind: { id: model.id }">
+          <h4>
+            <span>#${model.id}</span>
+          </h4>
+        </a>
+      </div>
+
+      <div>
+        <p class="text-muted">
+          Born to
+          <span if.bind="model.pair.sire && model.pair.sire.name"> ${model.pair.sire.name}</span>
+          <span if.bind="model.pair.sire && !model.pair.sire.name"><i> Unnamed sire</i></span>
+          <span if.bind="!model.pair.sire"><i> Unknown sire </i></span>
+          and
+          <span if.bind="model.pair.dame && model.pair.dame.name"> ${model.pair.dame.name}</span>
+          <span if.bind="model.pair.dame && !model.pair.dame.name"><i> Unnamed dame</i></span>
+          <span if.bind="!model.pair.dame"><i> Unknown dame</i></span>
+        </p>
+      </div>
+
+      <div class="text-muted">
+        <p if.bind="model.children[0] && model.children[0].dateOfBirth">
+          Born on ${model.children[0].dateOfBirth}
+        </p>
+        <p if.bind="!model.children[0] || !model.children[0].dateOfBirth">
+          Unknown date of birth
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
