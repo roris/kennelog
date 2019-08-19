@@ -59,7 +59,7 @@ export const routeMap: RouteConfig[] = [
     moduleId: PLATFORM.moduleName(
       './components/user-pairs-list/user-pairs-list'
     ),
-    route: ['pairs/breed/:breed/id/:id/page/:page'],
+    route: ['pairs/breed/:breed/name/:name/page/:page'],
     title: 'Your pairs'
   },
   {
@@ -67,7 +67,7 @@ export const routeMap: RouteConfig[] = [
     moduleId: PLATFORM.moduleName(
       './components/user-pairs-list/user-pairs-list'
     ),
-    route: ['pairs/id/:id/page/:page'],
+    route: ['pairs/name/:name/page/:page'],
     title: 'Your pairs'
   },
   {
