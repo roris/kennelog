@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Events extends Model {
@@ -25,20 +25,20 @@ class Events extends Model {
     };
   }
 
-  // static get relationMappings(): RelationMappings {
-  //   const Dogs = require('./dogs.model')();
+  static get relationMappings(): RelationMappings {
+    const Dogs = require('./dogs.model')();
 
-  //   return {
-  //     dog: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Dogs,
-  //       join: {
-  //         from: 'dogs.id',
-  //         to: 'events.dog'
-  //       }
-  //     }
-  //   };
-  // }
+    return {
+      dog: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Dogs,
+        join: {
+          from: 'events.id',
+          to: 'dogs.id'
+        }
+      }
+    };
+  }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();
@@ -49,6 +49,6 @@ class Events extends Model {
   }
 }
 
-export default function(app: Application) {
+module.exports = function(app?: Application) {
   return Events;
-}
+};

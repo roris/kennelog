@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Dogs extends Model {
@@ -46,28 +46,46 @@ class Dogs extends Model {
     };
   }
 
-  // static get relationMappings(): RelationMappings {
-  //   const Users = require('./users.model')();
+  static get relationMappings(): RelationMappings {
+    const Users = require('./users.model')();
+    const Breeds = require('./breeds.model')();
+    const Events = require('./events.model')();
 
-  //   return {
-  //     owner: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Users(),
-  //       join: {
-  //         from: 'users.id',
-  //         to: 'dogs.id'
-  //       }
-  //     },
-  //     breeder: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Users(),
-  //       join: {
-  //         from: 'users.id',
-  //         to: 'dogs.id'
-  //       }
-  //     }
-  //   };
-  // }
+    return {
+      owner: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Users,
+        join: {
+          from: 'dogs.ownerId',
+          to: 'users.id'
+        }
+      },
+      breeder: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Users,
+        join: {
+          from: 'dogs.breederId',
+          to: 'users.id'
+        }
+      },
+      breed: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Breeds,
+        join: {
+          from: 'dogs.breedId',
+          to: 'breeds.id'
+        }
+      },
+      events: {
+        relation: Model.HasManyRelation,
+        modelClass: Events,
+        join: {
+          from: 'dogs.id',
+          to: 'events.dogId'
+        }
+      }
+    };
+  }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();
@@ -78,6 +96,6 @@ class Dogs extends Model {
   }
 }
 
-export default function(app: Application) {
+module.exports = function(app?: Application) {
   return Dogs;
-}
+};

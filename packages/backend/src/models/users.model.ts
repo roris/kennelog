@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Users extends Model {
@@ -40,29 +40,39 @@ class Users extends Model {
     };
   }
 
-  // static get relationMappings(): RelationMappings {
-  //   const Dogs = require('./dogs.model')();
+  static get relationMappings(): RelationMappings {
+    const Dogs = require('./dogs.model')();
+    const Pairs = require('./pairs.model')();
 
-  //   return {
-  //     stock: {
-  //       relation: Model.HasManyRelation,
-  //       modelClass: Dogs,
-  //       join: {
-  //         from: 'users.id',
-  //         to: 'dogs.owner'
-  //       }
-  //     },
+    return {
+      ownDogs: {
+        relation: Model.HasManyRelation,
+        modelClass: Dogs,
+        join: {
+          from: 'users.id',
+          to: 'dogs.ownerId'
+        }
+      },
 
-  //     bred: {
-  //       relation: Model.HasManyRelation,
-  //       modelClass: Dogs,
-  //       join: {
-  //         from: 'users.id',
-  //         to: 'dogs.breeder'
-  //       }
-  //     }
-  //   };
-  // }
+      bredDogs: {
+        relation: Model.HasManyRelation,
+        modelClass: Dogs,
+        join: {
+          from: 'users.id',
+          to: 'dogs.breederId'
+        }
+      },
+
+      pairs: {
+        relation: Model.HasManyRelation,
+        modelClass: Pairs,
+        join: {
+          from: 'users.id',
+          to: 'pairs.pairedBy'
+        }
+      }
+    };
+  }
 
   $beforeInsert(): void {
     this.createdAt = this.updatedAt = new Date().toISOString();
@@ -73,6 +83,6 @@ class Users extends Model {
   }
 }
 
-export default function(app: Application): any {
+module.exports = function(app?: Application) {
   return Users;
-}
+};

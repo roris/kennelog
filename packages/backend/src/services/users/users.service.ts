@@ -18,7 +18,8 @@ export default function(app: Application): void {
 
   const options = {
     Model,
-    paginate
+    paginate,
+    whitelist: ['$joinRelation']
   };
 
   // Initialize our service with any options it requires

@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Pairs extends Model {
@@ -24,39 +24,46 @@ class Pairs extends Model {
     };
   }
 
-  // static get relationMappings(): RelationMappings {
-  //   const Dogs = require('./dogs.model')();
-  //   const Users = require('./users.model')();
+  static get relationMappings(): RelationMappings {
+    const Dogs = require('./dogs.model')();
+    const Litters = require('./litters.model')();
+    const Users = require('./users.model')();
 
-  //   return {
-  //     sire: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Dogs,
-  //       join: {
-  //         from: 'dogs.id',
-  //         to: 'pairs.sire'
-  //       }
-  //     },
-
-  //     dame: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Dogs,
-  //       join: {
-  //         from: 'dogs.id',
-  //         to: 'pairs.dame'
-  //       }
-  //     },
-
-  //     breeder: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Users,
-  //       join: {
-  //         from: 'users.id',
-  //         to: 'pairs.pairedBy'
-  //       }
-  //     }
-  //   };
-  // }
+    return {
+      sire: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Dogs,
+        join: {
+          from: 'pairs.sireId',
+          to: 'dogs.id'
+        }
+      },
+      litters: {
+        relation: Model.HasOneRelation,
+        modelClass: Litters,
+        join: {
+          from: 'pairs.id',
+          to: 'litters.pairId'
+        }
+      },
+      dame: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Dogs,
+        join: {
+          from: 'pairs.dameId',
+          to: 'dogs.id'
+        }
+      },
+      pairer: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Users,
+        join: {
+          from: 'pairs.pairedBy',
+          to: 'users.id'
+        }
+      }
+    };
+  }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();
@@ -67,6 +74,6 @@ class Pairs extends Model {
   }
 }
 
-export default function(app: Application) {
+module.exports = function(app?: Application) {
   return Pairs;
-}
+};

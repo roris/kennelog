@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Heights extends Model {
@@ -19,22 +19,22 @@ class Heights extends Model {
     };
   }
 
-  // static get relationMappings(): RelationMappings {
-  //   const Measures = require('./measures.model')();
+  static get relationMappings(): RelationMappings {
+    const Measures = require('./measures.model')();
 
-  //   return {
-  //     parent: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Measures,
-  //       join: {
-  //         from: 'measures.id',
-  //         to: 'heights.id'
-  //       }
-  //     }
-  //   };
-  // }
+    return {
+      measure: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Measures,
+        join: {
+          from: 'heights.id',
+          to: 'measures.id'
+        }
+      }
+    };
+  }
 }
 
-export default function(app: Application) {
+module.exports = function(app?: Application) {
   return Heights;
-}
+};
