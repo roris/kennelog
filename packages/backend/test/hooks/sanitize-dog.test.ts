@@ -6,10 +6,10 @@ const params = {
   name: 'Doge',
   microchipNo: '123456789012345',
   dateOfBirth: '2018-01-01',
-  breed: 1,
-  picture: 2,
-  breeder: 1,
-  owner: 1
+  breedId: 1,
+  pictureId: 2,
+  breederId: 1,
+  ownerId: 1
 };
 
 describe("'sanitize-dog' hook", () => {
