@@ -39,6 +39,46 @@ export const routeMap: RouteConfig[] = [
     moduleId: PLATFORM.moduleName('./components/new-dog/new-dog')
   },
   {
+    name: 'pairs',
+    moduleId: PLATFORM.moduleName(
+      './components/user-pairs-list/user-pairs-list'
+    ),
+    route: ['pairs'],
+    title: 'Your pairs'
+  },
+  {
+    name: 'pairs/breed',
+    moduleId: PLATFORM.moduleName(
+      './components/user-pairs-list/user-pairs-list'
+    ),
+    route: ['pairs/breed/:breed/page/:page'],
+    title: 'Your pairs'
+  },
+  {
+    name: 'pairs/breed/name',
+    moduleId: PLATFORM.moduleName(
+      './components/user-pairs-list/user-pairs-list'
+    ),
+    route: ['pairs/breed/:breed/id/:id/page/:page'],
+    title: 'Your pairs'
+  },
+  {
+    name: 'pairs/name',
+    moduleId: PLATFORM.moduleName(
+      './components/user-pairs-list/user-pairs-list'
+    ),
+    route: ['pairs/id/:id/page/:page'],
+    title: 'Your pairs'
+  },
+  {
+    name: 'pairs/page',
+    moduleId: PLATFORM.moduleName(
+      './components/user-pairs-list/user-pairs-list'
+    ),
+    route: ['pairs/page/:page'],
+    title: 'Your pairs'
+  },
+  {
     route: ['pairs/new'],
     name: 'new-pair',
     title: 'Create new pair',

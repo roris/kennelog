@@ -1,0 +1,62 @@
+<template>
+  <require from="../../resources/elements/user-info.html"></require>
+  <require from="../../resources/elements/user-menu.html"></require>
+  <require from="../../resources/elements/pager"></require>
+  <require from="./user-pairs-detail.html"></require>
+
+  <user-info user.bind="state.user"></user-info>
+
+  <div class="col-lg-9 col-md-8 col-12 float-md-left pl-md-2">
+    <user-menu selected="1"></user-menu>
+
+    <div class="position-relative">
+      <div class="border-bottom py-3">
+        <form class="d-block d-sm-flex" accept-charset="UTF-8" action="#">
+          <div class="mb-3 mb-sm-0 mr-sm-3 col-4">
+            <input class="form-control w-100" value.bind="idFilter & debounce" />
+          </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Breed:</span>
+            </div>
+
+            <select class="custom-select" value.bind="breedFilter">
+              <option model.bind="null">Choose...</option>
+              <option repeat.for="breed of breeds" model.bind="breed.id">${breed.name}</option>
+            </select>
+          </div>
+
+          <div class="col-2">
+            <a button class="btn btn-success w-100" route-href="route: new-pair;">New Pair</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-12 d-flex w-100 py-4" if.bind="(!pairs || pairs.length === 0)">
+      <span if.bind="!breedFilter"> No pairs found. <a route-href="route: new-dog;">Create a new pair.</a> </span>
+      <span if.bind="breedFilter">
+        No pairs that satisfy the given criteria were found.
+      </span>
+    </div>
+
+    <user-pairs-detail repeat.for="pair of pairs" model.bind="pair"></user-pairs-detail>
+
+    <pager model.bind="paginationModel"></pager>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" repeat.for="error of errors">
+      <strong>${error.code} ${error.name}: </strong> ${error.message}
+      <button
+        type="button"
+        id="alert${$index}"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+        click.delegate="removeError($index, error)"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+</template>
