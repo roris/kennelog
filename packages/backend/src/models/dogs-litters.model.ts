@@ -15,36 +15,11 @@ class DogsLitters extends Model {
   static get jsonSchema(): JsonSchema {
     return {
       type: 'object',
-      required: ['dog', 'litter'],
+      required: ['dogId', 'litterId'],
 
       properties: {
         dogId: { type: 'integer' },
         litterId: { type: 'integer' }
-      }
-    };
-  }
-
-  static get relationMappings(): RelationMappings {
-    const Litters = require('./litters.model')();
-    const Dogs = require('./dogs.model')();
-
-    return {
-      litter: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Litters,
-        join: {
-          from: 'dogs_litters.litterId',
-          to: 'dogs.id'
-        }
-      },
-
-      dog: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Dogs,
-        join: {
-          from: 'dogs_litters.dogId',
-          to: 'dogs.id'
-        }
       }
     };
   }
