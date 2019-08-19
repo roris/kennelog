@@ -13,9 +13,9 @@ const generateDog = (name, breed, user) => {
     name: name,
     dateOfBirth: randomDate(new Date('2001-01-01')),
     gender: Math.random() > 0.5 ? 'M' : 'F',
-    owner: user,
-    breeder: user,
-    breed: breed,
+    ownerId: user,
+    breederId: user,
+    breedId: breed,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   };

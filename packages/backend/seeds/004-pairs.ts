@@ -12,7 +12,7 @@ export async function seed(knex: Knex): Promise<any> {
   const dame = await getEldestDogByOwnerAndGender(knex, owner.id, 'F');
 
   // update the dame's breed
-  await updateRecord(knex, 'dogs', dame.id, { breed: sire.breed });
+  await updateRecord(knex, 'dogs', dame.id, { breedId: sire.breedId });
 
   // Deletes ALL existing entries
   return knex('pairs')
@@ -20,10 +20,10 @@ export async function seed(knex: Knex): Promise<any> {
     .then(() => {
       // Inserts seed entries
       return knex('pairs').insert({
-        dame: dame.id,
+        dameId: dame.id,
         pairedOn: new Date().toISOString().substr(0, 10),
         pairedBy: owner.id,
-        sire: sire.id
+        sireId: sire.id
       });
     });
 }

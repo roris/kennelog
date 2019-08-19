@@ -8,14 +8,14 @@ export async function up(knex: Knex): Promise<any> {
       .primary()
       .notNullable();
     table
-      .integer('sire')
+      .integer('sireId')
       .unsigned()
       .nullable()
       .references('id')
       .inTable('dogs')
       .onDelete('SET NULL');
     table
-      .integer('dame')
+      .integer('dameId')
       .unsigned()
       .nullable()
       .references('id')

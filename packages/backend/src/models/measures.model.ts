@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Measures extends Model {
@@ -19,24 +19,24 @@ class Measures extends Model {
 
       properties: {
         measuredOn: { type: 'string' },
-        dog: { type: 'integer' }
+        dogId: { type: 'integer' }
       }
     };
   }
 
-  // static get relationMappings(): RelationMappings {
-  //   const Dogs = require('./dogs.model')();
-  //   return {
-  //     dog: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Dogs,
-  //       join: {
-  //         from: 'dogs.id',
-  //         to: 'measures.dog'
-  //       }
-  //     }
-  //   };
-  // }
+  static get relationMappings(): RelationMappings {
+    const Dogs = require('./dogs.model')();
+    return {
+      dog: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Dogs,
+        join: {
+          from: 'measures.dogId',
+          to: 'dogs.id'
+        }
+      }
+    };
+  }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();
@@ -47,6 +47,6 @@ class Measures extends Model {
   }
 }
 
-export default function(app: Application) {
+module.exports = function(app?: Application) {
   return Measures;
-}
+};

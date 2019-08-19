@@ -45,7 +45,7 @@ export const insertMeasures = async (knex: Knex) => {
   const data = measurementDates.map(date => {
     return {
       measuredOn: date,
-      dog: dog.id,
+      dogId: dog.id,
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -77,8 +77,8 @@ export const mergeIdAndData = (ids: number[], data: any[]) => {
   const shorter = ids.length < data.length ? ids : data;
   const mergedData = new Array(shorter.length).fill({}).map((value, index) => {
     return {
-      id: ids[index],
-      ...data[index]
+      ...data[index],
+      id: ids[index]
     };
   });
 
@@ -93,7 +93,7 @@ export const getEldestDogByOwnerAndGender = async (
   const dogs = await knex
     .select()
     .from('dogs')
-    .where({ owner: ownerId })
+    .where({ ownerId: ownerId })
     .andWhere({ gender: gender })
     .orderBy('dateOfBirth', 'asc')
     .limit(1);

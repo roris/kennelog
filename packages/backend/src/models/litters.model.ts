@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Litters extends Model {
@@ -17,25 +17,25 @@ class Litters extends Model {
       type: 'object',
 
       properties: {
-        parents: { type: ['integer', 'null'] }
+        pairId: { type: ['integer', 'null'] }
       }
     };
   }
 
-  // static get relationMappings(): RelationMappings {
-  //   const Pairs = require('./pairs.model')();
+  static get relationMappings(): RelationMappings {
+    const Pairs = require('./pairs.model')();
 
-  //   return {
-  //     parents: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Pairs,
-  //       join: {
-  //         from: 'pairs.id',
-  //         to: 'litters.parents'
-  //       }
-  //     }
-  //   };
-  // }
+    return {
+      pair: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Pairs,
+        join: {
+          from: 'litters.pairId',
+          to: 'pairs.id'
+        }
+      }
+    };
+  }
 
   $beforeInsert() {
     this.createdAt = this.updatedAt = new Date().toISOString();
@@ -46,6 +46,6 @@ class Litters extends Model {
   }
 }
 
-export default function(app: Application) {
+module.exports = function(app?: Application) {
   return Litters;
-}
+};

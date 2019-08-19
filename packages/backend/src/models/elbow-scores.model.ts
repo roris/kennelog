@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model } from 'objection';
+import { Model, JsonSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class ElbowScores extends Model {
@@ -8,7 +8,7 @@ class ElbowScores extends Model {
     return 'elbow_scores';
   }
 
-  static get jsonSchema() {
+  static get jsonSchema(): JsonSchema {
     return {
       type: 'object',
       required: ['right', 'left'],
@@ -20,22 +20,22 @@ class ElbowScores extends Model {
     };
   }
 
-  //   static get relationMappings(): RelationMappings {
-  //     const Measures = require('./measures.model')();
+  static get relationMappings(): RelationMappings {
+    const Measures = require('./measures.model')();
 
-  //     return {
-  //       parent: {
-  //         relation: Model.BelongsToOneRelation,
-  //         modelClass: Measures,
-  //         join: {
-  //           from: 'measures.id',
-  //           to: 'elbow_scores.id'
-  //         }
-  //       }
-  //     };
-  //   }
+    return {
+      measure: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Measures,
+        join: {
+          from: 'elbow_scores.id',
+          to: 'measures.id'
+        }
+      }
+    };
+  }
 }
 
-export default function(app: Application) {
+module.exports = function(app?: Application) {
   return ElbowScores;
-}
+};

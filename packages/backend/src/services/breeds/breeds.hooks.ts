@@ -1,5 +1,6 @@
 import * as authentication from '@feathersjs/authentication';
 // Don't remove this comment. It's needed to format import lines nicely.
+import { nameToTitleCase } from '../../hooks/name-to-title-case';
 
 const { authenticate } = authentication.hooks;
 
@@ -15,7 +16,7 @@ export default {
   },
 
   after: {
-    all: [],
+    all: [nameToTitleCase()],
     find: [],
     get: [],
     create: [],
