@@ -142,9 +142,11 @@ export class BreederDogs {
   }
 
   private formatDateOfBirth(dogs: any[]) {
-    dogs.forEach(dog => {
-      dog.dateOfBirth = moment(dog.dateOfBirth).format('dddd, MMMM Do YYYY');
-    });
+    dogs
+      .filter(dog => !!dog.dateOfBirth)
+      .forEach(dog => {
+        dog.dateOfBirth = moment(dog.dateOfBirth).format('MMMM Do YYYY');
+      });
   }
 
   private paginate(total: number) {

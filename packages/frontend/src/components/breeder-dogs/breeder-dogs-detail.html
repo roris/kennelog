@@ -33,7 +33,12 @@
         <span class="text-muted">
           ${model.gender === "M" ? "♂" : "♀"}
         </span>
-        <small class="text-muted ml-2">Born on ${model.dateOfBirth}</small>
+        <small if.bind="!model.dateOfBirth" class="text-muted ml-2">
+          <i>Unknown date of birth</i>
+        </small>
+        <small if.bind="model.dateOfBirth" class="text-muted ml-2">
+          Born on ${model.dateOfBirth}
+        </small>
       </div>
     </div>
 
