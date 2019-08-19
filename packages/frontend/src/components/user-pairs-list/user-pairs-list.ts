@@ -152,7 +152,7 @@ export class UserPairsList {
   }
 
   private get nameQuery() {
-    const name = this.nameFilter;
+    const name: string = this.nameFilter;
     const query = {
       $joinRelation: '[sire, dame]',
       $or: [
@@ -161,7 +161,7 @@ export class UserPairsList {
       ]
     };
 
-    return name ? query : undefined;
+    return name && name.length >= 3 ? query : undefined;
   }
 
   private async applyFilters() {
