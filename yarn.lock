@@ -881,7 +881,7 @@
   resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.0.0.tgz#ae49bae4025c35aaeb9aacb6a0c27a3d1def5062"
   integrity sha512-hyCLse4RiNt7WLPQ0KSudjoVnwiRykhYzIZdtDon9i2usPaoYkFw/fEYZrkE5HVB+sUTwphZoZ1oOntRk1MShg==
 
-"@feathersjs/commons@^4.3.0-pre.2", "@feathersjs/commons@^4.3.0-pre.3":
+"@feathersjs/commons@^4.3.0-pre.3":
   version "4.3.0-pre.3"
   resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.3.0-pre.3.tgz#a12bde8d4194a109671744cca14817a15d285522"
   integrity sha512-T89RnoXweWGJsHlmvbnNuFLec3X8KcelrugQXZ+kVRg1cl7g/+HuySxsXZj2iyiqwe/C6lHLZzF2QwCby9AYrw==
@@ -928,7 +928,7 @@
     lodash "^4.17.15"
     uberproto "^2.0.4"
 
-"@feathersjs/feathers@^4.0.0-pre", "@feathersjs/feathers@^4.0.0-pre.5":
+"@feathersjs/feathers@^4.0.0-pre.5":
   version "4.0.0-pre.5"
   resolved "https://registry.yarnpkg.com/@feathersjs/feathers/-/feathers-4.0.0-pre.5.tgz#0501767fa88d6757fefd7686b998b8c0c6a1e517"
   integrity sha512-oyDPjvFO99pNbN16TcehWFswLiiuc/yNP7JwVtcTbh1gcxEJQABKTvKO547Ts1qdolKEBQBP4u+R8l1hdIx83w==
@@ -938,12 +938,12 @@
     events "^3.0.0"
     uberproto "^2.0.4"
 
-"@feathersjs/feathers@^4.3.0-pre.1":
-  version "4.3.0-pre.2"
-  resolved "https://registry.yarnpkg.com/@feathersjs/feathers/-/feathers-4.3.0-pre.2.tgz#d6e95a5a6b3abfa82293127dc3533cb320fb0527"
-  integrity sha512-L9zQ/8VrL7iprQLfTiMQxZ2C+HT9g58HEnbQmiW2geCV3L6wawQwntTzMNKX/cd7ougn84Fu5VILTuUTEU8oRg==
+"@feathersjs/feathers@^4.3.0-pre.3":
+  version "4.3.0-pre.3"
+  resolved "https://registry.yarnpkg.com/@feathersjs/feathers/-/feathers-4.3.0-pre.3.tgz#b06ebbf5c03c912563fd5098096b8f6b4a7cc7b7"
+  integrity sha512-zG1eSt9bRUM9bNucQkUQrAaMhytHvUYzNR1HnrTgz6Y9GJ/a4pMCTXJ28357roOB0YaJ9JrQy6T+1kVTN3mmKg==
   dependencies:
-    "@feathersjs/commons" "^4.3.0-pre.2"
+    "@feathersjs/commons" "^4.3.0-pre.3"
     debug "^4.1.1"
     events "^3.0.0"
     uberproto "^2.0.4"

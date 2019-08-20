@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@feathersjs/authentication-client": "^4.0.0-pre",
-    "@feathersjs/feathers": "^4.0.0-pre",
+    "@feathersjs/feathers": "^4.3.0-pre.3",
     "@feathersjs/socketio-client": "^4.0.0-pre",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.2",
