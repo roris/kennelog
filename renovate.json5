@@ -31,18 +31,6 @@
   masterIssueAutoClose: true,
   packageRules: [
     {
-      updateType: ['major'],
-      labels: ['major']
-    },
-    {
-      updateType: ['minor', 'patch'],
-      labels: ['non-major']
-    },
-    {
-      depTypeList: ['*'],
-      labels: ['dependencies']
-    },
-    {
       depTypeList: ['dependencies'],
       semanticCommitScope: 'deps'
     },
