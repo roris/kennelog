@@ -908,7 +908,7 @@
   dependencies:
     debug "^4.1.1"
 
-"@feathersjs/errors@^4.3.0-pre.1", "@feathersjs/errors@^4.3.0-pre.2", "@feathersjs/errors@^4.3.0-pre.3":
+"@feathersjs/errors@^4.3.0-pre.1", "@feathersjs/errors@^4.3.0-pre.3":
   version "4.3.0-pre.3"
   resolved "https://registry.yarnpkg.com/@feathersjs/errors/-/errors-4.3.0-pre.3.tgz#93be755c4b3d46abbde3ca14ac05b97df321274a"
   integrity sha512-bgRm3tw8obFFxZeG/slIWTSUIyQAi0FUpI6TAf9oi7276Hqvc81a9wFuLJjWlnQmYNHjM+SPxu/jl/kwOF/Y0w==
@@ -976,17 +976,6 @@
     "@feathersjs/errors" "^3.3.6"
     debug "^4.0.0"
     lodash "^4.17.10"
-    radix-router "^3.0.1"
-
-"@feathersjs/transport-commons@^4.3.0-pre.3":
-  version "4.3.0-pre.3"
-  resolved "https://registry.yarnpkg.com/@feathersjs/transport-commons/-/transport-commons-4.3.0-pre.3.tgz#e79050489e0123beb6bf9aa8e0f537c6d83c4ab9"
-  integrity sha512-nhAMhgAdOMn2RqdZcGHdRK224J0ELh/5PKO6bSXikdJ8226r1lHOYaQ05r/R737EyYhMxSexd2W7oXGKKSN/qg==
-  dependencies:
-    "@feathersjs/commons" "^4.3.0-pre.3"
-    "@feathersjs/errors" "^4.3.0-pre.3"
-    debug "^4.1.1"
-    lodash "^4.17.15"
     radix-router "^3.0.1"
 
 "@feathersjs/transport-commons@^4.3.0-pre.3":
@@ -5538,10 +5527,10 @@ eslint-config-prettier@^6.1.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-standard@^13.0.1:
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-13.0.1.tgz#c9c6ffe0cfb8a51535bc5c7ec9f70eafb8c6b2c0"
-  integrity sha512-zLKp4QOgq6JFgRm1dDCVv1Iu0P5uZ4v5Wa4DTOkg2RFMxdCX/9Qf7lz9ezRj2dBRa955cWQF/O/LWEiYWAHbTw==
+eslint-config-standard@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-14.0.0.tgz#1de7bf5af37542dc6eef879ab7eb5e5e0f830747"
+  integrity sha512-bV6e2LFvJEetrLjVAy4KWPOUsIhPWr040c649MigTPR6yUtaGuOt6CEAyNeez2lRiC+2+vjGWa02byjs25EB3A==
 
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
