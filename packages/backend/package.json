@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/compression": "^1.0.1",
-    "@types/cors": "^2.8.5",
+    "@types/cors": "^2.8.6",
     "@types/helmet": "^0.0.44",
     "@types/jsonwebtoken": "^8.3.2",
     "@types/serve-favicon": "^2.2.31",
