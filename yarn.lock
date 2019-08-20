@@ -886,12 +886,12 @@
   resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.3.0-pre.3.tgz#a12bde8d4194a109671744cca14817a15d285522"
   integrity sha512-T89RnoXweWGJsHlmvbnNuFLec3X8KcelrugQXZ+kVRg1cl7g/+HuySxsXZj2iyiqwe/C6lHLZzF2QwCby9AYrw==
 
-"@feathersjs/configuration@^4.3.0-pre.1":
-  version "4.3.0-pre.2"
-  resolved "https://registry.yarnpkg.com/@feathersjs/configuration/-/configuration-4.3.0-pre.2.tgz#4562c26649b5e9cc44144fec81d6e4511ed2c0c1"
-  integrity sha512-NF7ZWeTTH/jSmW9W7ak/zjnle8MXR2Q5693hC3PF2xmcoH6snoWPScJcyGxbAIEJ1iOOyYzixoikmD8pfQ4iiA==
+"@feathersjs/configuration@^4.3.0-pre.3":
+  version "4.3.0-pre.3"
+  resolved "https://registry.yarnpkg.com/@feathersjs/configuration/-/configuration-4.3.0-pre.3.tgz#f1aebee336f645c7696dedaebd52711e9308a23c"
+  integrity sha512-+Btg3KprnvIvmXNCa9qdh9lu8X+4r/UGzlmesqm6pLUgdoNhX5Jfypq2iTUteUhIQ5UCjd+xX6HLG2QQEqCcog==
   dependencies:
-    config "^3.1.0"
+    config "^3.2.2"
     debug "^4.1.1"
 
 "@feathersjs/errors@^3.3.0", "@feathersjs/errors@^3.3.6":
@@ -4345,7 +4345,7 @@ config-chain@^1.1.11:
     ini "^1.3.4"
     proto-list "~1.2.1"
 
-config@^3.1.0:
+config@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/config/-/config-3.2.2.tgz#c7d31bb2a9d30013a905ff420101e3b1ba58eead"
   integrity sha512-rOsfIOAcG82AWouK4/vBS/OKz3UPl2T/kP0irExmXJJOoWg2CmdfPLdx56bCoMUMFNh+7soQkQWCUC8DyemiwQ==
