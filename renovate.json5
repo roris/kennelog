@@ -1,16 +1,17 @@
 {
   extends: [
     'config:base',
-    ':enableRenovate',
-    ':enableVulnerabilityAlerts',
-    ':respectLatest',
-    ':semanticCommits',
-    ':semanticPrefixChore',
     ':automergeBranchMergeCommit',
     ':automergeRequireAllStatusChecks',
     ':automergeMinor',
     ':automergeLinters',
     ':automergeTypes',
+    ':combinePatchMinorReleases',
+    ':enableRenovate',
+    ':enableVulnerabilityAlerts',
+    ':respectLatest',
+    ':semanticCommits',
+    ':semanticPrefixChore',
     ':masterIssue'
   ],
   commitBodyTable: true,
