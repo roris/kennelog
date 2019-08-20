@@ -31,11 +31,11 @@
   masterIssueAutoclose: true,
   packageRules: [
     {
-      updateType: ['major'],
+      updateTypes: ['major'],
       labels: ['dependencies', 'major']
     },
     {
-      updateType: ['minor', 'patch'],
+      updateTypes: ['minor', 'patch'],
       labels: ['dependencies']
     },
     {
