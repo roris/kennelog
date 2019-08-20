@@ -28,7 +28,7 @@
   ],
   postUpdateOptions: ['yarnDedupeHighest'],
   masterIssue: true,
-  masterIssueAutoClose: true,
+  masterIssueAutoclose: true,
   packageRules: [
     {
       depTypeList: ['dependencies'],
