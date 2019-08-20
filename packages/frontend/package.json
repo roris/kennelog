@@ -37,7 +37,7 @@
     "@types/config": "^0.0.34",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.137",
-    "@types/webpack": "^4.32.2",
+    "@types/webpack": "^4.39.0",
     "aurelia-cli": "^1.0.2",
     "aurelia-loader-nodejs": "^1.0.1",
     "aurelia-pal-nodejs": "^1.2.0",
