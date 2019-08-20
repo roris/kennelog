@@ -1,0 +1,75 @@
+{
+  extends: [
+    'config:base',
+    ':enableRenovate',
+    ':automergePatch',
+    ':automergeLinters',
+    ':automergeTypes',
+    ':automergeBranchMergeCommit',
+    ':automergeRequireAllStatusChecks',
+    ':enableVulnerabilityAlerts',
+    ':respectLatest',
+    ':semanticCommits',
+    ':semanticPrefixChore'
+  ],
+  node: {
+    supportPolicy: ['lts']
+  },
+  travis: { enabled: true },
+  commitBodyTable: true,
+  rollbackPrs: true,
+  prBodyColumns: [
+    'Package',
+    'Update',
+    'Type',
+    'New value',
+    'Package file',
+    'References'
+  ],
+  postUpdateOptions: ['yarnDedupeHighest'],
+  masterIssue: true,
+  masterIssueAutoClose: true,
+  packageRules: [
+    {
+      updateType: ['major'],
+      labels: ['major']
+    },
+    {
+      updateType: ['minor', 'patch'],
+      labels: ['non-major']
+    },
+    {
+      depTypeList: ['*'],
+      labels: ['dependencies']
+    },
+    {
+      depTypeList: ['dependencies'],
+      semanticCommitScope: 'deps'
+    },
+    {
+      depTypeList: ['devDependencies'],
+      semanticCommitScope: 'dev-deps'
+    },
+    {
+      depTypeList: ['engines'],
+      semanticCommitScope: 'engine-deps'
+    },
+    {
+      depTypeList: ['peerDependencies'],
+      semanticCommitScope: 'peer-deps'
+    },
+    // range strategies
+    {
+      depTypeList: ['dependencies'],
+      rangeStrategy: 'replace'
+    },
+    {
+      depTypeList: ['devDependencies'],
+      rangeStrategy: 'bump'
+    },
+    {
+      depTypeList: ['peerDependencies'],
+      rangeStrategy: 'widen'
+    }
+  ]
+}
