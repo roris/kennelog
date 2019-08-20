@@ -1,11 +1,11 @@
 {
   extends: [
     'config:base',
-    ':automergeBranchMergeCommit',
-    ':automergeRequireAllStatusChecks',
-    ':automergeMinor',
     ':automergeLinters',
     ':automergeTypes',
+    ':automergeMinor',
+    ':automergePr',
+    ':automergeRequireAllStatusChecks',
     ':combinePatchMinorReleases',
     ':enableRenovate',
     ':enableVulnerabilityAlerts',
@@ -22,7 +22,6 @@
   node: {
     supportPolicy: ['lts']
   },
-  postUpdateOptions: ['yarnDedupeHighest'],
   rollbackPrs: true,
   travis: { enabled: true },
   packageRules: [
