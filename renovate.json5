@@ -7,17 +7,19 @@
     ':automergeTypes',
     ':automergeBranchMergeCommit',
     ':automergeRequireAllStatusChecks',
+    ':combinePatchMinorReleases',
     ':enableVulnerabilityAlerts',
     ':respectLatest',
     ':semanticCommits',
     ':semanticPrefixChore'
   ],
+  commitBodyTable: true,
+  masterIssue: true,
+  masterIssueAutoclose: true,
   node: {
     supportPolicy: ['lts']
   },
-  travis: { enabled: true },
-  commitBodyTable: true,
-  rollbackPrs: true,
+  postUpdateOptions: ['yarnDedupeHighest'],
   prBodyColumns: [
     'Package',
     'Update',
@@ -26,9 +28,8 @@
     'Package file',
     'References'
   ],
-  postUpdateOptions: ['yarnDedupeHighest'],
-  masterIssue: true,
-  masterIssueAutoclose: true,
+  rollbackPrs: true,
+  travis: { enabled: true },
   packageRules: [
     {
       updateTypes: ['major'],
