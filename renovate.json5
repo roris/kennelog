@@ -2,32 +2,26 @@
   extends: [
     'config:base',
     ':enableRenovate',
-    ':automergePatch',
-    ':automergeLinters',
-    ':automergeTypes',
-    ':automergeBranchMergeCommit',
-    ':automergeRequireAllStatusChecks',
-    ':combinePatchMinorReleases',
     ':enableVulnerabilityAlerts',
     ':respectLatest',
     ':semanticCommits',
-    ':semanticPrefixChore'
+    ':semanticPrefixChore',
+    ':automergeBranchMergeCommit',
+    ':automergeRequireAllStatusChecks',
+    ':automergeMinor',
+    ':automergeLinters',
+    ':automergeTypes',
+    ':masterIssue'
   ],
   commitBodyTable: true,
-  masterIssue: true,
+  major: {
+    masterIssueApproval: true
+  },
   masterIssueAutoclose: true,
   node: {
     supportPolicy: ['lts']
   },
   postUpdateOptions: ['yarnDedupeHighest'],
-  prBodyColumns: [
-    'Package',
-    'Update',
-    'Type',
-    'New value',
-    'Package file',
-    'References'
-  ],
   rollbackPrs: true,
   travis: { enabled: true },
   packageRules: [
