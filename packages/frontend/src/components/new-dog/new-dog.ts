@@ -11,6 +11,7 @@ import moment from 'moment';
 
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
+import { ApiError } from '../../util/api-error';
 
 class Dog {
   name: string = '';
@@ -29,6 +30,13 @@ class Dog {
     return this.imageFiles.length > 0;
   }
 }
+
+const isUniqueMicrochipNo = async (microchipNo: string, api: WebApi) => {
+  const total = await api
+    .service('dogs')
+    .count({ query: { microchipNo: microchipNo } });
+  return total == 0;
+};
 
 @inject(ControllerFactory, Router, State, Validator, WebApi)
 export class NewDog {
@@ -54,6 +62,10 @@ export class NewDog {
 
   validator: Validator;
 
+  breeds: any[] = [];
+
+  errors: ApiError[] = [];
+
   constructor(
     controllerFactory: ControllerFactory,
     router: Router,
@@ -78,6 +90,10 @@ export class NewDog {
 
   get maxDateOfBirth(): string {
     return moment().format('YYYY-MM-DD');
+  }
+
+  async classfiy() {
+    // TODO
   }
 
   validateWhole(): void {
@@ -132,9 +148,9 @@ export class NewDog {
         payload.name = this.dog.name;
       }
 
-      // if (this.dog.breed) {
-      //  payload.breed = this.dog.breedId;
-      // }
+      if (this.dog.breed) {
+        payload.breedId = this.dog.breed;
+      }
 
       if (this.dog.dob) {
         payload.dateOfBirth = this.dog.dob;
@@ -172,6 +188,7 @@ export class NewDog {
 
   activate() {
     this.setupValidation();
+    this.fetchBreeds();
   }
 
   setupValidation() {
@@ -179,23 +196,27 @@ export class NewDog {
       .maxLength(255)
       .matches(/^[\x20-\x7F]+$/)
       .withMessage('Name can have ASCII characters only')
+      // microchip number
       .ensure<string>('microchipNo')
       .displayName('Microchip #')
       .maxLength(15)
       .minLength(9)
       .matches(/^[0-9a-zA-Z]+$/)
       .withMessage('${$displayName} can have alphanumeric characters only')
-      //
+      .then()
+      .satisfies(microchipNo => isUniqueMicrochipNo(microchipNo, this.api))
+      .withMessage('${$displayName} already exists')
+      // gender
       .ensure<string>('gender')
       .required()
       .withMessage('${$displayName} must be selected')
-      //
+      // date of birth
       .ensure<string>('dob')
       .displayName('Date of birth')
       .satisfies(dob => Date.parse(dob) <= Date.now())
       .when(dog => !!dog.dob)
       .withMessage('${$displayName} must be before or on today')
-      //
+      // image file
       .ensure<File[]>('imageFiles')
       .displayName('Image')
       .satisfies(imageFiles => imageFiles[0].size <= 10_000_000)
@@ -206,10 +227,14 @@ export class NewDog {
       .satisfies(imageFiles => imageFiles[0].type.split('/')[0] === 'image')
       .when(dog => dog.imageFiles.length > 0)
       .withMessage('${$displayName} must be an image file (eg: png, jpeg)')
-      .ensure<string>('breed')
-      .maxLength(255)
-      .matches(/^[a-zA-Z ]+$/)
-      .withMessage('${$displayName} can contain alphabet characters only')
-      .on(this);
+      .on(this.dog);
+  }
+
+  private async fetchBreeds() {
+    try {
+      this.breeds = await this.api.service('breeds').all();
+    } catch (error) {
+      this.errors.push(new ApiError(error));
+    }
   }
 }

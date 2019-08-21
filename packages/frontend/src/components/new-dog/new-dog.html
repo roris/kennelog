@@ -33,6 +33,7 @@
         aria-describedby="microchipDesc"
         value.bind="dog.microchipNo & validate"
         maxlength="15"
+        minlength="9"
       />
       <small class="form-text text-muted" id="microchipDesc">
         Laws in some places require dogs to be microchipped. If yours does not have a microchip yet, you can leave this
@@ -101,17 +102,16 @@
 
     <div class="form-group col-6 mx-auto" validation-errors.bind="breedErrors">
       <label for="breedInput">Breed</label>
-      <input
-        type="text"
-        class="form-control"
-        class.bind="breedErrors.length ? 'is-invalid' : ''"
-        id="breedInput"
-        value.bind="dog.breed & validate"
-        maxlength="255"
-        placeholder="eg: Golden Retriever"
-      />
+
+      <select class="custom-select" value.bind="breedFilter">
+        <option model.bind="null">Choose...</option>
+        <option repeat.for="breed of breeds" model.bind="breed.id">${breed.name}</option>
+      </select>
+
       <div class="pt-2">
-        <button class="btn btn-secondary" role="button" disabled.bind="!hasImage">Classify using the image</button>
+        <button class="btn btn-secondary" role="button" disabled.bind="!hasImage" click.delegate="classify()">
+          Classify using the image
+        </button>
       </div>
       <ul class="invalid-feedback" if.bind="breedErrors.length > 0">
         <li repeat.for="errorInfo of breedErrors">
