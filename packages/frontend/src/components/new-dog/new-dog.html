@@ -101,9 +101,9 @@
     </div>
 
     <div class="form-group col-6 mx-auto" validation-errors.bind="breedErrors">
-      <label for="breedInput">Breed</label>
+      <label for="breedSelect">Breed</label>
 
-      <select class="custom-select" value.bind="breedFilter">
+      <select id="breedSelect" class="custom-select" value.bind="breedFilter">
         <option model.bind="null">Choose...</option>
         <option repeat.for="breed of breeds" model.bind="breed.id">${breed.name}</option>
       </select>
