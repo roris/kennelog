@@ -108,73 +108,65 @@ export class NewDog {
     this.submitting = true;
 
     try {
-      // create the blob first
-      if (this.canClassify) {
-        const reader = new FileReader();
-
-        reader.addEventListener(
-          'load',
-          () => {
-            this.sendToServer(reader.result)
-              .then(() => {})
-              .catch(() => {});
-          },
-          false
-        );
-
-        reader.readAsDataURL(this.imageFile);
-      } else {
-        await this.sendToServer();
-      }
-    } catch (error) {}
-  }
-
-  async sendToServer(uri?): Promise<void> {
-    try {
-      let upload;
-      const blobsService = this.api.service('blobs');
-      const uploadsService = this.api.service('uploads');
-
-      if (uri) {
-        const blob = await blobsService.create({ uri: uri });
-        upload = await uploadsService.create({ path: blob.id });
-      }
-      const payload: any = {};
-      payload.gender = this.dog.gender;
-
-      if (this.dog.name) {
-        payload.name = this.dog.name;
-      }
-
-      if (this.dog.breed) {
-        payload.breedId = this.dog.breed;
-      }
-
-      if (this.dog.dob) {
-        payload.dateOfBirth = this.dog.dob;
-      }
-
-      if (this.dog.microchipNo) {
-        payload.microchipNo = this.dog.microchipNo;
-      }
-
-      if (this.isBreeder) {
-        payload.breederId = this.state.user.id;
-      }
-
-      if (this.isOwner) {
-        payload.ownerId = this.state.user.id;
-      }
-
-      if (upload) {
-        payload.pictureId = upload.id;
-      }
-
-      const dogsService = this.api.service('dogs');
-      await dogsService.create(payload);
-    } catch (error) {}
+      const uploadedPicture = await this.sendImageToServer();
+      const payload = this.createPayload(uploadedPicture);
+      await this.api.service('dogs').create(payload);
+      // success
+    } catch (error) {
+      // show it to the user
+    }
 
     this.submitting = false;
+  }
+
+  private async sendImageToServer() {
+    if (!this.dog.imageFile) {
+      // nothing to send
+      return undefined;
+    }
+
+    try {
+      const uri = document.getElementById('imagePreview')!.getAttribute('src');
+      const blob = await this.api.service('blobs').create({ uri: uri });
+      return this.api.service('uploads').create({ path: blob.id });
+    } catch (error) {
+      //
+    }
+  }
+
+  private createPayload(uploadedPicture?) {
+    const payload: any = {};
+    payload.gender = this.dog.gender;
+
+    if (this.dog.name) {
+      payload.name = this.dog.name;
+    }
+
+    if (this.dog.dob) {
+      payload.dateOfBirth = this.dog.dob;
+    }
+
+    if (this.dog.microchipNo) {
+      payload.microchipNo = this.dog.microchipNo;
+    }
+
+    if (this.dog.breed) {
+      payload.breedId = this.breeds[this.dog.breed].id;
+    }
+
+    if (this.isBreeder) {
+      payload.breederId = this.state.user.id;
+    }
+
+    if (this.isOwner) {
+      payload.ownerId = this.state.user.id;
+    }
+
+    if (uploadedPicture) {
+      payload.pictureId = uploadedPicture.id;
+    }
+
+    return payload;
   }
 
   canActivate(): boolean | Redirect {
