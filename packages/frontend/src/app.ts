@@ -95,8 +95,10 @@ export class App {
         // remove the stored keys when feathers-jwt was also deleted,
         // or if the token expired(?)
         if (error.code === 401) {
+          this.viewModelState.onLogout(this.store);
           storedState.authenticated = false;
-          localStorage.setItem('kennelog-store', storedState);
+          storedState.user = {};
+          localStorage.setItem('kennelog-store', JSON.stringify(storedState));
         }
       }
     }
