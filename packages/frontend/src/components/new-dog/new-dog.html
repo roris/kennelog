@@ -94,7 +94,8 @@
             src="https://via.placeholder.com/224x224?text=Preview"
           />
         </div>
-        <small if.bind="!hasImage" class="text-muted">The image you select will replace the one above</small>
+        <small if.bind="!canClassify" class="text-muted">The image you select will replace the one above</small>
+        <small if.bind="canClassify" class="text-muted">Click the classify button below to identify the breed.</small>
       </div>
       <input
         type="file"
@@ -102,7 +103,8 @@
         class="form-control-file"
         class.bind="imageFilesErrors.length > 0 ? 'is-invalid' : ''"
         id="imageFileInput"
-        files.bind="dog.imageFiles & validate"
+        files.bind="dog.imageFile & validate"
+        change.delegate="onImageFileChanged($event)"
       />
       <ul class="invalid-feedback" if.bind="imageFilesErrors.length > 0">
         <li repeat.for="errorInfo of imageFilesErrors">
@@ -120,7 +122,7 @@
       </select>
 
       <div class="pt-2">
-        <button class="btn btn-secondary" role="button" disabled.bind="!hasImage" click.delegate="classify()">
+        <button class="btn btn-secondary" role="button" disabled.bind="!canClassify" click.delegate="classify()">
           Classify using the image
         </button>
       </div>

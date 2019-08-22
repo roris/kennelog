@@ -20,15 +20,11 @@ class Dog {
 
   dob: string = '';
 
+  imageFile;
+
   gender: string = '';
 
-  imageFiles: File[] = [];
-
   breed: string = '';
-
-  get hasImage(): boolean {
-    return this.imageFiles.length > 0;
-  }
 }
 
 const isUniqueMicrochipNo = async (microchipNo: string, api: WebApi) => {
@@ -45,6 +41,8 @@ export class NewDog {
   controller: ValidationController;
 
   dog: Dog = new Dog();
+
+  canClassify: boolean = false;
 
   isBreeder: boolean = true;
 
@@ -111,7 +109,7 @@ export class NewDog {
 
     try {
       // create the blob first
-      if (this.dog.hasImage) {
+      if (this.canClassify) {
         const reader = new FileReader();
 
         reader.addEventListener(
@@ -124,7 +122,7 @@ export class NewDog {
           false
         );
 
-        reader.readAsDataURL(this.dog.imageFiles[0]);
+        reader.readAsDataURL(this.imageFile);
       } else {
         await this.sendToServer();
       }
@@ -191,6 +189,32 @@ export class NewDog {
     this.fetchBreeds();
   }
 
+  // Binding engine is broken for files
+  // ref: https://github.com/aurelia/binding/issues/314
+  onImageFileChanged(event) {
+    const reader = new FileReader();
+    this.canClassify = false;
+    this.dog.imageFile = event.target.files[0];
+
+    reader.onload = () => {
+      const uri =
+        typeof reader.result === 'string'
+          ? reader.result
+          : 'https://via.placeholder.com/224x224?text=Preview';
+      const img = document.getElementById('imagePreview')!;
+
+      // Enable the classify button if there is a file, which should
+      // almost always be true
+      img.onload = () => {
+        this.canClassify = !!this.dog.imageFile;
+      };
+
+      img.setAttribute('src', uri);
+    };
+
+    reader.readAsDataURL(this.dog.imageFile);
+  }
+
   setupValidation() {
     ValidationRules.ensure<Dog, string>('name')
       .maxLength(255)
@@ -217,15 +241,15 @@ export class NewDog {
       .when(dog => !!dog.dob)
       .withMessage('${$displayName} must be before or on today')
       // image file
-      .ensure<File[]>('imageFiles')
+      .ensure<File>('imageFile')
       .displayName('Image')
-      .satisfies(imageFiles => imageFiles[0].size <= 10_000_000)
-      .when(dog => dog.imageFiles.length > 0)
+      .satisfies(imageFile => imageFile.size <= 10_000_000)
+      .when(dog => dog.imageFile)
       .withMessage(
         '${$displayName} file size must be smaller or equal to 10 MB'
       )
-      .satisfies(imageFiles => imageFiles[0].type.split('/')[0] === 'image')
-      .when(dog => dog.imageFiles.length > 0)
+      .satisfies(imageFiles => imageFiles.type.split('/')[0] === 'image')
+      .when(dog => dog.imageFile)
       .withMessage('${$displayName} must be an image file (eg: png, jpeg)')
       .on(this.dog);
   }
