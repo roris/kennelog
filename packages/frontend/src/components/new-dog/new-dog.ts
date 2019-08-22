@@ -92,7 +92,7 @@ export class NewDog {
     return moment().format('YYYY-MM-DD');
   }
 
-  async classfiy() {
+  async classify() {
     // TODO
   }
 
