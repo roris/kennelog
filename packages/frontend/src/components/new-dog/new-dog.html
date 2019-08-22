@@ -85,17 +85,21 @@
 
     <div class="form-group col-6 mx-auto" validation-errors.bind="imageFilesErrors">
       <label for="imageFileInput">Image</label>
-      <div class="mb-2">
-        <div>
-          <img
-            id="imagePreview"
-            class="img-thumbnail"
-            style="max-height: 224px; max-width: 224px;"
-            src="https://via.placeholder.com/224x224?text=Preview"
-          />
+      <div>
+        <div class.bind="canClassify ? '' : 'd-none'" style="width: 200px">
+          <img id="imagePreview" class="img-thumbnail d-block w-100" style="height: auto;" alt="Image of your dog" />
         </div>
-        <small if.bind="!canClassify" class="text-muted">The image you select will replace the one above</small>
-        <small if.bind="canClassify" class="text-muted">Click the classify button below to identify the breed.</small>
+        <div if.bind="!canClassify">
+          <span class="fa fa-image img-thumbnail" style="font-size: 200px"></span>
+        </div>
+        <p>
+          <small if.bind="!canClassify" class="text-muted">
+            Browse and select an image of your dog. The image you select will appear above.
+          </small>
+          <small if.bind="canClassify" class="text-muted">
+            The <strong>Classify breed</strong> button below can now be used to identify the dog's breed.
+          </small>
+        </p>
       </div>
       <input
         type="file"
@@ -106,6 +110,12 @@
         files.bind="dog.imageFile & validate"
         change.delegate="onImageFileChanged($event)"
       />
+      <div class="pt-2">
+        <button class="btn btn-secondary" role="button" disabled.bind="!canClassify" click.delegate="classify()">
+          Classify breed
+        </button>
+      </div>
+
       <ul class="invalid-feedback" if.bind="imageFilesErrors.length > 0">
         <li repeat.for="errorInfo of imageFilesErrors">
           ${errorInfo.error.message}
@@ -116,16 +126,11 @@
     <div class="form-group col-6 mx-auto" validation-errors.bind="breedErrors">
       <label for="breedSelect">Breed</label>
 
-      <select id="breedSelect" class="custom-select" value.bind="breedFilter">
+      <select id="breedSelect" class="custom-select d-block" value.bind="breedFilter">
         <option model.bind="null">Choose...</option>
         <option repeat.for="breed of breeds" model.bind="breed.id">${breed.name}</option>
       </select>
 
-      <div class="pt-2">
-        <button class="btn btn-secondary" role="button" disabled.bind="!canClassify" click.delegate="classify()">
-          Classify using the image
-        </button>
-      </div>
       <ul class="invalid-feedback" if.bind="breedErrors.length > 0">
         <li repeat.for="errorInfo of breedErrors">
           ${errorInfo.error.message}
