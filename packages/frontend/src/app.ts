@@ -80,13 +80,6 @@ export class App {
     this.subscription.unsubscribe();
   }
 
-  async login() {
-    // update viewModelState if authentication was successful
-    const response = await this.api.login();
-    const user = response.user;
-    this.viewModelState.onLogin(this.store, user);
-  }
-
   async activate(): Promise<void> {
     // @ts-ignore
     const storedState = JSON.parse(localStorage.getItem('kennelog-store'));
@@ -96,7 +89,8 @@ export class App {
 
     if (storedState.authenticated) {
       try {
-        this.login();
+        const { user } = await this.api.login();
+        this.viewModelState.onLogin(this.store, user);
       } catch (error) {
         // remove the stored keys when feathers-jwt was also deleted,
         // or if the token expired(?)
