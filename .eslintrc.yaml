@@ -57,9 +57,8 @@ rules:
     - max: 25
       skipBlankLines: true
       skipComments: true
-
   # make nesting stricter
-  max-nested-callbacks:
+  max-depth:
     - error
     - 3
 
