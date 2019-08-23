@@ -9,7 +9,7 @@
     "bootstrap": "lerna bootstrap --use-workspaces",
     "build": "lerna run --parallel --no-bail build",
     "check-types": "lerna exec --no-bail -- tsc",
-    "lint": "eslint . --format=codeframe --cache --ext .js,.ts",
+    "lint": "eslint . --cache --ext .js,.ts",
     "migrate": "lerna run migrate-latest --scope=kennelog-backend --",
     "seed": "lerna run seed --scope=kennelog-backend --",
     "start": "lerna run --parallel start",
@@ -44,6 +44,7 @@
     "jest": "^24.9.0",
     "jest-transform-stub": "^2.0.0",
     "lerna": "^3.16.4",
+    "lint-staged": "^9.2.3",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
     "ts-jest": "^24.0.2",
@@ -51,7 +52,17 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{html,md,yaml,yml,css,json,json5}": [
+      "pretty-quick",
+      "git add"
+    ]
   }
 }
