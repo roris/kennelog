@@ -25,6 +25,8 @@ checks:
     enabled: true
     config:
       threshold: 4
+  # appears to cause problem for hooks, which do have similar code structures with
+  # different variables
   similar-code:
     enabled: true
   identical-code:
@@ -36,7 +38,13 @@ exclude_patterns:
   - '**/seeds/*'
   - '**/migrations/*'
   - '**/aurelia_project/*'
+  # models have long methods that create objects in-place
   - '**/*.model.*'
+  # service/hook files have identical code blocks
   - '**/*.hooks.*'
+  # services all have identical code for most of the content
+  - '**/*.service.*'
+  # hooks have similar structures
+  - '**/hooks/*'
   - '**/*.config.js'
   - '**/webpack.config.babel.js'
