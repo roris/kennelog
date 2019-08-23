@@ -13,7 +13,7 @@
     "migrate": "lerna run migrate-latest --scope=kennelog-backend --",
     "seed": "lerna run seed --scope=kennelog-backend --",
     "start": "lerna run --parallel start",
-    "test": "lerna exec  --no-bail -- jest --forceExit --detectOpenHandles --colors"
+    "test": "lerna exec --no-bail -- jest --forceExit --detectOpenHandles --colors"
   },
   "dependencies": {
     "title-case": "^2.1.1"
