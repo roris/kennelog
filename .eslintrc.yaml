@@ -1,0 +1,85 @@
+---
+root: true
+extends:
+  # import sonar here?
+  - eslint:recommended
+  - standard
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/recommended-requiring-type-checking
+  # add sonar
+  - plugin:jest/recommended
+  # prettier is always kept for last
+  - plugin:prettier/recommended
+  - prettier/standard
+  - prettier/@typescript-eslint
+parserOptions:
+  ecmaVersion: 2019
+  sourceType: module
+  project: ./tsconfig.json
+parser: '@typescript-eslint/parser'
+env:
+  node: true
+plugins:
+  - '@typescript-eslint'
+  - jest
+  - prettier
+rules:
+  # enforce prettier
+  prettier/prettier: error
+  # allow declaring class members without access specifiers
+  '@typescript-eslint/explicit-member-accessibility':
+    - off
+  # allow function type inference
+  '@typescript-eslint/explicit-function-return-type':
+    - off
+  # allow explicit any
+  '@typescript-eslint/no-explicit-any':
+    - off
+  # warn about var requires (objection needs this)
+  '@typescript-eslint/no-var-requires':
+    - warn
+  prefer-arrow-callback:
+    - error
+  # Quality improvements: CodeClimate defaults
+  # Set to warn for now
+  complexity:
+    - error
+    - 5
+  max-lines:
+    - error
+    - 250
+  max-params:
+    - warn
+    - 4
+  max-lines-per-function:
+    - error
+    - max: 25
+      skipBlankLines: true
+      skipComments: true
+
+  # make nesting stricter
+  max-nested-callbacks:
+    - error
+    - 3
+
+overrides:
+  - files:
+      - packages/frontend/src/components/**/*.ts
+    rules:
+      no-template-curly-in-string: 'off'
+  # common rule breakers
+  - files:
+      - '**/*.config.*js'
+      - '**/*.config.babel.js'
+      - '**/seeds/**'
+      - '**/migrations/**'
+      - '**/test/*'
+      - '**/*.model.ts'
+    rules:
+      complexity:
+        - warn
+      max-lines:
+        - warn
+      max-lines-per-function:
+        - warn
