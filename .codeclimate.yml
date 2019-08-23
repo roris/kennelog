@@ -37,3 +37,6 @@ exclude_patterns:
   - '**/migrations/*'
   - '**/aurelia_project/*'
   - '**/*.model.*'
+  - '**/*.hooks.*'
+  - '**/*.config.js'
+  - '**/webpack.config.babel.js'
