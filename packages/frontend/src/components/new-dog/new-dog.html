@@ -86,17 +86,17 @@
     <div class="form-group col-6 mx-auto" validation-errors.bind="imageFilesErrors">
       <label for="imageFileInput">Image</label>
       <div>
-        <div class.bind="canClassify ? '' : 'd-none'" style="width: 200px">
+        <div class.bind="hasImage ? '' : 'd-none'" style="width: 224px;">
           <img id="imagePreview" class="img-thumbnail d-block w-100" style="height: auto;" alt="Image of your dog" />
         </div>
-        <div if.bind="!canClassify">
-          <span class="fa fa-image img-thumbnail" style="font-size: 200px"></span>
+        <div if.bind="!hasImage">
+          <span class="fa fa-image img-thumbnail" style="font-size: 224px;"></span>
         </div>
         <p>
-          <small if.bind="!canClassify" class="text-muted">
+          <small if.bind="!hasImage" class="text-muted">
             Browse and select an image of your dog. The image you select will appear above.
           </small>
-          <small if.bind="canClassify" class="text-muted">
+          <small if.bind="hasImage" class="text-muted">
             The <strong>Classify breed</strong> button below can now be used to identify the dog's breed.
           </small>
         </p>

@@ -19,8 +19,6 @@
     "@feathersjs/authentication-client": "^4.0.0-pre",
     "@feathersjs/feathers": "^4.3.0-pre.3",
     "@feathersjs/socketio-client": "^4.0.0-pre",
-    "@tensorflow-models/mobilenet": "^2.0.3",
-    "@tensorflow/tfjs": "^1.2.7",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.2",
     "aurelia-store": "^1.4.0",

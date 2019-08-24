@@ -11,6 +11,10 @@ export class Service {
     return this.service.create(data, params);
   }
 
+  async get(id, params?: Params) {
+    return this.service.get(id, params);
+  }
+
   async find(params?: Params) {
     return this.service.find(params);
   }

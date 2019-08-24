@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { inject } from 'aurelia-dependency-injection';
 import { Redirect, Router } from 'aurelia-router';
 import {
@@ -14,24 +15,24 @@ import { WebApi } from '../../shared/web-api';
 import { ApiError } from '../../util/api-error';
 
 class Dog {
-  name: string = '';
+  name = '';
 
-  microchipNo: string = '';
+  microchipNo = '';
 
-  dob: string = '';
+  dob = '';
 
   imageFile;
 
-  gender: string = '';
+  gender = '';
 
-  breed: string = '';
+  breed = '';
 }
 
 const isUniqueMicrochipNo = async (microchipNo: string, api: WebApi) => {
   const total = await api
     .service('dogs')
     .count({ query: { microchipNo: microchipNo } });
-  return total == 0;
+  return total === 0;
 };
 
 @inject(ControllerFactory, Router, State, Validator, WebApi)
@@ -42,17 +43,19 @@ export class NewDog {
 
   dog: Dog = new Dog();
 
-  canClassify: boolean = false;
+  hasImage = false;
 
-  isBreeder: boolean = true;
+  isBreeder = true;
 
-  isOwner: boolean = true;
+  isClassifying = false;
 
-  submitting: boolean = false;
+  isOwner = true;
 
-  valid: boolean = false;
+  submitting = false;
 
-  validated: boolean = false;
+  valid = false;
+
+  validated = false;
 
   router: Router;
 
@@ -64,6 +67,7 @@ export class NewDog {
 
   errors: ApiError[] = [];
 
+  /* eslint-disable max-params */
   constructor(
     controllerFactory: ControllerFactory,
     router: Router,
@@ -81,6 +85,7 @@ export class NewDog {
     this.state = state;
     this.validator = validator;
   }
+  /* eslint-enable max-params */
 
   get canSubmit(): boolean {
     return !this.submitting && this.valid;
@@ -90,8 +95,21 @@ export class NewDog {
     return moment().format('YYYY-MM-DD');
   }
 
+  get canClassify() {
+    return this.hasImage && !this.isClassifying;
+  }
+
   async classify() {
-    // TODO
+    this.isClassifying = true;
+    const uri = document.getElementById('imagePreview').getAttribute('src');
+
+    try {
+      await this.api.service('classify').get(uri);
+    } catch {
+      // print to ui
+    }
+
+    this.isClassifying = false;
   }
 
   validateWhole(): void {
@@ -126,7 +144,7 @@ export class NewDog {
     }
 
     try {
-      const uri = document.getElementById('imagePreview')!.getAttribute('src');
+      const uri = document.getElementById('imagePreview').getAttribute('src');
       const blob = await this.api.service('blobs').create({ uri: uri });
       return this.api.service('uploads').create({ path: blob.id });
     } catch (error) {
@@ -134,6 +152,7 @@ export class NewDog {
     }
   }
 
+  /* eslint-disable max-lines-per-function, complexity */
   private createPayload(uploadedPicture?) {
     const payload: any = {};
     payload.gender = this.dog.gender;
@@ -168,6 +187,7 @@ export class NewDog {
 
     return payload;
   }
+  /* eslint-enable max-lines-per-function, complexity */
 
   canActivate(): boolean | Redirect {
     if (!this.state.authenticated) {
@@ -185,7 +205,7 @@ export class NewDog {
   // ref: https://github.com/aurelia/binding/issues/314
   onImageFileChanged(event) {
     const reader = new FileReader();
-    this.canClassify = false;
+    this.hasImage = false;
     this.dog.imageFile = event.target.files[0];
 
     reader.onload = () => {
@@ -193,12 +213,12 @@ export class NewDog {
         typeof reader.result === 'string'
           ? reader.result
           : 'https://via.placeholder.com/224x224?text=Preview';
-      const img = document.getElementById('imagePreview')!;
+      const img = document.getElementById('imagePreview');
 
       // Enable the classify button if there is a file, which should
       // almost always be true
       img.onload = () => {
-        this.canClassify = !!this.dog.imageFile;
+        this.hasImage = !!this.dog.imageFile;
       };
 
       img.setAttribute('src', uri);
@@ -207,6 +227,7 @@ export class NewDog {
     reader.readAsDataURL(this.dog.imageFile);
   }
 
+  /* eslint-disable max-lines-per-function */
   setupValidation() {
     ValidationRules.ensure<Dog, string>('name')
       .maxLength(255)
@@ -245,6 +266,7 @@ export class NewDog {
       .withMessage('${$displayName} must be an image file (eg: png, jpeg)')
       .on(this.dog);
   }
+  /* eslint-enable max-lines-per-function */
 
   private async fetchBreeds() {
     try {
