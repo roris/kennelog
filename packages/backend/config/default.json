@@ -40,5 +40,10 @@
     "connection": {
       "filename": "kennelog.sqlite3"
     }
+  },
+  "tfjsModel": {
+    "path": "",
+    "width": 0,
+    "height": 0
   }
 }

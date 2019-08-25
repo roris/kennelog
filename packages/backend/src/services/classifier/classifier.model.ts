@@ -21,15 +21,12 @@
 //    - predict() accepts a dataUri
 //    - rejects() with @feathersjs/errors on exceptions
 //    - uses node-canvas to process the image (tfjs/issues/1414)
+//    - load accepts the path, width and height as parameters
 
 import * as tf from '@tensorflow/tfjs';
 import { ImageNetClasses } from './imagenet-classes';
 import { Image, createCanvas } from 'canvas';
 import { BadRequest, GeneralError } from '@feathersjs/errors';
-
-const MOBILENET_MODEL_PATH =
-  'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
-const IMAGE_SIZE = 224;
 
 const getTopKClasses = async logits => {
   const values = await logits.data();
@@ -53,24 +50,33 @@ const getTopKClasses = async logits => {
 export class MobileNet {
   model: tf.LayersModel | null = null;
   loaded = false;
+  width;
+  height;
 
-  async load() {
-    this.model = await tf.loadLayersModel(MOBILENET_MODEL_PATH);
+  async load(path, width, height) {
+    if (!path || !width || !height) {
+      return;
+    }
+
+    this.model = await tf.loadLayersModel(path);
     this.loaded = true;
     // Warmup the model. This isn't necessary, but makes the first prediction
     // faster. Call `dispose` to release the WebGL memory allocated for the return
     // value of `predict`
-    this.model.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
+    this.model.predict(tf.zeros([1, width, height, 3])).dispose();
   }
 
   async predict(uri) {
     return new Promise((resolve, reject) => {
+      const width = this.width;
+      const height = this.height;
+
       // ref: https://github.com/tensorflow/tfjs/issues/1414
-      const canvas = createCanvas(IMAGE_SIZE, IMAGE_SIZE);
+      const canvas = createCanvas(width, height);
       const image = new Image();
       // the sizes need to be set for TensorFlow to process the image for some reason
-      image.width = IMAGE_SIZE;
-      image.height = IMAGE_SIZE;
+      image.width = width;
+      image.height = height;
 
       image.onload = async () => {
         try {
@@ -92,9 +98,11 @@ export class MobileNet {
   }
 
   private async predict_(image, canvas) {
+    const width = image.width;
+    const height = image.height;
     // draw the image so tf can process it
     const context = canvas.getContext('2d');
-    context.drawImage(image, 0, 0, IMAGE_SIZE, IMAGE_SIZE);
+    context.drawImage(image, 0, 0, width, height);
 
     // tf.browser.fromPixels() returns a Tensor from an image element.
     const img = tf.browser.fromPixels(canvas);
@@ -104,7 +112,7 @@ export class MobileNet {
     const normalized = img.sub(offset).div(offset);
 
     // Reshape to a single-element batch so we can pass it to predict.
-    const batched = normalized.reshape([1, IMAGE_SIZE, IMAGE_SIZE, 3]);
+    const batched = normalized.reshape([1, width, height, 3]);
     const logits = this.model.predict(batched);
     return getTopKClasses(logits);
   }
