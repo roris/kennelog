@@ -1,7 +1,9 @@
 import { RouteConfig } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
 
-const NewDogForm = PLATFORM.moduleName('./components/new-dog/new-dog');
+const NewDogForm = PLATFORM.moduleName(
+  './components/new-dog-form/new-dog-form'
+);
 const NewLitterForm = PLATFORM.moduleName('./components/new-litter/new-litter');
 const NewLitterFromPairForm = PLATFORM.moduleName(
   './components/new-litter-from-pair/new-litter-from-pair'
