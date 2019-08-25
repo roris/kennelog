@@ -1,8 +1,15 @@
 <template bindable="model">
   <div class="d-table col-12 w-100 py-4 border-bottom">
     <div class="d-table-cell col-2 col-lg-1 align-middle">
-      <img if.bind="model.avatar" class="img-thumbnail avatar" alt="" src="${model.avatar}" width="100" height="100" />
-      <div if.bind="!model.avatar">
+      <div style="width: 120px" if.bind="model.pictureUrl">
+        <img
+          class="img-thumbnail w-100"
+          alt="Picture of ${model.name}"
+          src="${model.pictureUrl}"
+          style="height: auto"
+        />
+      </div>
+      <div if.bind="!model.pictureUrl">
         <i class="fa fa-image img-thumbnail" style="font-size: 100px"></i>
         <small class="text-muted text-center"><i>No picture available</i></small>
       </div>
