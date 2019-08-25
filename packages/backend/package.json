@@ -15,7 +15,7 @@
     "node": ">=8.12.0"
   },
   "scripts": {
-    "build": "babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --no-comments",
+    "build": "babel src --out-dir dist --source-maps --extensions .ts,.js --delete-dir-on-start --no-comments",
     "make-migrate": "knex migrate:make -x ts",
     "migrate-latest": "knex migrate:latest",
     "migrate-up": "knex migrate:up",
@@ -33,6 +33,8 @@
     "@feathersjs/express": "^4.3.0-pre.3",
     "@feathersjs/feathers": "^4.3.0-pre.3",
     "@feathersjs/socketio": "^4.3.0-pre.3",
+    "@tensorflow/tfjs": "^1.2.8",
+    "canvas": "^2.6.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "feathers-blob": "^2.1.0",

@@ -4,5 +4,6 @@ const package = require('./package');
 module.exports = {
   ...base,
   name: package.name,
-  displayName: package.name
+  displayName: package.name,
+  transformIgnorePatterns: ['node_modules/?!@tensorflow/']
 };

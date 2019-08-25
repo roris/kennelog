@@ -33,6 +33,7 @@
         aria-describedby="microchipDesc"
         value.bind="dog.microchipNo & validate"
         maxlength="15"
+        minlength="9"
       />
       <small class="form-text text-muted" id="microchipDesc">
         Laws in some places require dogs to be microchipped. If yours does not have a microchip yet, you can leave this
@@ -84,14 +85,38 @@
 
     <div class="form-group col-6 mx-auto" validation-errors.bind="imageFilesErrors">
       <label for="imageFileInput">Image</label>
+      <div>
+        <div class.bind="hasImage ? '' : 'd-none'" style="width: 224px;">
+          <img id="imagePreview" class="img-thumbnail d-block w-100" style="height: auto;" alt="Image of your dog" />
+        </div>
+        <div if.bind="!hasImage">
+          <span class="fa fa-image img-thumbnail" style="font-size: 224px;"></span>
+        </div>
+        <p>
+          <small if.bind="!hasImage" class="text-muted">
+            Browse and select an image of your dog. The image you select will appear above.
+          </small>
+          <small if.bind="hasImage" class="text-muted">
+            The <strong>Classify breed</strong> button below can now be used to identify the dog's breed.
+          </small>
+          <small if.bind="classifierError" class="text-danger">${classifierError.message}</small>
+        </p>
+      </div>
       <input
         type="file"
         accept="image/*"
         class="form-control-file"
         class.bind="imageFilesErrors.length > 0 ? 'is-invalid' : ''"
         id="imageFileInput"
-        files.bind="dog.imageFiles & validate"
+        files.bind="dog.imageFile & validate"
+        change.delegate="onImageFileChanged($event)"
       />
+      <div class="pt-2">
+        <button class="btn btn-secondary" role="button" disabled.bind="!canClassify" click.delegate="classify()">
+          Classify breed
+        </button>
+      </div>
+
       <ul class="invalid-feedback" if.bind="imageFilesErrors.length > 0">
         <li repeat.for="errorInfo of imageFilesErrors">
           ${errorInfo.error.message}
@@ -100,19 +125,13 @@
     </div>
 
     <div class="form-group col-6 mx-auto" validation-errors.bind="breedErrors">
-      <label for="breedInput">Breed</label>
-      <input
-        type="text"
-        class="form-control"
-        class.bind="breedErrors.length ? 'is-invalid' : ''"
-        id="breedInput"
-        value.bind="dog.breed & validate"
-        maxlength="255"
-        placeholder="eg: Golden Retriever"
-      />
-      <div class="pt-2">
-        <button class="btn btn-secondary" role="button" disabled.bind="!hasImage">Classify using the image</button>
-      </div>
+      <label for="breedSelect">Breed</label>
+
+      <select id="breedSelect" class="custom-select d-block" value.bind="dog.breed">
+        <option model.bind="null">Choose...</option>
+        <option repeat.for="breed of breeds" model.bind="breed.id">${breed.name}</option>
+      </select>
+
       <ul class="invalid-feedback" if.bind="breedErrors.length > 0">
         <li repeat.for="errorInfo of breedErrors">
           ${errorInfo.error.message}
@@ -140,6 +159,20 @@
   <div class="form-group col-6 mx-auto border-top pt-4 pl-3">
     <button class="btn btn-success" type="submit" disabled.bind="!canSubmit" click.delegate="submit()">
       Add dog
+    </button>
+  </div>
+
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" repeat.for="error of errors">
+    <strong>${error.code} ${error.name}: </strong>${error.message}
+    <button
+      type="button"
+      id="alert${$index}"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close"
+      click.delegate="removeError($index, error)"
+    >
+      <span aria-hidden="true">&times;</span>
     </button>
   </div>
 </template>
