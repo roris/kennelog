@@ -58,6 +58,8 @@ export class MobileNet {
       return;
     }
 
+    this.width = width;
+    this.height = height;
     this.model = await tf.loadLayersModel(path);
     this.loaded = true;
     // Warmup the model. This isn't necessary, but makes the first prediction
@@ -98,8 +100,8 @@ export class MobileNet {
   }
 
   private async predict_(image, canvas) {
-    const width = image.width;
-    const height = image.height;
+    const width = this.width;
+    const height = this.height;
     // draw the image so tf can process it
     const context = canvas.getContext('2d');
     context.drawImage(image, 0, 0, width, height);

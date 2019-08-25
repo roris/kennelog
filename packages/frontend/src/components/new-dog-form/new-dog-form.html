@@ -99,6 +99,7 @@
           <small if.bind="hasImage" class="text-muted">
             The <strong>Classify breed</strong> button below can now be used to identify the dog's breed.
           </small>
+          <small if.bind="classifierError" class="text-danger">${classifierError.message}</small>
         </p>
       </div>
       <input
@@ -126,7 +127,7 @@
     <div class="form-group col-6 mx-auto" validation-errors.bind="breedErrors">
       <label for="breedSelect">Breed</label>
 
-      <select id="breedSelect" class="custom-select d-block" value.bind="breedFilter">
+      <select id="breedSelect" class="custom-select d-block" value.bind="dog.breed">
         <option model.bind="null">Choose...</option>
         <option repeat.for="breed of breeds" model.bind="breed.id">${breed.name}</option>
       </select>
@@ -158,6 +159,20 @@
   <div class="form-group col-6 mx-auto border-top pt-4 pl-3">
     <button class="btn btn-success" type="submit" disabled.bind="!canSubmit" click.delegate="submit()">
       Add dog
+    </button>
+  </div>
+
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" repeat.for="error of errors">
+    <strong>${error.code} ${error.name}: </strong>${error.message}
+    <button
+      type="button"
+      id="alert${$index}"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close"
+      click.delegate="removeError($index, error)"
+    >
+      <span aria-hidden="true">&times;</span>
     </button>
   </div>
 </template>
