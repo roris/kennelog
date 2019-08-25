@@ -67,6 +67,8 @@ export class NewDog {
 
   errors: ApiError[] = [];
 
+  classifierError: Error;
+
   /* eslint-disable max-params */
   constructor(
     controllerFactory: ControllerFactory,
@@ -104,9 +106,10 @@ export class NewDog {
     const uri = document.getElementById('imagePreview').getAttribute('src');
 
     try {
-      await this.api.service('classify').get(uri);
-    } catch {
-      // print to ui
+      const prediction = await this.api.service('classify').get(uri);
+      this.selectBreed(prediction.name);
+    } catch (error) {
+      this.classifierError = error;
     }
 
     this.isClassifying = false;
@@ -131,7 +134,7 @@ export class NewDog {
       await this.api.service('dogs').create(payload);
       // success
     } catch (error) {
-      // show it to the user
+      this.errors.push(new ApiError(error));
     }
 
     this.submitting = false;
@@ -148,7 +151,7 @@ export class NewDog {
       const blob = await this.api.service('blobs').create({ uri: uri });
       return this.api.service('uploads').create({ path: blob.id });
     } catch (error) {
-      //
+      this.errors.push(new ApiError(error));
     }
   }
 
@@ -170,7 +173,7 @@ export class NewDog {
     }
 
     if (this.dog.breed) {
-      payload.breedId = this.breeds[this.dog.breed].id;
+      payload.breedId = this.dog.breed;
     }
 
     if (this.isBreeder) {
@@ -207,6 +210,7 @@ export class NewDog {
     const reader = new FileReader();
     this.hasImage = false;
     this.dog.imageFile = event.target.files[0];
+    this.classifierError = null;
 
     reader.onload = () => {
       const uri =
@@ -273,6 +277,16 @@ export class NewDog {
       this.breeds = await this.api.service('breeds').all();
     } catch (error) {
       this.errors.push(new ApiError(error));
+    }
+  }
+
+  // find the
+  private selectBreed(name) {
+    const breed = this.breeds.filter(breed => breed.name === name);
+    if (!breed.length) {
+      this.classifierError = new Error("Could not classify the dog's breed");
+    } else {
+      this.dog.breed = breed[0].id;
     }
   }
 }
