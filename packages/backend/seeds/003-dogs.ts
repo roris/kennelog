@@ -1,6 +1,8 @@
 import * as Knex from 'knex';
 import { uniq, random } from 'lodash';
 import { getAllRecords } from './util/common';
+import { MaleDogNames } from './data/male-dog-names';
+import { FemaleDogNames } from './data/female-dog-names';
 
 const randomDate = (start, end = new Date()) => {
   return new Date(Math.ceil(random(start.getTime(), end.getTime(), false)))
@@ -8,11 +10,18 @@ const randomDate = (start, end = new Date()) => {
     .substr(0, 10);
 };
 
-const generateDog = (name, breed, user) => {
+const randomName = gender => {
+  const names = gender === 'M' ? MaleDogNames : FemaleDogNames;
+  const name = Math.random() < 0.5 ? names[random(0, names.length - 1)] : '';
+  return name;
+};
+
+const generateDog = (breed, user) => {
+  const gender = Math.random() > 0.5 ? 'M' : 'F';
   return {
-    name: name,
+    name: randomName(gender),
     dateOfBirth: randomDate(new Date('2001-01-01')),
-    gender: Math.random() > 0.5 ? 'M' : 'F',
+    gender: gender,
     ownerId: user,
     breederId: user,
     breedId: breed,
@@ -43,7 +52,6 @@ const generateDogs = (length, breeds, users) => {
     .fill(0)
     .map(() =>
       generateDog(
-        '',
         breeds[random(0, breeds.length - 1)].id,
         users[random(0, users.length - 1)].id
       )
@@ -61,6 +69,8 @@ export async function seed(knex: Knex): Promise<any> {
     .del()
     .then(async () => {
       // Inserts seed entries
-      return knex('dogs').insert(generateDogs(100, breeds, users));
+      return knex('dogs')
+        .insert(generateDogs(100, breeds, users))
+        .insert(generateDogs(100, breeds, users));
     });
 }
