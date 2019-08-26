@@ -11,32 +11,34 @@ export async function up(knex: Knex): Promise<any> {
       .inTable('measures')
       .onDelete('CASCADE');
     // Norberg angle
-    table.integer('na_l').notNullable();
-    table.integer('na_r').notNullable();
+    table.integer('norbergAngleLeft').notNullable();
+    table.integer('norbergAngleRight').notNullable();
     // subluxation
-    table.integer('s_l').notNullable();
-    table.integer('s_r').notNullable();
+    table.integer('subluxationLeft').notNullable();
+    table.integer('subluxationRight').notNullable();
     // cranial acetabular edge
-    table.integer('crae_l').notNullable();
-    table.integer('crae_r').notNullable();
+    table.integer('cranialAcetabularEdgeLeft').notNullable();
+    table.integer('cranialAcetabularEdgeRight').notNullable();
     // dorsal acetabular edge
-    table.integer('dae_l').notNullable();
-    table.integer('dae_r').notNullable();
+    table.integer('dorsalAcetabularEdgeLeft').notNullable();
+    table.integer('dorsalAcetabularEdgeRight').notNullable();
     // cranial effective acetabular rim
-    table.integer('craer_l').notNullable();
-    table.integer('craer_r').notNullable();
+    table.integer('cranialEffectiveAcetabularRimLeft').notNullable();
+    table.integer('cranialEffectiveAcetabularRimRight').notNullable();
     // acetabular fossa
-    table.integer('af_l').notNullable();
-    table.integer('af_r').notNullable();
+    table.integer('acetabularFossaLeft').notNullable();
+    table.integer('acetabularFossaRight').notNullable();
     // caudal acetabular edge
-    table.integer('cdae_l').notNullable();
-    table.integer('cdae_r').notNullable();
+    table.integer('caudalAcetabularEdgeLeft').notNullable();
+    table.integer('caudalAcetabularEdgeRight').notNullable();
     // femoral head/neck exostosis
-    table.integer('fhne_l').notNullable();
-    table.integer('fhne_r').notNullable();
+    table.integer('femoralHeadNeckExostosisLeft').notNullable();
+    table.integer('femoralHeadNeckExostosisRight').notNullable();
     // femoral head recontouring
-    table.integer('fhrc_l').notNullable();
-    table.integer('fhrc_r').notNullable();
+    table.integer('femoralHeadRecontouringLeft').notNullable();
+    table.integer('femoralHeadRecontouringRight').notNullable();
+    // total score
+    table.integer('totalScore').notNullable();
   });
 }
 
