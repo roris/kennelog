@@ -5,10 +5,10 @@
     </div>
 
     <div class="form-group">
-      <label for="sireChipNo">Sire #</label>
+      <label for="input-sire-id">Sire #</label>
       <div class="form-row">
         <div class="col-6">
-          <input class="form-control" value.bind="sireId" />
+          <input id="input-sire-id" class="form-control" value.bind="sireId" />
         </div>
         <button class="btn btn-secondary mr-2" click.delegate="fetchSire()" disabled.bind="!hasSireName">Search</button>
         <button class="btn btn-secondary" click.delegate="suggestSire()">Suggest</button>
@@ -20,10 +20,10 @@
     </div>
 
     <div class="form-group">
-      <label for="dameChipNo">Dame #</label>
+      <label for="input-dame-id">Dame #</label>
       <div class="form-row">
         <div class="col-6">
-          <input class="form-control" value.bind="dameId" />
+          <input id="input-dame-id" class="form-control" value.bind="dameId" />
         </div>
         <button class="btn btn-secondary mr-2" click.delegate="fetchDame()" disabled.bind="!hasDameName">Search</button>
         <button class="btn btn-secondary" click.delegate="suggestDame()">Suggest</button>
@@ -35,11 +35,11 @@
     </div>
 
     <div class="form-group">
-      <label for="datePairedOn">Date paired on</label>
+      <label for="input-paired-on">Date paired on</label>
       <input
         type="date"
         class="form-control col-6"
-        id="datePairedOn"
+        id="input-paired-on"
         max.bind="maxPairedOnDate"
         value.bind="pairedOnDate"
       />
