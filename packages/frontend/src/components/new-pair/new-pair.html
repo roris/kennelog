@@ -10,7 +10,9 @@
         <div class="col-6">
           <input id="input-sire-id" class="form-control" value.bind="sireId" />
         </div>
-        <button class="btn btn-secondary mr-2" click.delegate="fetchSire()" disabled.bind="!hasSireName">Search</button>
+        <button class="btn btn-secondary mr-2" click.delegate="fetchSire()" disabled.bind="!canSearchSire">
+          Search
+        </button>
         <button class="btn btn-secondary" click.delegate="suggestSire()">Suggest</button>
       </div>
       <small class="text-muted">
@@ -25,7 +27,9 @@
         <div class="col-6">
           <input id="input-dame-id" class="form-control" value.bind="dameId" />
         </div>
-        <button class="btn btn-secondary mr-2" click.delegate="fetchDame()" disabled.bind="!hasDameName">Search</button>
+        <button class="btn btn-secondary mr-2" click.delegate="fetchDame()" disabled.bind="!canSearchDame">
+          Search
+        </button>
         <button class="btn btn-secondary" click.delegate="suggestDame()">Suggest</button>
       </div>
       <small class="text-muted">

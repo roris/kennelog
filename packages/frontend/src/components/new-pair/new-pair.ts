@@ -45,7 +45,7 @@ export class NewPair {
     return !!this.dameId && !isNaN(Number(this.dameId));
   }
 
-  get hasSireName() {
+  get canSearchSire() {
     return (
       this.sireId &&
       typeof this.sireId === 'string' &&
@@ -54,7 +54,7 @@ export class NewPair {
     );
   }
 
-  get hasDameName() {
+  get canSearchDame() {
     return (
       this.dameId &&
       typeof this.dameId === 'string' &&
