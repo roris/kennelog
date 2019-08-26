@@ -35,7 +35,7 @@
     </div>
 
     <div class="col-12 d-flex w-100 py-4" if.bind="(!pairs || pairs.length === 0)">
-      <span if.bind="!breedFilter"> No pairs found. <a route-href="route: new-dog;">Create a new pair.</a> </span>
+      <span if.bind="!breedFilter"> No pairs found. <a route-href="route: new-pair;">Create a new pair.</a> </span>
       <span if.bind="breedFilter">
         No pairs that satisfy the given criteria were found.
       </span>
