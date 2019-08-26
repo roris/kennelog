@@ -2,39 +2,61 @@ import * as Knex from 'knex';
 import { insertMeasures, mergeIdAndData } from './util/common';
 import { random } from 'lodash';
 
+const sumHipScore = hipScore => {
+  hipScore.totalScore = 0;
+  hipScore.totalScore += hipScore.norbergAngleLeft;
+  hipScore.totalScore += hipScore.norbergAngleRight;
+  hipScore.totalScore += hipScore.subluxationLeft;
+  hipScore.totalScore += hipScore.subluxationRight;
+  hipScore.totalScore += hipScore.cranialAcetabularEdgeLeft;
+  hipScore.totalScore += hipScore.cranialAcetabularEdgeRight;
+  hipScore.totalScore += hipScore.dorsalAcetabularEdgeLeft;
+  hipScore.totalScore += hipScore.dorsalAcetabularEdgeRight;
+  hipScore.totalScore += hipScore.acetabularFossaLeft;
+  hipScore.totalScore += hipScore.acetabularFossaRight;
+  hipScore.totalScore += hipScore.caudalAcetabularEdgeLeft;
+  hipScore.totalScore += hipScore.caudalAcetabularEdgeRight;
+  hipScore.totalScore += hipScore.femoralHeadNeckExostosisLeft;
+  hipScore.totalScore += hipScore.femoralHeadNeckExostosisRight;
+  hipScore.totalScore += hipScore.femoralHeadRecontouringLeft;
+  hipScore.totalScore += hipScore.femoralHeadRecontouringRight;
+  return hipScore;
+};
+
 const generateHipScores = amount => {
   return Array(amount)
     .fill({})
     .map(hipScore => {
       return {
-        na_l: random(0, 6),
-        na_r: random(0, 6),
+        norbergAngleLeft: random(0, 6),
+        norbergAngleRight: random(0, 6),
         // subluxation
-        s_l: random(0, 6),
-        s_r: random(0, 6),
+        subluxationLeft: random(0, 6),
+        subluxationRight: random(0, 6),
         // cranial acetabular edge
-        crae_l: random(0, 6),
-        crae_r: random(0, 6),
+        cranialAcetabularEdgeLeft: random(0, 6),
+        cranialAcetabularEdgeRight: random(0, 6),
         // dorsal acetabular edge
-        dae_l: random(0, 6),
-        dae_r: random(0, 6),
+        dorsalAcetabularEdgeLeft: random(0, 6),
+        dorsalAcetabularEdgeRight: random(0, 6),
         // cranial effective acetabular rim
-        craer_l: random(0, 6),
-        craer_r: random(0, 6),
+        cranialEffectiveAcetabularRimLeft: random(0, 6),
+        cranialEffectiveAcetabularRimRight: random(0, 6),
         // acetabular fossa
-        af_l: random(0, 6),
-        af_r: random(0, 6),
+        acetabularFossaLeft: random(0, 6),
+        acetabularFossaRight: random(0, 6),
         // caudal acetabular edge
-        cdae_l: random(0, 6),
-        cdae_r: random(0, 6),
+        caudalAcetabularEdgeLeft: random(0, 6),
+        caudalAcetabularEdgeRight: random(0, 6),
         // femoral head/neck exostosis
-        fhne_l: random(0, 6),
-        fhne_r: random(0, 6),
+        femoralHeadNeckExostosisLeft: random(0, 6),
+        femoralHeadNeckExostosisRight: random(0, 6),
         // femoral head recontouring
-        fhrc_l: random(0, 6),
-        fhrc_r: random(0, 6)
+        femoralHeadRecontouringLeft: random(0, 6),
+        femoralHeadRecontouringRight: random(0, 6)
       };
-    });
+    })
+    .map(hipScore => sumHipScore(hipScore));
 };
 
 export async function seed(knex: Knex): Promise<any> {

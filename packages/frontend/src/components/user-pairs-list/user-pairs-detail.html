@@ -1,33 +1,31 @@
 <template bindable="model">
   <div class="d-table col-12 w-100 py-4 border-bottom">
     <div class="d-table-cell col-8 ml-2">
-      <div>
-        <a route-href="route: pair-detail; params.bind: { id: model.id }">
-          <h4>
-            <span if.bind="model.sire && model.sire.name">${model.sire.name}</span>
-            <span if.bind="model.sire && !model.sire.name"><i>Unnamed sire</i></span>
-            <span if.bind="!model.sire"><i>Unknown sire</i></span>
-            and
-            <span if.bind="model.dame && model.dame.name">${model.dame.name}</span>
-            <span if.bind="model.dame && !model.dame.name"><i>Unnamed dame</i></span>
-            <span if.bind="!model.dame"><i>Unknown sire</i></span>
-          </h4>
-        </a>
-      </div>
+      <a route-href="route: pair-detail; params.bind: { id: model.id }">
+        <h4>
+          <span if.bind="model.sire && model.sire.name">${model.sire.name}</span>
+          <span if.bind="model.sire && !model.sire.name"><i>Unnamed sire</i></span>
+          <span if.bind="!model.sire"><i>Unknown sire</i></span>
+          and
+          <span if.bind="model.dame && model.dame.name">${model.dame.name}</span>
+          <span if.bind="model.dame && !model.dame.name"><i>Unnamed dame</i></span>
+          <span if.bind="!model.dame"><i>Unknown dame</i></span>
+        </h4>
+      </a>
 
-      <div class="text-muted">
+      <p class="text-muted">
         <span if.bind="model.sire && model.sire.breed && model.sire.breed.name">${model.sire.breed.name}</span>
         <span if.bind="!model.sire || !model.sire.breed || !model.sire.breed.name">Unknown breed</span>
         and
         <span if.bind="model.dame && model.dame.breed && model.dame.breed.name">${model.dame.breed.name}</span>
         <span if.bind="!model.dame || !model.dame.breed || !model.dame.breed.name">Unknown breed</span>
-      </div>
+      </p>
 
-      <div class="text-muted">
+      <p class="text-muted">
         <span if.bind="model.pairedOn">
           Paired on ${model.pairedOn}
         </span>
-      </div>
+      </p>
     </div>
 
     <div class="d-table-cell col-2 text-right">

@@ -1,5 +1,6 @@
 import * as authentication from '@feathersjs/authentication';
 // Don't remove this comment. It's needed to format import lines nicely.
+import { populateDog } from '../../hooks/populate-dog';
 
 const { authenticate } = authentication.hooks;
 
@@ -15,7 +16,7 @@ export default {
   },
 
   after: {
-    all: [],
+    all: [populateDog()],
     find: [],
     get: [],
     create: [],
