@@ -1,9 +1,12 @@
 import { inject } from 'aurelia-dependency-injection';
 import { Redirect } from 'aurelia-router';
+import { isEmpty } from 'lodash';
+import moment from 'moment';
+import $ from 'jquery';
+
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
 import { ApiError } from '../../util/api-error';
-import moment from 'moment';
 
 @inject(State, WebApi)
 export class NewPair {
@@ -13,9 +16,15 @@ export class NewPair {
 
   errors: ApiError[] = [];
 
+  dameSuggestError;
+
+  sireSuggestError;
+
   sire: any = {};
 
   state: State;
+
+  submitted = false;
 
   pairedOnDate = '';
 
@@ -25,7 +34,7 @@ export class NewPair {
   }
 
   get canSubmit() {
-    return this.hasSireId && this.hasDameId;
+    return this.hasSireId && this.hasDameId && !this.submitted;
   }
 
   get hasSireId() {
@@ -118,12 +127,19 @@ export class NewPair {
   }
 
   async suggestDame() {
-    const { data } = await this.suggestMate('F');
-    const dame = data.length > 0 ? data[0].measure.dog : {};
-    this.dame = dame;
+    try {
+      this.dameSuggestError = '';
+      const { data } = await this.suggestMate('F');
+      const dame = data.length > 0 ? data[0].measure.dog : {};
+      this.dame = dame;
+      this.dameSuggestError = isEmpty(dame) ? 'No suitable dogs found.' : '';
+    } catch (error) {
+      this.errors.push(new ApiError(error));
+    }
   }
 
   async submit() {
+    this.submitted = false;
     // This will be called when canSubmit is true, so both Ids will be given.
     // However, they are strings, since input.type=text. :(
     // Making input.type=number means that even if names can be entered, they
@@ -139,36 +155,47 @@ export class NewPair {
     this.stripInvalid(pair);
 
     try {
-      const result = await this.api.service('pairs').create(pair);
+      await this.api.service('pairs').create(pair);
+      this.submitted = true;
     } catch (error) {
       this.errors.push(new ApiError(error));
     }
   }
 
   async suggestMate(gender) {
-    try {
-      const params = {
-        query: {
-          $joinRelation: '[measure.[dog]]',
-          $limit: 1,
-          $sort: {
-            totalScore: 1,
-            'measure.measuredOn': -1
-          },
-          'measure:dog.gender': gender,
-          'measure:dog.ownerId': this.state.user.id
-        }
-      };
+    const params = {
+      query: {
+        $joinRelation: '[measure.[dog]]',
+        $limit: 1,
+        $sort: {
+          totalScore: 1,
+          'measure.measuredOn': -1
+        },
+        'measure:dog.gender': gender,
+        'measure:dog.ownerId': this.state.user.id
+      }
+    };
 
-      return this.api.service('hip-scores').find(params);
+    const dogs = await this.api.service('hip-scores').find(params);
+    return dogs;
+  }
+
+  async suggestSire() {
+    try {
+      this.sireSuggestError = '';
+      const { data } = await this.suggestMate('M');
+      const sire = data.length > 0 ? data[0].measure.dog : {};
+      this.sire = sire;
+      this.sireSuggestError = isEmpty(sire) ? 'No suitable dogs found.' : '';
     } catch (error) {
       this.errors.push(new ApiError(error));
     }
   }
 
-  async suggestSire() {
-    const { data } = await this.suggestMate('M');
-    const sire = data.length > 0 ? data[0].measure.dog : {};
-    this.sire = sire;
+  // Remove the alert through bootstrap and then remove the error from the array
+  removeError(index, error) {
+    $(`#alert${index}`).on('closed.bs.alert', () => {
+      this.errors.splice(this.errors.findIndex(error), 1);
+    });
   }
 }
