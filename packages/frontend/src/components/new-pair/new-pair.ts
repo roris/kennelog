@@ -2,12 +2,16 @@ import { inject } from 'aurelia-dependency-injection';
 import { Redirect } from 'aurelia-router';
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
+import { ApiError } from '../../util/api-error';
+import moment from 'moment';
 
 @inject(State, WebApi)
 export class NewPair {
   api: WebApi;
 
   dame: any = {};
+
+  errors: ApiError[] = [];
 
   sire: any = {};
 
@@ -52,6 +56,10 @@ export class NewPair {
     this.dame.id = value;
   }
 
+  get maxPairedOnDate() {
+    return moment().format('YYYY-MM-DD');
+  }
+
   canActivate(): boolean | Redirect {
     if (!this.state.authenticated) {
       return new Redirect('sign-in');
@@ -86,7 +94,40 @@ export class NewPair {
       }
     };
     const { data } = await this.api.service('dogs').find(params);
-    console.log(data);
     return data.length > 0 ? data[0] : {};
+  }
+
+  async suggestDame() {
+    const { data } = await this.suggestMate('F');
+    const dame = data.length > 0 ? data[0].measure.dog : {};
+    this.dame = dame;
+  }
+
+  async suggestMate(gender) {
+    try {
+      const params = {
+        query: {
+          $joinRelation: '[measure.[dog]]',
+          $limit: 1,
+          $sort: {
+            totalScore: 1,
+            'measure.measuredOn': -1
+          },
+          'measure:dog.gender': gender,
+          'measure:dog.ownerId': this.state.user.id
+        }
+      };
+
+      return this.api.service('hip-scores').find(params);
+    } catch (error) {
+      this.errors.push(new ApiError(error));
+    }
+  }
+
+  async suggestSire() {
+    const { data } = await this.suggestMate('M');
+    console.log(data);
+    const sire = data.length > 0 ? data[0].measure.dog : {};
+    this.sire = sire;
   }
 }

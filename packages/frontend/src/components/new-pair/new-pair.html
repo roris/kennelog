@@ -13,7 +13,7 @@
 
         <div class="col-4">
           <button class="btn btn-secondary" click.delegate="fetchSire()" disabled.bind="!hasSireName">Search</button>
-          <button class="btn btn-secondary">Suggest</button>
+          <button class="btn btn-secondary" click.delegate="suggestSire()">Suggest</button>
         </div>
       </div>
       <small class="text-muted">
@@ -30,7 +30,7 @@
         </div>
         <div class="col-4">
           <button class="btn btn-secondary" click.delegate="fetchDame()" disabled.bind="!hasDameName">Search</button>
-          <button class="btn btn-secondary">Suggest</button>
+          <button class="btn btn-secondary" click.delegate="suggestDame()">Suggest</button>
         </div>
       </div>
       <small class="text-muted">
@@ -41,7 +41,7 @@
 
     <div class="form-group">
       <label for="datePairedOn">Date paired on</label>
-      <input type="date" class="form-control col-2" id="datePairedOn" />
+      <input type="date" class="form-control col-2" id="datePairedOn" max.bind="maxPairedOnDate" />
       <small class="form-text text-muted">
         Leave empty if you don't know the date.
       </small>
