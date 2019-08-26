@@ -68,13 +68,13 @@ describe('New Pair Form', () => {
   it('can search sire if sireId is a non-numeric string', () => {
     expect.assertions(1);
     component.sireId = 'Hello';
-    expect(component.hasSireName).toBe(true);
+    expect(component.canSearchSire).toBe(true);
   });
 
   it('can search dame if dameId is a non-numeric string', () => {
     expect.assertions(1);
     component.dameId = 'Hello';
-    expect(component.hasDameName).toBe(true);
+    expect(component.canSearchDame).toBe(true);
   });
 
   it('replaces the sireId when search is clicked', async () => {
