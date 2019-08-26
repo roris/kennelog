@@ -17,9 +17,23 @@ export class NewPair {
 
   state: State;
 
+  pairedOnDate = '';
+
   constructor(state: State, api: WebApi) {
     this.api = api;
     this.state = state;
+  }
+
+  get canSubmit() {
+    return this.hasSireId && this.hasDameId;
+  }
+
+  get hasSireId() {
+    return !!this.sireId && !isNaN(Number(this.sireId));
+  }
+
+  get hasDameId() {
+    return !!this.dameId && !isNaN(Number(this.dameId));
   }
 
   get hasSireName() {
@@ -97,10 +111,38 @@ export class NewPair {
     return data.length > 0 ? data[0] : {};
   }
 
+  stripInvalid(pair) {
+    if (!pair.pairedOn) {
+      delete pair.pairedOn;
+    }
+  }
+
   async suggestDame() {
     const { data } = await this.suggestMate('F');
     const dame = data.length > 0 ? data[0].measure.dog : {};
     this.dame = dame;
+  }
+
+  async submit() {
+    // This will be called when canSubmit is true, so both Ids will be given.
+    // However, they are strings, since input.type=text. :(
+    // Making input.type=number means that even if names can be entered, they
+    // cannot be used by fetchXXXX functions as they are given as undefined.
+    // So they are explicitly to numbers here.
+    const pair: any = {
+      sireId: Number(this.sireId),
+      dameId: Number(this.dameId),
+      pairedOn: this.pairedOnDate,
+      pairedBy: this.state.user.id
+    };
+
+    this.stripInvalid(pair);
+
+    try {
+      const result = await this.api.service('pairs').create(pair);
+    } catch (error) {
+      this.errors.push(new ApiError(error));
+    }
   }
 
   async suggestMate(gender) {
@@ -126,7 +168,6 @@ export class NewPair {
 
   async suggestSire() {
     const { data } = await this.suggestMate('M');
-    console.log(data);
     const sire = data.length > 0 ? data[0].measure.dog : {};
     this.sire = sire;
   }

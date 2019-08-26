@@ -41,14 +41,22 @@
 
     <div class="form-group">
       <label for="datePairedOn">Date paired on</label>
-      <input type="date" class="form-control col-2" id="datePairedOn" max.bind="maxPairedOnDate" />
+      <input
+        type="date"
+        class="form-control col-2"
+        id="datePairedOn"
+        max.bind="maxPairedOnDate"
+        value.bind="pairedOnDate"
+      />
       <small class="form-text text-muted">
         Leave empty if you don't know the date.
       </small>
     </div>
 
     <div class="form-group border-top pt-4">
-      <button class="btn btn-success" type="submit">Create pair</button>
+      <button class="btn btn-success" type="submit" disabled.bind="!canSubmit" click.delegate="submit()">
+        Create pair
+      </button>
     </div>
   </form>
 </template>
