@@ -10,34 +10,18 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgres',
+    client: 'sqlite3',
     connection: {
-      database: 'kennelog',
-      user: 'username',
-      password: 'password'
+      filename: './kennelog.sqlite3'
     },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
+    useNullAsDefault: false
   },
 
   production: {
-    client: 'postgres',
+    client: 'sqlite3',
     connection: {
-      database: 'kennelog',
-      user: 'username',
-      password: 'password'
+      filename: './kennelog.sqlite3'
     },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
+    useNullAsDefault: false
   }
 };
