@@ -1,24 +1,24 @@
-<template bindable="selected">
+<template bindable="selected,dogId">
   <div class="border-bottom">
     <nav class="d-flex">
       <a
         class="mr-0 mr-md-1 mr-lg-3 menu-item"
         class.bind="selected == 0 ? 'text-dark selected' : 'text-muted'"
-        route-href="route: dog-details"
+        route-href="route: dog-details; params.bind: { id: dogId }"
       >
         Overview
       </a>
       <a
         class="mr-0 mr-md-1 mr-lg-3 menu-item"
         class.bind="selected == 1 ? 'text-dark selected' : 'text-muted'"
-        route-href="route: dog-pairs"
+        route-href="route: dog-pairs; params.bind: { id: dogId }"
       >
         Pairings
       </a>
       <a
         class="mr-0 mr-md-1 mr-lg-3 menu-item"
         class.bind="selected == 2 ? 'text-dark selected' : 'text-muted'"
-        route-href="route: dog-offspring"
+        route-href="route: dog-offspring; params.bind: { id: dogId }"
       >
         Offspring
       </a>
@@ -26,7 +26,7 @@
       <a
         class="mr-0 mr-md-1 mr-lg-3 menu-item"
         class.bind="selected == 3 ? 'text-dark selected' : 'text-muted'"
-        route-href="route: dog-ancestry"
+        route-href="route: dog-ancestry; params.bind: { id: dogId }"
       >
         Ancestry
       </a>
@@ -34,7 +34,7 @@
       <a
         class="mr-0 mr-md-1 mr-lg-3 menu-item"
         class.bind="selected == 4 ? 'text-dark selected' : 'text-muted'"
-        route-href="route: dog-stats"
+        route-href="route: dog-stats; params.bind: { id: dogId }"
       >
         Health Stats
       </a>

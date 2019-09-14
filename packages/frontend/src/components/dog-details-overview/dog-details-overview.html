@@ -8,7 +8,7 @@
     <div class="col-10 mx-auto mb-3">
       <h3 if.bind="dog.name">${dog.name}</h3>
       <h3 if.bind="!dog.name" class="font-italic">Unnamed Dog</h3>
-      <dog-menu selected="0"></dog-menu>
+      <dog-menu selected="0" dog-id.bind="dog.id"></dog-menu>
     </div>
 
     <div class="row col-10 mx-auto">

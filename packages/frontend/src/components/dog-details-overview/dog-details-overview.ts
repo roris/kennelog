@@ -8,7 +8,7 @@ import { WebApi } from '../../shared/web-api';
 import { ApiError } from '../../util/api-error';
 
 @inject(State, WebApi)
-export class DogDetails {
+export class DogDetailsOverview {
   api: WebApi;
 
   state: State;
@@ -35,6 +35,9 @@ export class DogDetails {
 
   activate(params) {
     const id = params && !isNaN(Number(params.id)) ? Number(params.id) : 0;
+    if (id) {
+      this.dog = { id: id };
+    }
     this.getDog(id);
   }
 
