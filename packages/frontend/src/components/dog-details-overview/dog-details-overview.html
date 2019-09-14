@@ -1,0 +1,74 @@
+<template>
+  <require from="../../resources/elements/dog-menu.html"></require>
+
+  <div if.bind="!dog" class="col-6 mx-auto">
+    Dog not found! <a route-href="route: dogs">Click here to go back to the home page.</a>
+  </div>
+  <div if.bind="dog">
+    <div class="col-10 mx-auto mb-3">
+      <h3 if.bind="dog.name">${dog.name}</h3>
+      <h3 if.bind="!dog.name" class="font-italic">Unnamed Dog</h3>
+      <dog-menu selected="0"></dog-menu>
+    </div>
+
+    <div class="row col-10 mx-auto">
+      <div class="col-md-8 order-md-1 mx-auto">
+        <div class="row">
+          <p class="col-3 font-weight-bold">ID</p>
+          <p class="col">${dog.id}</p>
+        </div>
+
+        <div class="row" if.bind="dog.microchipNo">
+          <p class="col-3 font-weight-bold">Microchip#</p>
+          <p class="col">${dog.microchipNo}</p>
+        </div>
+
+        <div class="row">
+          <p class="col-3 font-weight-bold">Date of Birth</p>
+          <p class="col">${dateOfBirth}</p>
+        </div>
+
+        <div class="row">
+          <p class="col-3 font-weight-bold">Gender</p>
+          <p class="col">${gender}</p>
+        </div>
+
+        <div class="row">
+          <p class="col-3 font-weight-bold">Breed</p>
+          <p class="col">
+            <span if.bind="dog.breedId">${dog.breed.name}</span>
+            <span if.bind="!dog.breedId" class="font-italic">Unknown</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3 order-md-2">
+        <div style="width: 200px" if.bind="dog.pictureUrl">
+          <img class="img-thumbnail w-100" alt="Picture of ${dog.name}" src="${dog.pictureUrl}" style="height: auto" />
+        </div>
+        <div if.bind="!dog.pictureUrl">
+          <div>
+            <i class="fa fa-image img-thumbnail" style="font-size: 160px"></i>
+          </div>
+          <div>
+            <small class="text-muted text-center"><i>No picture available</i></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div if.bind="dog" class="alert alert-danger alert-dismissible fade show" role="alert" repeat.for="error of errors">
+    <strong>${error.code} ${error.name}: </strong>${error.message}
+    <button
+      type="button"
+      id="alert${$index}"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close"
+      click.delegate="removeError($index, error)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</template>
