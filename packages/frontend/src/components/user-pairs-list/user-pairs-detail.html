@@ -1,7 +1,7 @@
 <template bindable="model">
   <div class="d-table col-12 w-100 py-4 border-bottom">
     <div class="d-table-cell col-8 ml-2">
-      <a route-href="route: pair-detail; params.bind: { id: model.id }">
+      <a route-href="route: pair-details; params.bind: { id: model.id }">
         <h4>
           <span if.bind="model.sire && model.sire.name">${model.sire.name}</span>
           <span if.bind="model.sire && !model.sire.name"><i>Unnamed sire</i></span>

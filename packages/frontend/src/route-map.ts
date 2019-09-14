@@ -34,6 +34,10 @@ const DogDetailsAncestry = PLATFORM.moduleName(
   './components/dog-details-ancestry/dog-details-ancestry'
 );
 
+const PairDetailsOverview = PLATFORM.moduleName(
+  './components/pair-details-overview/pair-details-overview'
+);
+
 export const routeMap: RouteConfig[] = [
   {
     moduleId: DogDetails,
@@ -50,8 +54,14 @@ export const routeMap: RouteConfig[] = [
   {
     moduleId: DogDetailsPairs,
     name: 'dog-pairs',
-    route: 'dog/:id/pairs',
+    route: ['dog/:id/pairs'],
     title: 'Dog pairs'
+  },
+  {
+    moduleId: PairDetailsOverview,
+    name: 'pair-details',
+    route: ['pair/:id'],
+    title: 'Pair details'
   },
   {
     moduleId: UserDogsList,
