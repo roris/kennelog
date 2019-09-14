@@ -22,7 +22,37 @@ const UserPairsList = PLATFORM.moduleName(
   './components/user-pairs-list/user-pairs-list'
 );
 
+const DogDetails = PLATFORM.moduleName(
+  './components/dog-details-overview/dog-details-overview'
+);
+
+const DogDetailsPairs = PLATFORM.moduleName(
+  './components/dog-details-pairs/dog-details-pairs'
+);
+
+const DogDetailsAncestry = PLATFORM.moduleName(
+  './components/dog-details-ancestry/dog-details-ancestry'
+);
+
 export const routeMap: RouteConfig[] = [
+  {
+    moduleId: DogDetails,
+    name: 'dog-details',
+    route: ['dog/:id'],
+    title: 'Dog detail'
+  },
+  {
+    moduleId: DogDetailsAncestry,
+    name: 'dog-ancestry',
+    route: ['dog/:id/ancestry'],
+    title: 'Dog ancestry'
+  },
+  {
+    moduleId: DogDetailsPairs,
+    name: 'dog-pairs',
+    route: 'dog/:id/pairs',
+    title: 'Dog pairs'
+  },
   {
     moduleId: UserDogsList,
     name: 'dogs',

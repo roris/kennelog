@@ -1,0 +1,95 @@
+<template>
+  <require from="../../resources/elements/dog-menu.html"></require>
+
+  <div if.bind="!dog" class="col-6 mx-auto">
+    Dog not found! <a route-href="route: dogs">Click here to go back to the home page.</a>
+  </div>
+  <div if.bind="dog">
+    <div class="col-10 mx-auto mb-3">
+      <h3 if.bind="dog.name">${dog.name}</h3>
+      <h3 if.bind="!dog.name" class="font-italic">Unnamed Dog</h3>
+      <dog-menu selected="2" dog-id.bind="dog.id"></dog-menu>
+    </div>
+  </div>
+
+  <div class="col-9 mx-auto border-bottom">
+    <h5 class="row">Parents</h5>
+    <div class="row">
+      <p class="col-3 font-weight-bold">Mother</p>
+      <span if.bind="!parents.dame" class="font-italic">Unknown</span>
+      <a if.bind="parents.dame" route-href="route: dog-details; params.bind: { id: parents.dame.id }">
+        <span if.bind="!parents.dame.name" class="font-italic">Unnamed</span>
+        <span if.bind="parents.dame.name">${parents.dame.name}</span>
+      </a>
+    </div>
+
+    <div class="row">
+      <p class="col-3 font-weight-bold">Father</p>
+      <p>
+        <span if.bind="!parents.sire" class="font-italic">Unknown</span>
+        <a if.bind="parents.sire" route-href="route: dog-details; params.bind: { id: parents.sire.id }">
+          <span if.bind="!parents.sire.name" class="font-italic">Unnamed</span>
+          <span if.bind="parents.sire.name">${parents.sire.name}</span>
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="col-9 mx-auto border-bottom">
+    <h5 class="row">Maternal Grandparents</h5>
+    <div class="row">
+      <p class="col-3 font-weight-bold">Maternal Grandmother</p>
+      <span if.bind="!maternalGrandparents.dame" class="font-italic">Unknown</span>
+      <a
+        if.bind="maternalGrandparents.dame"
+        route-href="route: dog-details; params.bind: { id: maternalGrandparents.dame.id }"
+      >
+        <span if.bind="!maternalGrandparents.dame.name" class="font-italic">Unnamed</span>
+        <span if.bind="maternalGrandparents.dame.name">${maternalGrandparents.dame.name}</span>
+      </a>
+    </div>
+
+    <div class="row">
+      <p class="col-3 font-weight-bold">Maternal Grandfather</p>
+      <p>
+        <span if.bind="!maternalGrandparents.sire" class="font-italic">Unknown</span>
+        <a
+          if.bind="maternalGrandparents.dame"
+          route-href="route: dog-details; params.bind: { id: maternalGrandparents.dame.id }"
+        >
+          <span if.bind="!maternalGrandparents.sire.name" class="font-italic">Unnamed</span>
+          <span if.bind="maternalGrandparents.sire.name">${maternalGrandparents.sire.name}</span>
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="col-9 mx-auto border-bottom">
+    <h5 class="row">Paternal Grandparents</h5>
+    <div class="row">
+      <p class="col-3 font-weight-bold">Paternal Grandmother</p>
+      <span if.bind="!paternalGrandparents.dame" class="font-italic">Unknown</span>
+      <a
+        if.bind="paternalGrandparents.dame"
+        route-href="route: dog-details; params.bind: { id: paternalGrandparents.dame.id }"
+      >
+        <span if.bind="!paternalGrandparents.dame.name" class="font-italic">Unnamed</span>
+        <span if.bind="paternalGrandparents.dame.name">${paternalGrandparents.dame.name}</span>
+      </a>
+    </div>
+
+    <div class="row">
+      <p class="col-3 font-weight-bold">Paternal Grandfather</p>
+      <p>
+        <span if.bind="!paternalGrandparents.sire" class="font-italic">Unknown</span>
+        <a
+          if.bind="paternalGrandparents.sire"
+          route-href="route: dog-details; params.bind: { id: paternalGrandparents.sire.id }"
+        >
+          <span if.bind="!paternalGrandparents.sire.name" class="font-italic">Unnamed</span>
+          <span if.bind="paternalGrandparents.sire.name">${paternalGrandparents.sire.name}</span>
+        </a>
+      </p>
+    </div>
+  </div>
+</template>
