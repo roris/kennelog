@@ -1,0 +1,29 @@
+<template>
+  <div if.bind="!litter" class="col-6 mx-auto">
+    Pair not found! <a route-href="route: litters">Click here to go back to the litters list page.</a>
+  </div>
+
+  <div if.bind="litter">
+    <div class="col-10 mx-auto border-bottom mb-3 pb-3">
+      <h3>Litter #${litter.id}</h3>
+    </div>
+
+    <div repeat.for="pup of pups" class="col-8 mx-auto border-bottom mb-3 mt-2">
+      <p>
+        <a route-href="route: dog-details; params.bind: { id: pup.id }">
+          <span if.bind="pup.name">${pup.name}</span>
+          <span if.bind="!pup.name" class="font-italic">Unnamed</span>
+        </a>
+      </p>
+      <p>
+        <small if.bind="!pup.breed" class="font-italic">Unknown breed</small>
+        <small if.bind="pup.breed">${pup.breed.name}</small>
+      </p>
+
+      <p>
+        <small if.bind="!pup.dateOfBirth" class="font-italic">Unknown date of birth</small>
+        <small if.bind="pup.dateOfBirth">Born on ${pup.dateOfBirth}</small>
+      </p>
+    </div>
+  </div>
+</template>

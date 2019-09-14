@@ -34,6 +34,18 @@ const DogDetailsAncestry = PLATFORM.moduleName(
   './components/dog-details-ancestry/dog-details-ancestry'
 );
 
+const PairDetailsOverview = PLATFORM.moduleName(
+  './components/pair-details-overview/pair-details-overview'
+);
+
+const PairDetailsLitter = PLATFORM.moduleName(
+  './components/pair-details-litter/pair-details-litter'
+);
+
+const LitterDetails = PLATFORM.moduleName(
+  './components/litter-details/litter-details'
+);
+
 export const routeMap: RouteConfig[] = [
   {
     moduleId: DogDetails,
@@ -50,8 +62,26 @@ export const routeMap: RouteConfig[] = [
   {
     moduleId: DogDetailsPairs,
     name: 'dog-pairs',
-    route: 'dog/:id/pairs',
+    route: ['dog/:id/pairs'],
     title: 'Dog pairs'
+  },
+  {
+    moduleId: PairDetailsOverview,
+    name: 'pair-details',
+    route: ['pair/:id'],
+    title: 'Pair details'
+  },
+  {
+    moduleId: PairDetailsLitter,
+    name: 'pair-litter',
+    route: ['pair/:id/litter'],
+    title: 'Pair litter'
+  },
+  {
+    moduleId: LitterDetails,
+    name: 'litter-details',
+    route: ['litter/:id'],
+    title: 'Litter details'
   },
   {
     moduleId: UserDogsList,

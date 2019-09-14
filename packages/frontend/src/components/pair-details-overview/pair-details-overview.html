@@ -1,0 +1,110 @@
+<template>
+  <require from="../../resources/elements/pair-menu.html"></require>
+
+  <div if.bind="!pair" class="col-6 mx-auto">
+    Pair not found! <a route-href="route: pairs">Click here to go back to the pairs list page.</a>
+  </div>
+
+  <div if.bind="pair">
+    <div class="col-10 mx-auto mb-3">
+      <h3>Pair #${pair.id}</h3>
+      <pair-menu selected="0" pair-id.bind="pair.id"></pair-menu>
+    </div>
+
+    <div class="row col-10 mx-auto">
+      <div class="col-md-8 order-md-1 mx-auto border-bottom mb-3 pb-3">
+        <div class="row">
+          <div class="col-3 font-weight-bold">
+            Sire
+          </div>
+          <div class="col">
+            <a if.bind="pair.sire" route-href="route: dog-details; params.bind: { id: pair.sire.id }">
+              <span if.bind="pair.sire.name">${pair.sire.name}</span>
+              <span if.bind="!pair.sire.name" class="font-italic">Unnamed</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3 font-weight-bold">
+            Date of birth
+          </div>
+          <div class="col">
+            <span if.bind="pair.sire.dateOfBirth">${pair.sire.dateOfBirth}</span>
+            <span if.bind="!pair.sire.dateOfBirth" class="font-italic">Unknown</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3 font-weight-bold">
+            Breed
+          </div>
+          <div class="col">
+            <span if.bind="pair.sire.breed">${pair.sire.breed.name}</span>
+            <span if.bind="!pair.sire.breed.name" class="font-italic">Unknown</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8 order-md-1 mx-auto border-bottom mb-3 pb-3">
+        <div class="row">
+          <div class="col-3 font-weight-bold">
+            Dame
+          </div>
+          <div class="col">
+            <a if.bind="pair.dame" route-href="route: dog-details; params.bind: { id: pair.dame.id }">
+              <span if.bind="pair.dame.name">${pair.dame.name}</span>
+              <span if.bind="!pair.dame.name" class="font-italic">Unnamed</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3 font-weight-bold">
+            Date of birth
+          </div>
+          <div class="col">
+            <span if.bind="pair.dame.dateOfBirth">${pair.dame.dateOfBirth}</span>
+            <span if.bind="!pair.dame.dateOfBirth" class="font-italic">Unknown</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3 font-weight-bold">
+            Breed
+          </div>
+          <div class="col">
+            <span if.bind="pair.dame.breed">${pair.dame.breed.name}</span>
+            <span if.bind="!pair.dame.breed.name" class="font-italic">Unknown</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8 order-md-1 mx-auto border-bottom mb-2 pb-3">
+        <div class="row">
+          <div class="col-3 font-weight-bold">
+            Date paired
+          </div>
+          <div class="col">
+            <span if.bind="pair.pairedOn">${pair.pairedOn}</span>
+            <span if.bind="!pair.pairedOn" class="font-italic">Unknown</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div if.bind="dog" class="alert alert-danger alert-dismissible fade show" role="alert" repeat.for="error of errors">
+    <strong>${error.code} ${error.name}: </strong>${error.message}
+    <button
+      type="button"
+      id="alert${$index}"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close"
+      click.delegate="removeError($index, error)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</template>

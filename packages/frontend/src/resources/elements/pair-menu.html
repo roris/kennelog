@@ -1,0 +1,20 @@
+<template bindable="selected,pairId">
+  <div class="border-bottom">
+    <nav class="d-flex">
+      <a
+        class="mr-0 mr-md-1 mr-lg-3 menu-item"
+        class.bind="selected == 0 ? 'text-dark selected' : 'text-muted'"
+        route-href="route: pair-details; params.bind: { id: pairId }"
+      >
+        Overview
+      </a>
+      <a
+        class="mr-0 mr-md-1 mr-lg-3 menu-item"
+        class.bind="selected == 1 ? 'text-dark selected' : 'text-muted'"
+        route-href="route: pair-litter; params.bind: { id: pairId }"
+      >
+        Litter
+      </a>
+    </nav>
+  </div>
+</template>
