@@ -5,20 +5,20 @@
     </div>
 
     <div class="form-group col-6 mx-auto">
-      <label for="sireChipNo">Sire id#</label>
+      <label for="sireIdInput">Sire id#</label>
       <div class="form-row">
         <div class="col-6">
-          <input type="text" class="form-control" value.bind="sireId" />
+          <input id="sireIdInput" type="text" class="form-control" value.bind="sireId" />
         </div>
         <button class="btn btn-secondary" click.delegate="searchSire()" disabled.bind="!canSearchSire">Search</button>
       </div>
     </div>
 
     <div class="form-group col-6 mx-auto">
-      <label for="dameChipNo">Dame id#</label>
+      <label for="dameIdInput">Dame id#</label>
       <div class="form-row">
         <div class="col-6">
-          <input type="text" class="form-control" value.bind="dameId" />
+          <input id="dameIdInput" type="text" class="form-control" value.bind="dameId" />
         </div>
         <button class="btn btn-secondary" click.delegate="searchDame()" disabled.bind="!canSearchDame">Search</button>
       </div>
@@ -34,8 +34,8 @@
 
     <div class="form-group col-6 mx-auto border-bottom mb-2">
       <div class="form-check">
-        <label class="form-check-label" for="checkbox1">
-          <input class="form-check-input" type="checkbox" id="checkbox1" checked.bind="isPairer" />
+        <label class="form-check-label" for="isPairerInput">
+          <input class="form-check-input" type="checkbox" id="isPairerInput" checked.bind="isPairer" />
           I created this pair
         </label>
       </div>
@@ -100,7 +100,7 @@
 
             <div class="form-group">
               <label for="pupGender${pup.pupNumber}">Gender</label>
-              <select class="form-control col-4" id="pupGender${pup.pupNumber}" value.bind="pup.gender">
+              <select class="form-control col-4" id="pupGender${pup.pupNumber}" value.bind="pup.gender" required>
                 <option value="" selected disabled>Please select</option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="form-group">
-              <label for="pupImagePreview${pup.pupNumber}">Image</label>
+              <label for="pupImageFileInput${pup.pupNumber}">Image</label>
               <div>
                 <div class.bind="pup.hasImage ? '' : 'd-none'" style="width: 224px;">
                   <img
