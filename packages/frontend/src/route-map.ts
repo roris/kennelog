@@ -26,12 +26,22 @@ const DogDetails = PLATFORM.moduleName(
   './components/dog-details-overview/dog-details-overview'
 );
 
+const DogDetailsPairs = PLATFORM.moduleName(
+  './components/dog-details-pairs/dog-details-pairs'
+);
+
 export const routeMap: RouteConfig[] = [
   {
     moduleId: DogDetails,
     name: 'dog-details',
     route: ['dog/:id'],
     title: 'Dog detail'
+  },
+  {
+    moduleId: DogDetailsPairs,
+    name: 'dog-pairs',
+    route: 'dog/:id/pairs',
+    title: 'Dog pairs'
   },
   {
     moduleId: UserDogsList,

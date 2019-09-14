@@ -1,0 +1,36 @@
+<template>
+  <require from="../../resources/elements/dog-menu.html"></require>
+
+  <div if.bind="!dog" class="col-6 mx-auto">
+    No pairs found.
+  </div>
+  <div if.bind="dog">
+    <div class="col-10 mx-auto mb-3">
+      <h3 if.bind="dog.name">${dog.name}</h3>
+      <h3 if.bind="!dog.name" class="font-italic">Unnamed Dog</h3>
+      <dog-menu selected="1" dog-id.bind="dog.id"></dog-menu>
+    </div>
+
+    <div if.bind="!pairs || !pairs.length">No pairs for the dog exist.</div>
+    <div repeat.for="pair of pairs" class="col-8 mx-auto border-bottom mb-3 mt-2">
+      <p>
+        With
+        <a if.bind="pair.partner" route-href="route: dog-details; params.bind: { id: pair.partner.id }">
+          <span if.bind="pair.partner.name">${pair.partner.name}</span>
+          <span if.bind="!pair.partner.name" class="font-italic">Unnamed</span>
+        </a>
+        <span if.bind="!pair.partner" class="font-italic">Unknown</span>
+      </p>
+
+      <p>
+        <small if.bind="!pair.partner || !pair.partner.breed">Unknown breed</small>
+        <small if.bind="pair.partner && pair.partner.breed">${pair.partner.breed.name}</small>
+      </p>
+
+      <p>
+        <small if.bind="!pair.pairedOn">Formed on unknown date.</small>
+        <small if.bind="pair.pairedOn">Formed on ${pair.pairedOn}</small>
+      </p>
+    </div>
+  </div>
+</template>
