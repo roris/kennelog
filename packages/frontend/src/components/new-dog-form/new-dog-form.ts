@@ -13,6 +13,7 @@ import moment from 'moment';
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
 import { ApiError } from '../../util/api-error';
+import { createDog } from '../../util/api-helpers';
 
 class Dog {
   name = '';
@@ -129,10 +130,11 @@ export class NewDog {
     this.submitting = true;
 
     try {
-      const uploadedPicture = await this.sendImageToServer();
-      const payload = this.createPayload(uploadedPicture);
-      await this.api.service('dogs').create(payload);
-      // success
+      const uri = this.dog.imageFile
+        ? document.getElementById('imagePreview').getAttribute('src')
+        : undefined;
+      const payload = this.createPayload();
+      await createDog(this.api, payload, uri);
     } catch (error) {
       this.errors.push(new ApiError(error));
     }
@@ -140,23 +142,8 @@ export class NewDog {
     this.submitting = false;
   }
 
-  private async sendImageToServer() {
-    if (!this.dog.imageFile) {
-      // nothing to send
-      return undefined;
-    }
-
-    try {
-      const uri = document.getElementById('imagePreview').getAttribute('src');
-      const blob = await this.api.service('blobs').create({ uri: uri });
-      return this.api.service('uploads').create({ path: blob.id });
-    } catch (error) {
-      this.errors.push(new ApiError(error));
-    }
-  }
-
   /* eslint-disable max-lines-per-function, complexity */
-  private createPayload(uploadedPicture?) {
+  private createPayload() {
     const payload: any = {};
     payload.gender = this.dog.gender;
 
@@ -182,10 +169,6 @@ export class NewDog {
 
     if (this.isOwner) {
       payload.ownerId = this.state.user.id;
-    }
-
-    if (uploadedPicture) {
-      payload.pictureId = uploadedPicture.id;
     }
 
     return payload;

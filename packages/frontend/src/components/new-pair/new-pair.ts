@@ -7,6 +7,7 @@ import $ from 'jquery';
 import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
 import { ApiError } from '../../util/api-error';
+import { getDogByNameAndGender } from '../../util/api-helpers';
 
 @inject(State, WebApi)
 export class NewPair {
@@ -93,31 +94,17 @@ export class NewPair {
   async fetchDame() {
     const name = this.dame.id;
     const gender = 'F';
-    const dame = await this.fetchDog(name, gender);
-    this.dame = dame;
+    const ownerId = this.state.user.id;
+    const api = this.api;
+    this.dame = await getDogByNameAndGender(api, ownerId, name, gender);
   }
 
   async fetchSire() {
     const name = this.sire.id;
     const gender = 'M';
-    const sire = await this.fetchDog(name, gender);
-    this.sire = sire;
-  }
-
-  async fetchDog(name, gender) {
-    const params = {
-      query: {
-        name: { $like: `%${name}%` },
-        gender: gender,
-        ownerId: this.state.user.id,
-        $limit: 1,
-        $sort: {
-          updatedAt: -1
-        }
-      }
-    };
-    const { data } = await this.api.service('dogs').find(params);
-    return data.length > 0 ? data[0] : {};
+    const ownerId = this.state.user.id;
+    const api = this.api;
+    this.sire = await getDogByNameAndGender(api, ownerId, name, gender);
   }
 
   stripInvalid(pair) {
