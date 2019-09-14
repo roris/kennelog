@@ -189,6 +189,7 @@ export class UserPairsList {
       if (!name) {
         delete params.name;
       }
+      return params;
     };
 
     this.paginationModel.update(total, currentPage, route, routeParams);

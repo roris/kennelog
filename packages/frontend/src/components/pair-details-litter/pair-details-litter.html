@@ -1,0 +1,35 @@
+<template>
+  <require from="../../resources/elements/pair-menu.html"></require>
+
+  <div if.bind="!pair" class="col-6 mx-auto">
+    Pair not found! <a route-href="route: pairs">Click here to go back to the pairs list page.</a>
+  </div>
+
+  <div if.bind="pair">
+    <div class="col-10 mx-auto mb-3">
+      <h3>Pair #${pair.id}</h3>
+      <pair-menu selected="1" pair-id.bind="pair.id"></pair-menu>
+    </div>
+
+    <div class="col-5 mx-auto" if.bind="pair && !litter || !litter.length">
+      This pair does not appear to have produced a litter yet.
+    </div>
+    <div repeat.for="pup of litter" class="col-8 mx-auto border-bottom mb-3 mt-2">
+      <p>
+        <a route-href="route: dog-details; params.bind: { id: pup.id }">
+          <span if.bind="pup.name">${pup.name}</span>
+          <span if.bind="!pup.name" class="font-italic">Unnamed</span>
+        </a>
+      </p>
+      <p>
+        <small if.bind="!pup.breed">Unknown breed</small>
+        <small if.bind="pup.breed">${pup.breed.name}</small>
+      </p>
+
+      <p>
+        <small if.bind="!pup.dateOfBirth">Unknown birthday</small>
+        <small if.bind="pup.dateOfBirth">Born on ${pup.birthday}</small>
+      </p>
+    </div>
+  </div>
+</template>
