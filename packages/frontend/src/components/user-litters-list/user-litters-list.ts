@@ -17,7 +17,7 @@ export class UserLittersList {
 
   litters: any[] = [];
 
-  littersPerPage: number = 5;
+  littersPerPage = 5;
 
   params: any = {};
 
@@ -187,6 +187,7 @@ export class UserLittersList {
       if (!name) {
         delete params.name;
       }
+      return params;
     };
 
     this.paginationModel.update(total, currentPage, route, routeParams);

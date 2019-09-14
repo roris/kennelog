@@ -4,14 +4,14 @@ import { ViewModelState as State } from '../../shared/view-model-state';
 import { WebApi } from '../../shared/web-api';
 
 @inject(State, WebApi)
-export class PairDetailsLitter {
+export class LitterDetails {
   api;
 
   state;
 
-  pair;
-
   litter;
+
+  pups;
 
   constructor(state: State, api: WebApi) {
     this.api = api;
@@ -28,37 +28,18 @@ export class PairDetailsLitter {
   activate(params) {
     const id = params && !isNaN(params.id) ? Number(params.id) : 0;
     if (id) {
-      this.pair = { id: id };
-      this.getPair(id).catch(error => console.error(error));
-
+      this.litter = { id: id };
       this.fetchLitter(id).catch(error => console.error(error));
     }
   }
 
-  async getPair(id) {
-    this.pair = await this.api.service('pairs').get(id);
-  }
-
   async fetchLitter(id) {
-    const id_ = id;
-    const params = {
-      query: {
-        pairId: id_
-      }
-    };
-    const { data } = await this.api.service('litters').find(params);
-
-    if (data && data.length > 0) {
-      const litterId = data[0].id;
-      console.log(data);
-      return this.fetchLitterDogs(litterId);
-    }
-
-    return null;
+    this.litter = await this.api.service('litters').get(id);
+    this.fetchPups(this.litter.id);
   }
 
-  async fetchLitterDogs(id) {
-    const id_ = id;
+  async fetchPups(litterId) {
+    const id_ = litterId;
     const params = {
       query: {
         $joinRelation: '[litter]',
@@ -67,6 +48,6 @@ export class PairDetailsLitter {
     };
 
     const { data } = await this.api.service('dogs').find(params);
-    this.litter = data;
+    this.pups = data;
   }
 }
