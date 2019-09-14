@@ -18,25 +18,9 @@
       <a
         class="mr-0 mr-md-1 mr-lg-3 menu-item"
         class.bind="selected == 2 ? 'text-dark selected' : 'text-muted'"
-        route-href="route: dog-offspring; params.bind: { id: dogId }"
-      >
-        Offspring
-      </a>
-
-      <a
-        class="mr-0 mr-md-1 mr-lg-3 menu-item"
-        class.bind="selected == 3 ? 'text-dark selected' : 'text-muted'"
         route-href="route: dog-ancestry; params.bind: { id: dogId }"
       >
         Ancestry
-      </a>
-
-      <a
-        class="mr-0 mr-md-1 mr-lg-3 menu-item"
-        class.bind="selected == 4 ? 'text-dark selected' : 'text-muted'"
-        route-href="route: dog-stats; params.bind: { id: dogId }"
-      >
-        Health Stats
       </a>
     </nav>
   </div>
