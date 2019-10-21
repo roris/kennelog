@@ -37,7 +37,7 @@
     "@types/config": "^0.0.34",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.137",
-    "@types/webpack": "^4.39.1",
+    "@types/webpack": "^4.39.5",
     "aurelia-cli": "^1.0.2",
     "aurelia-loader-nodejs": "^1.0.1",
     "aurelia-pal-nodejs": "^1.2.0",
@@ -64,7 +64,7 @@
     "through2": "^3.0.1",
     "url-loader": "^2.1.0",
     "vinyl-fs": "^3.0.3",
-    "webpack": "^4.39.2",
+    "webpack": "^4.41.2",
     "webpack-bundle-analyzer": "^3.4.1",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
