@@ -36,7 +36,7 @@
     "@babel/register": "^7.6.2",
     "@types/config": "^0.0.34",
     "@types/jest": "^24.0.18",
-    "@types/lodash": "^4.14.137",
+    "@types/lodash": "^4.14.144",
     "@types/webpack": "^4.39.5",
     "aurelia-cli": "^1.0.2",
     "aurelia-loader-nodejs": "^1.0.1",
