@@ -3321,10 +3321,10 @@ aurelia-bootstrapper@^2.3.2:
     aurelia-templating-resources "^1.7.0"
     aurelia-templating-router "^1.0.0"
 
-aurelia-cli@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/aurelia-cli/-/aurelia-cli-1.2.1.tgz#60ac4c581a46d9dee876cf8748ea1e8781f4a92c"
-  integrity sha512-NZ0FHIk3mHgTIlgv6tyS88W35ZLqFwQGsjYeiHVNNm/nbIxtSFKnLoGz+Hexnd/oQoaTN/mbduFQ9PmJ1lpPBg==
+aurelia-cli@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/aurelia-cli/-/aurelia-cli-1.2.2.tgz#9bb85b6f95b309b14d3f1ee3aa06ac6106b4a104"
+  integrity sha512-8uJRB/FoBGMcHqGxmisbviBNy0NVFtBrJD9xggsUVkpy03IpM8K9JTwxkXG7NunkrDBlgK2kU5SmyVJZuAnq6Q==
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/plugin-proposal-class-properties" "^7.5.5"
