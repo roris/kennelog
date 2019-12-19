@@ -33,7 +33,7 @@
     "validator": "^11.1.0"
   },
   "devDependencies": {
-    "@babel/register": "^7.7.4",
+    "@babel/register": "^7.7.7",
     "@types/config": "^0.0.36",
     "@types/jest": "^24.0.24",
     "@types/lodash": "^4.14.149",
