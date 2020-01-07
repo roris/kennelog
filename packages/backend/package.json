@@ -54,7 +54,7 @@
     "@types/helmet": "^0.0.45",
     "@types/jsonwebtoken": "^8.3.5",
     "@types/serve-favicon": "^2.5.0",
-    "axios": "^0.19.0",
+    "axios": "^0.19.1",
     "bcrypt": "^3.0.7",
     "nodemon": "^1.19.4",
     "shx": "^0.3.2",
