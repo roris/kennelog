@@ -1,14 +1,18 @@
 {
   extends: [
     'config:base',
+    'config:semverAllMonthly',
     ':automergeLinters',
+    ':automergeTesters',
     ':automergeTypes',
     ':automergeMinor',
     ':automergePr',
+    ':automergeDigest',
     ':automergeRequireAllStatusChecks',
     ':combinePatchMinorReleases',
     ':enableRenovate',
     ':enableVulnerabilityAlerts',
+    ':rebaseStalePrs',
     ':respectLatest',
     ':semanticCommits',
     ':semanticPrefixChore',
