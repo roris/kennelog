@@ -16,7 +16,7 @@
     "test": "lerna exec --no-bail -- jest --forceExit --detectOpenHandles --colors"
   },
   "dependencies": {
-    "title-case": "^2.1.1"
+    "title-case": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
