@@ -1,6 +1,6 @@
 // See https://vincit.github.io/objection.js/#models
 // for more of what you can do here.
-import { Model, JsonSchema, RelationMappings } from 'objection';
+import { Model, JSONSchema, RelationMappings } from 'objection';
 import { Application } from '../declarations';
 
 class Weights extends Model {
@@ -8,7 +8,7 @@ class Weights extends Model {
     return 'weights';
   }
 
-  static get jsonSchema(): JsonSchema {
+  static get jsonSchema(): JSONSchema {
     return {
       type: 'object',
       required: ['weight'],
@@ -35,6 +35,6 @@ class Weights extends Model {
   }
 }
 
-module.exports = function(app?: Application) {
+export function createModel(app?: Application) {
   return Weights;
-};
+}

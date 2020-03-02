@@ -2,7 +2,7 @@
 import { ServiceAddons } from '@feathersjs/feathers';
 import { Application } from '../../declarations';
 import { Heights } from './heights.class';
-import createModel from '../../models/heights.model';
+import { createModel } from '../../models/heights.model';
 import hooks from './heights.hooks';
 
 // Add this service to the service type index
