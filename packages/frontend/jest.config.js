@@ -10,5 +10,11 @@ module.exports = {
       'jest-transform-stub'
   },
   modulePaths: ['<rootDir>/src', '<rootDir>/node_modules'],
-  setupFiles: ['<rootDir>/test/jest-pretest.ts']
+  setupFiles: ['<rootDir>/test/jest-pretest.ts'],
+  globals: {
+    'ts-jest': {
+      diagnostics: false,
+      packageJson: 'package.json'
+    }
+  }
 };
