@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "preserveSymlinks": true
   },
   "extends": "../../tsconfig.json",
   "include": ["./src/**/*.ts", "./test/**/*.ts", "./types/**/*.d.ts"]
