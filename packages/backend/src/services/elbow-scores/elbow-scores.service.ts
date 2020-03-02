@@ -2,7 +2,7 @@
 import { ServiceAddons } from '@feathersjs/feathers';
 import { Application } from '../../declarations';
 import { ElbowScores } from './elbow-scores.class';
-import createModel from '../../models/elbow-scores.model';
+import { createModel } from '../../models/elbow-scores.model';
 import hooks from './elbow-scores.hooks';
 
 // Add this service to the service type index

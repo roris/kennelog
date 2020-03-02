@@ -2,7 +2,7 @@
 import { ServiceAddons } from '@feathersjs/feathers';
 import { Application } from '../../declarations';
 import { HipScores } from './hip-scores.class';
-import createModel from '../../models/hip-scores.model';
+import { createModel } from '../../models/hip-scores.model';
 import hooks from './hip-scores.hooks';
 
 // Add this service to the service type index
