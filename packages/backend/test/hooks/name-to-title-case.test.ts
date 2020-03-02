@@ -1,6 +1,5 @@
 import feathers, { Application } from '@feathersjs/feathers';
 import { nameToTitleCase } from '../../src/hooks/name-to-title-case';
-import titleCase from 'title-case';
 
 describe("'name-to-title-case' hook", () => {
   let app: Application;
@@ -23,7 +22,7 @@ describe("'name-to-title-case' hook", () => {
     expect.assertions(1);
     const name = 'What a name!';
     const result = await app.service('dummy').create({ name: name });
-    expect(result.name).toBe(titleCase(name));
+    expect(result.name).toBe('What A Name!');
   });
 
   it('ignores objects without names', async () => {

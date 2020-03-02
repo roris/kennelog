@@ -1,5 +1,5 @@
 import { Hook, HookContext } from '@feathersjs/feathers';
-import titleCase from 'title-case';
+import { toTitleCase } from '../util/title-case';
 
 export const nameToTitleCase = (options = {}): Hook => {
   return async (context: HookContext) => {
@@ -8,7 +8,7 @@ export const nameToTitleCase = (options = {}): Hook => {
 
     things
       .filter(thing => typeof thing.name !== 'undefined') // filter all named things
-      .forEach(thing => (thing.name = titleCase(thing.name))); // convert names to title case
+      .forEach(thing => (thing.name = toTitleCase(thing.name))); // convert names to title case
 
     return context;
   };
