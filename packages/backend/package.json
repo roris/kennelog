@@ -41,7 +41,7 @@
     "feathers-objection": "^6.0.0",
     "fs-blob-store": "^5.2.1",
     "helmet": "^4.0.0",
-    "knex": "^0.21.0",
+    "knex": "^2.0.0",
     "objection": "^2.0.0",
     "pg": "^8.0.0",
     "serve-favicon": "^2.5.0",
